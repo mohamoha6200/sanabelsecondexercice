@@ -1,0 +1,161 @@
+import 'dart:async';
+
+import 'package:audioplayers/audio_cache.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:flame/flame.dart';
+import 'package:flame/flame_audio.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:sanabelsecondexercice/components/widgets/sanabelFrame.dart';
+
+import 'package:sanabelsecondexercice/pages/Exercice2/Exercice2.dart';
+
+class SplashScreen extends StatefulWidget {
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  var twenty;
+  Timer t2;
+  String routeName;
+  FlameAudio audio = FlameAudio();
+  @override
+  void initState() {
+    super.initState();
+    Flame.bgm.initialize();
+
+    Flame.bgm.dispose();
+
+    /* twenty = const Duration(seconds: 1);
+    t2 = Timer(twenty, () async {
+
+      Navigator.of(context).pushNamed('home-page');
+    });*/
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    t2.cancel();
+    Flame.bgm.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Container(
+            //   decoration: BoxDecoration(gradient: gradient4),
+            child: Center(
+              child: Container(
+                child: Image.asset(
+                  'assets/basmala.png',
+                  fit: BoxFit.fill,
+                  width: screenSize.width / 4,
+                ),
+              ),
+            ),
+          ),
+          Container(
+            //   decoration: BoxDecoration(gradient: gradient4),
+            child: Center(
+              child: Container(
+                child: Image.asset(
+                  'assets/logomilieu.png',
+                  fit: BoxFit.fill,
+                  width: screenSize.width / 6,
+                ),
+              ),
+            ),
+          ),
+          Directionality(
+            textDirection: TextDirection.rtl,
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Container(
+                    //   decoration: BoxDecoration(gradient: gradient4),
+                    child: Center(
+                      child: Container(
+                        child: Image.asset(
+                          'assets/bas0.png',
+                          fit: BoxFit.fill,
+                          width: screenSize.width / 6,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    //   decoration: BoxDecoration(gradient: gradient4),
+                    child: Center(
+                      child: Container(
+                        child: Image.asset(
+                          'assets/bas1.png',
+                          fit: BoxFit.fill,
+                          width: screenSize.width / 6,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    //   decoration: BoxDecoration(gradient: gradient4),
+                    child: Center(
+                      child: Container(
+                        child: Image.asset(
+                          'assets/bas2.png',
+                          fit: BoxFit.fill,
+                          width: screenSize.width / 6,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    //   decoration: BoxDecoration(gradient: gradient4),
+                    child: Center(
+                      child: Container(
+                        child: Image.asset(
+                          'assets/bas3.png',
+                          fit: BoxFit.fill,
+                          width: screenSize.width / 6,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              margin: new EdgeInsets.only(top: 3),
+              child: InkWell(
+                  onTap: () {
+                    print('should play funny');
+                    Flame.bgm.initialize();
+                    Flame.bgm.play('funny.wav');
+
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (BuildContext context) {
+                      return ExerciceTwo();
+                    }));
+                  },
+                  child: Center(child: SanabelFrame(title: 'دُخُولْ'))),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}

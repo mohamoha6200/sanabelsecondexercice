@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:sanabelsecondexercice/components/ExQuestionBar.dart';
 import 'package:sanabelsecondexercice/components/widgets/ResultSuccessQuestion.dart';
 import 'package:sanabelsecondexercice/components/widgets/Signature.dart';
+import 'package:sanabelsecondexercice/pages/fakePage.dart';
 import 'package:sanabelsecondexercice/theme/style.dart';
 
 
@@ -292,6 +293,11 @@ class _ExerciceTwoState extends State<ExerciceTwo> {
           child: new FloatingActionButton(
               child: new Icon(Icons.clear),
               onPressed: () => {
+
+                  Navigator.push(context,
+                        MaterialPageRoute(builder: (BuildContext context) {
+                      return FakePage();
+                    })),
                     setState(() {
                       _points = [];
                       scoreMap = {};

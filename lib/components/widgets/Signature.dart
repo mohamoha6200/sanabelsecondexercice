@@ -10,15 +10,17 @@ class Signature extends CustomPainter {
     Paint paint = new Paint()
       ..color = Colors.blue
       ..strokeCap = StrokeCap.round
-      ..strokeWidth = size.width / 60;
-    //paint.style = PaintingStyle.stroke; //circle
-    paint.style = PaintingStyle.fill; //Line
+     // ..strokeWidth = size.width / 200; //for circle
+     ..strokeWidth = size.width / 55; //fir line
+
+    paint.style = PaintingStyle.stroke; //circle
+    //paint.style = PaintingStyle.fill; //Line
     for (int i = 0; i < points.length - 1; i++) {
       if (points[i] != null && points[i + 1] != null) {
         canvas.drawLine(points[i], points[i + 1], paint);
-        //print(size.width / 15);
-        // canvas.drawCircle(points[i], size.width / 15, paint);
-
+        // print(size.width / 15);
+        //  canvas.drawCircle(points[i], size.width / 15, paint);
+         
         
       }
     }

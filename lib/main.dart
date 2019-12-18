@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:audioplayers/audio_cache.dart';
+import 'package:flame/flame.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sanabelsecondexercice/pages/Exercice2/Exercice2.dart';
-
+import 'package:sanabelsecondexercice/pages/Exercice2/Splash.dart';
 
 final RouteObserver<PageRoute> routeObserver = new RouteObserver<PageRoute>();
 
@@ -16,13 +17,11 @@ void main() async {
     if (isInDebugMode) {
       FlutterError.dumpErrorToConsole(details);
     } else {
-
       Zone.current.handleUncaughtError(details.exception, details.stack);
     }
   };
 
   _setTargetPlatformForDesktop();
-
 
   return runApp(MyApp());
 }
@@ -45,12 +44,17 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     super.initState();
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    print('disposed');
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,14 +64,10 @@ class MyAppState extends State<MyApp> {
     ]);
 
     return MaterialApp(
-
-        debugShowCheckedModeBanner: false,
-        navigatorObservers: <NavigatorObserver>[routeObserver],
-  
-
-        theme: ThemeData(primaryColor: Colors.black
-            ),
-        home: ExerciceTwo(),
-     );
+      debugShowCheckedModeBanner: false,
+      navigatorObservers: <NavigatorObserver>[routeObserver],
+      theme: ThemeData(primaryColor: Colors.black),
+      home: SplashScreen(),
+    );
   }
 }
