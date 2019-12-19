@@ -1,15 +1,13 @@
 import 'dart:async';
 
-import 'package:audioplayers/audio_cache.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flame/flame.dart';
-import 'package:flame/flame_audio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sanabelsecondexercice/components/widgets/sanabelFrame.dart';
 
 import 'package:sanabelsecondexercice/pages/Exercice2/Exercice2.dart';
+import 'package:sanabelsecondexercice/pages/Exercice3.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -20,26 +18,19 @@ class _SplashScreenState extends State<SplashScreen> {
   var twenty;
   Timer t2;
   String routeName;
-  FlameAudio audio = FlameAudio();
+
   @override
   void initState() {
     super.initState();
+    print('should stop everything');
     Flame.bgm.initialize();
-
-    Flame.bgm.dispose();
-
-    /* twenty = const Duration(seconds: 1);
-    t2 = Timer(twenty, () async {
-
-      Navigator.of(context).pushNamed('home-page');
-    });*/
+    Flame.bgm.pause();
   }
 
   @override
   void dispose() {
     super.dispose();
     t2.cancel();
-    Flame.bgm.dispose();
   }
 
   @override
@@ -143,12 +134,11 @@ class _SplashScreenState extends State<SplashScreen> {
               child: InkWell(
                   onTap: () {
                     print('should play funny');
-                    Flame.bgm.initialize();
-                    Flame.bgm.play('funny.wav');
+                    // Flame.bgm.play('funny.mp3');
 
                     Navigator.push(context,
                         MaterialPageRoute(builder: (BuildContext context) {
-                      return ExerciceTwo();
+                      return ExerciceThree();
                     }));
                   },
                   child: Center(child: SanabelFrame(title: 'دُخُولْ'))),

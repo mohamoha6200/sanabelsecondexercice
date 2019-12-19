@@ -1,4 +1,5 @@
 import 'package:audioplayers/audio_cache.dart';
+import 'package:flame/flame.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sanabelsecondexercice/components/ExQuestionBar.dart';
@@ -6,7 +7,6 @@ import 'package:sanabelsecondexercice/components/widgets/ResultSuccessQuestion.d
 import 'package:sanabelsecondexercice/components/widgets/Signature.dart';
 import 'package:sanabelsecondexercice/pages/fakePage.dart';
 import 'package:sanabelsecondexercice/theme/style.dart';
-
 
 class ExerciceTwo extends StatefulWidget {
   @override
@@ -73,7 +73,6 @@ class _ExerciceTwoState extends State<ExerciceTwo> {
 
   Offset currentRightCardPosition;
 
-
   bool pointsInrightCard(List<Offset> pointsList, List<Offset> rightCards) {
     bool insideOneAndOnlyCorrectAnswer = true;
     // print('pointsList');
@@ -105,8 +104,8 @@ class _ExerciceTwoState extends State<ExerciceTwo> {
     if (nb == 1) {
       setState(() {
         currentRightCardPosition = x;
-        print(
-            'currentRightCardPosition=' + currentRightCardPosition.toString());
+        // print(
+        //     'currentRightCardPosition=' + currentRightCardPosition.toString());
       });
     }
     return nb;
@@ -114,8 +113,7 @@ class _ExerciceTwoState extends State<ExerciceTwo> {
 
   bool pointInOffset(Offset point, Offset cardOffset) {
     Size screenSize = MediaQuery.of(context).size;
-    print(screenSize.width/5);
-
+    print(screenSize.width / 5);
 
     // print(point);
     if ((point.dx >= cardOffset.dx) &&
@@ -158,15 +156,14 @@ class _ExerciceTwoState extends State<ExerciceTwo> {
       setState(() {});
     }
 
-    print(indexOffsetsMap);
-    print(rightCards);
+    // print(indexOffsetsMap);
+    // print(rightCards);
   }
 
   Widget childWidget() {
     Size screenSize = MediaQuery.of(context).size;
 
     return GestureDetector(
-      
         onPanUpdate: (DragUpdateDetails details) {
           setState(() {
             RenderBox object = context.findRenderObject();
@@ -193,7 +190,9 @@ class _ExerciceTwoState extends State<ExerciceTwo> {
               });
               if (scoreMap.length == rightCardsIndexes.length) {
                 // print(_points);
-                audioCache.play('goodComplete.wav', volume: 3);
+                // audioCache.play('goodComplete.mp3', volume: 3);
+                // Flame.bgm.play('goodComplete.mp3');
+                Flame.audio.play('goodComplete.mp3');
 
                 showDialog(
                     context: context,
@@ -213,7 +212,9 @@ class _ExerciceTwoState extends State<ExerciceTwo> {
                   scoreMap = {};
                 });
               } else {
-                audioCache.play('good.wav', volume: 3);
+                // audioCache.play('good.mp3', volume: 3);
+                // Flame.bgm.play('good.mp3');
+                Flame.audio.play('good.mp3');
               }
             } else {
               print('its not new :p ');
@@ -229,7 +230,8 @@ class _ExerciceTwoState extends State<ExerciceTwo> {
               _points = [];
               scoreMap = {};
             });
-            audioCache.play('error.mp3', volume: 3);
+            // audioCache.play('error.mp3', volume: 3);
+            Flame.audio.play('error.mp3');
           }
         },
         child: new CustomPaint(
@@ -252,26 +254,31 @@ class _ExerciceTwoState extends State<ExerciceTwo> {
                               print(index);
                               // getSizeAndPosition(_cardKey[index]);
                             },
-                            child: Padding(
-                                key: _cardKey[index],
-                                padding: const EdgeInsets.all(50.0),
-                                child: rightCardsIndexes.contains(index)
-                                    ? Container(
-                                        // key: _cardKey[index],
-                                        child: 
-                                         Text(
-                                           subQuestion,
-                                           style: TextStyle(
-                                               fontSize: 32, color: Colors.red),
-                                         ),
-                                        // Circle(),
-                                      )
-                                    : Container(
-                                        child: new Image.asset(
-                                          'assets/aliff.png',
-                                          fit: BoxFit.fill,
-                                        ),
-                                      )));
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(),
+                              ),
+                              child: Padding(
+                                  key: _cardKey[index],
+                                  padding: const EdgeInsets.all(50.0),
+                                  child: rightCardsIndexes.contains(index)
+                                      ? Center(
+                                          // key: _cardKey[index],
+                                          child: Text(
+                                            subQuestion,
+                                            style: TextStyle(
+                                                fontSize: 32,
+                                                color: Colors.red),
+                                          ),
+                                          // Circle(),
+                                        )
+                                      : Container(
+                                          child: new Image.asset(
+                                            'assets/aliff.png',
+                                            fit: BoxFit.fill,
+                                          ),
+                                        )),
+                            ));
                       },
                     ),
                   ),
@@ -285,24 +292,24 @@ class _ExerciceTwoState extends State<ExerciceTwo> {
     Size screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-        backgroundColor: backgroundMainColor,
-        // appBar: ExQuestionBar(),
-        body: childWidget(),
-        bottomNavigationBar: Container(
-          height: screenSize.height * 0.05,
-          child: new FloatingActionButton(
-              child: new Icon(Icons.clear),
-              onPressed: () => {
-
+      backgroundColor: backgroundMainColor,
+      // appBar: ExQuestionBar(),
+      body: childWidget(),
+      bottomNavigationBar: Container(
+        height: screenSize.height * 0.05,
+        child: new FloatingActionButton(
+            child: new Icon(Icons.clear),
+            onPressed: () => {
                   Navigator.push(context,
-                        MaterialPageRoute(builder: (BuildContext context) {
-                      return FakePage();
-                    })),
-                    setState(() {
-                      _points = [];
-                      scoreMap = {};
-                    }),
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return FakePage();
+                  })),
+                  setState(() {
+                    _points = [];
+                    scoreMap = {};
                   }),
-        ));
+                }),
+      ),
+    );
   }
 }
