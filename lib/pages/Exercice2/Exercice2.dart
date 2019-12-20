@@ -192,7 +192,6 @@ class _ExerciceTwoState extends State<ExerciceTwo> {
                 // print(_points);
                 // audioCache.play('goodComplete.mp3', volume: 3);
                 // Flame.bgm.play('goodComplete.mp3');
-                Flame.audio.play('goodComplete.mp3');
 
                 showDialog(
                     context: context,
@@ -238,7 +237,11 @@ class _ExerciceTwoState extends State<ExerciceTwo> {
             painter: new Signature(points: _points),
             child: Column(
               children: <Widget>[
-                ExQuestionBar(subQuestion: subQuestion),
+                ExQuestionBar(
+                  subQuestion: subQuestion,
+                  question: 'أَرَسْمِ دائرة حول الحرف ',
+                  kidPic: 'ecoute2.png',
+                ),
                 Directionality(
                   textDirection: TextDirection.rtl,
                   child: new GridView.count(

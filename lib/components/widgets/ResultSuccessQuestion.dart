@@ -1,8 +1,8 @@
 import 'dart:core';
 import 'package:audioplayers/audio_cache.dart';
+import 'package:flame/flame.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-    
 
 class ResultSucessQuestion extends StatefulWidget {
   @override
@@ -14,8 +14,9 @@ class _ResultSucessQuestionState extends State<ResultSucessQuestion> {
   @override
   void initState() {
     super.initState();
+    Flame.audio.play('goodComplete.mp3');
 
-    audioCache.play('oueee.mp3', volume: 0.2);
+    Flame.audio.play('oueee.mp3');
   }
 
   @override

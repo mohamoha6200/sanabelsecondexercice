@@ -13,7 +13,6 @@ class ExerciceThree extends StatefulWidget {
 }
 
 class _ExerciceThreeState extends State<ExerciceThree> {
-  final String subQuestion = 'ب';
 
   List<Offset> _points = <Offset>[];
   List<Offset> _truePoints = <Offset>[];
@@ -107,8 +106,8 @@ class _ExerciceThreeState extends State<ExerciceThree> {
     String card = '';
     var strings = stringOffsetmap.keys.toList();
     for (var index = 0; index < strings.length; index++) {
-      // print(strings[index]);
-      // print((pointInOffset(point, stringOffsetmap[strings[index]]) == true));
+      print(strings[index]);
+      print((pointInOffset(point, stringOffsetmap[strings[index]]) == true));
       if (pointInOffset(point, stringOffsetmap[strings[index]]) == true) {
         card = strings[index];
       }
@@ -222,6 +221,7 @@ class _ExerciceThreeState extends State<ExerciceThree> {
             // print('lastPointOffset');
 
             // print(lastPointOffset);
+
             if (((inWhichCardIsThisPoint(firstPointOffset, picOffsetmap) !=
                         '') &&
                     (inWhichCardIsThisPoint(lastPointOffset, wordOffsetmap) !=
@@ -244,9 +244,13 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                   if (scoreMap[picChoiceMap[inWhichCardIsThisPoint(
                           firstPointOffset, picOffsetmap)]] ==
                       null) {
+                    setState(() {
+                      _truePoints += _points;
+                      _points = [];
+                      scoreMap[picChoiceMap[inWhichCardIsThisPoint(
+                          firstPointOffset, picOffsetmap)]] = true;
+                    });
                     if (scoreMap.length == picChoiceMap.length) {
-                      Flame.audio.play('goodComplete.mp3');
-
                       showDialog(
                           context: context,
                           builder: (context) {
@@ -259,35 +263,33 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                               child: ResultSucessQuestion(),
                             );
                           });
-
                       setState(() {
                         _points = [];
-                        scoreMap = {};
                         _truePoints = [];
+                        scoreMap = {};
                       });
                     } else {
+                      print('shouldnt good');
                       Flame.audio.play('good.mp3');
-                      setState(() {
-                        _truePoints += _points;
-                        _points = [];
-                        scoreMap[picChoiceMap[inWhichCardIsThisPoint(
-                            firstPointOffset, picOffsetmap)]] = true;
-                      });
                     }
-                  } else {
+                  } else
                     setState(() {
                       _points = [];
                     });
-                  }
                 } else if (picChoiceMap[inWhichCardIsThisPoint(
                         lastPointOffset, picOffsetmap)] ==
                     inWhichCardIsThisPoint(firstPointOffset, wordOffsetmap)) {
                   if (scoreMap[picChoiceMap[inWhichCardIsThisPoint(
                           lastPointOffset, picOffsetmap)]] ==
                       null) {
-                    if (scoreMap.length == picChoiceMap.length) {
-                      Flame.audio.play('goodComplete.mp3');
+                    setState(() {
+                      _truePoints += _points;
+                      _points = [];
 
+                      scoreMap[picChoiceMap[inWhichCardIsThisPoint(
+                          lastPointOffset, picOffsetmap)]] = true;
+                    });
+                    if (scoreMap.length == picChoiceMap.length) {
                       showDialog(
                           context: context,
                           builder: (context) {
@@ -300,20 +302,15 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                               child: ResultSucessQuestion(),
                             );
                           });
-
                       setState(() {
                         _points = [];
-                        scoreMap = {};
                         _truePoints = [];
+                        scoreMap = {};
                       });
                     } else {
+                      print('shouldnt good');
+
                       Flame.audio.play('good.mp3');
-                      setState(() {
-                        _truePoints += _points;
-                        _points = [];
-                        scoreMap[picChoiceMap[inWhichCardIsThisPoint(
-                            lastPointOffset, picOffsetmap)]] = true;
-                      });
                     }
                   } else {
                     setState(() {
@@ -339,10 +336,6 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                 scoreMap = {};
               });
             }
-            print('scoreMap.length');
-
-            print(scoreMap.length);
-            // print('picChoiceMap' + picChoiceMap.length.toString());
 
             //     if (((picChoiceMap[inWhichCardIsThisPoint(
             //                 firstPointOffset, picOffsetmap)] ==
@@ -449,7 +442,10 @@ class _ExerciceThreeState extends State<ExerciceThree> {
             child: Center(
               child: Column(
                 children: <Widget>[
-                  ExQuestionBar(subQuestion: subQuestion),
+                  ExQuestionBar(
+                    question: ' أربط الكلمة بالصورة المناسبة',
+                    kidPic: 'kids4.png',
+                  ),
                   Column(
                     children: <Widget>[
                       Row(

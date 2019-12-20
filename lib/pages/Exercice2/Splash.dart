@@ -138,7 +138,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
                     Navigator.push(context,
                         MaterialPageRoute(builder: (BuildContext context) {
-                      return ExerciceThree();
+                      return ExerciceTwo();
                     }));
                   },
                   child: Center(child: SanabelFrame(title: 'دُخُولْ'))),

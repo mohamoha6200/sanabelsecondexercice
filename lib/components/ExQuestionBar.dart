@@ -2,27 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:sanabelsecondexercice/theme/perrine.dart';
 
 class ExQuestionBar extends StatelessWidget {
-  final String kidPic = 'ecoute.png';
-  final String question = 'أَرَسْمِ دائرة حول الحرف ';
-  final String subQuestion ;
+  final String kidPic;
+  final String question;
+  // = 'أَرَسْمِ دائرة حول الحرف ';
+  final String subQuestion;
   final String bookPic = 'Logo-sanabel-Vec.png';
 
-   ExQuestionBar({
-    //  this.kidPic, this.question, this.subQuestion, this.bookPic
-    @required this.subQuestion });
+  ExQuestionBar({
+    @required this.kidPic,
+    @required this.question,
+    this.subQuestion,
+    //this.bookPic,
+  });
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
 
     return Container(
-      height: screenSize.height*0.18,
+      height: screenSize.height * 0.18,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Container(
                 child: Image.asset(
@@ -39,17 +43,20 @@ class ExQuestionBar extends StatelessWidget {
             ],
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisSize: MainAxisSize.max,
             children: <Widget>[
-              Container(
-                child: Text(
-                  subQuestion,
-                  style: questionLetter,
-                ),
-              ),
+              this.subQuestion != null
+                  ? Container(
+                      child: Text(
+                        subQuestion,
+                        style: questionLetter,
+                      ),
+                    )
+                  : Container(),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18),
+                padding: const EdgeInsets.only(right:8.0),
                 child: Container(
                   child: Text(
                     question,
@@ -58,11 +65,13 @@ class ExQuestionBar extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
+                padding: const EdgeInsets.only(right: 20),
                 child: Container(
                   child: Image.asset(
-                    'assets/ecoute.png',
-                    width: 50,
+                    'assets/$kidPic',
+                    fit: BoxFit.fill,
+                    width: 80,
+                    height: 80,
                   ),
                 ),
               ),
