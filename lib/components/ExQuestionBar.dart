@@ -55,15 +55,14 @@ class ExQuestionBar extends StatelessWidget {
                       ),
                     )
                   : Container(),
-              Padding(
-                padding: const EdgeInsets.only(right:8.0),
-                child: Container(
-                  child: Text(
-                    question,
-                    style: mStyle1ex,
-                  ),
+              Container(
+                child: Text(
+                  question,
+                  style: mStyle1ex,
                 ),
               ),
+                  SizedBox(width: 20,),
+
               Padding(
                 padding: const EdgeInsets.only(right: 20),
                 child: Container(
