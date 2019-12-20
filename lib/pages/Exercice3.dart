@@ -13,7 +13,6 @@ class ExerciceThree extends StatefulWidget {
 }
 
 class _ExerciceThreeState extends State<ExerciceThree> {
-
   List<Offset> _points = <Offset>[];
   List<Offset> _truePoints = <Offset>[];
 
@@ -45,14 +44,20 @@ class _ExerciceThreeState extends State<ExerciceThree> {
     'assets/berkar.png': 'assets/berkarword.png'
   };
 
+  Map<String, String>  initialpicChoiceMap = {
+     'assets/berkar.png': 'assets/birdword.png',
+    'assets/bird.png': 'assets/doorword.png',
+    'assets/door.png': 'assets/berkarword.png'
+  };
+
+
+
   Size cardSize;
   // Offset picCardPosition;
 
   Map<String, Offset> picOffsetmap = {};
   Map<String, Offset> wordOffsetmap = {};
 
-  List<int> rightCardsIndexes = [0, 4, 7];
-  List<Offset> rightCards = [];
   Map<String, bool> scoreMap = {};
 
   Offset currentRightCardPosition;
@@ -60,46 +65,6 @@ class _ExerciceThreeState extends State<ExerciceThree> {
   Offset lastPointOffset;
 
   Offset firstPointOffset;
-
-  Offset aux;
-
-  bool pointsInrightCard(List<Offset> pointsList, List<Offset> rightCards) {
-    bool insideOneAndOnlyCorrectAnswer = true;
-    // print('pointsList');
-    // print(pointsList);
-
-    for (var i = 0; i < pointsList.length; i++) {
-      if (pointsList[i] != null) {
-        if (pointInRightCard(pointsList[i], rightCards) != 1) {
-          insideOneAndOnlyCorrectAnswer = false;
-          break;
-        }
-      }
-    }
-
-    return insideOneAndOnlyCorrectAnswer;
-  }
-
-  int pointInRightCard(Offset point, List<Offset> rightCards) {
-    int nb = 0;
-    Offset x;
-    // print(point);
-
-    for (var i = 0; i < rightCards.length; i++) {
-      if (pointInOffset(point, rightCards[i]) == true) {
-        nb++;
-        x = rightCards[i];
-      }
-    }
-    if (nb == 1) {
-      setState(() {
-        currentRightCardPosition = x;
-        // print(
-        //     'currentRightCardPosition=' + currentRightCardPosition.toString());
-      });
-    }
-    return nb;
-  }
 
   String inWhichCardIsThisPoint(
       Offset point, Map<String, Offset> stringOffsetmap) {
@@ -146,7 +111,7 @@ class _ExerciceThreeState extends State<ExerciceThree> {
   }
 
   getPicsCardsSizesAndPositions() {
-    var pickeys = picChoiceMap.keys.toList();
+    var pickeys = initialpicChoiceMap.keys.toList();
     for (var index = 0; index < 3; index++) {
       RenderBox _cardBox = _picCardKey[index].currentContext.findRenderObject();
       Size picCardSize = _cardBox.size;
@@ -168,7 +133,7 @@ class _ExerciceThreeState extends State<ExerciceThree> {
   }
 
   getWordsCardsSizesAndPositions() {
-    var wordkeys = picChoiceMap.values.toList();
+    var wordkeys = initialpicChoiceMap.values.toList();
 
     for (var index = 0; index < 3; index++) {
       RenderBox _cardBox =
@@ -190,15 +155,11 @@ class _ExerciceThreeState extends State<ExerciceThree> {
   }
 
   Widget childWidget() {
-    Size screenSize = MediaQuery.of(context).size;
 
     return Center(
       child: GestureDetector(
           onPanUpdate: (DragUpdateDetails details) {
             setState(() {
-              //  firstPointOffset = null;
-              //  lastPointOffset = null;
-
               RenderBox object = context.findRenderObject();
               Offset _localPosition =
                   object.globalToLocal(details.globalPosition);
@@ -214,13 +175,6 @@ class _ExerciceThreeState extends State<ExerciceThree> {
 
             firstPointOffset = _points[0];
             lastPointOffset = _points[_points.length - 2];
-
-            // print('firstPointOffset');
-
-            // print(firstPointOffset);
-            // print('lastPointOffset');
-
-            // print(lastPointOffset);
 
             if (((inWhichCardIsThisPoint(firstPointOffset, picOffsetmap) !=
                         '') &&
@@ -336,106 +290,6 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                 scoreMap = {};
               });
             }
-
-            //     if (((picChoiceMap[inWhichCardIsThisPoint(
-            //                 firstPointOffset, picOffsetmap)] ==
-            //             inWhichCardIsThisPoint(
-            //                 lastPointOffset, wordOffsetmap))) ||
-            //         ((picChoiceMap[inWhichCardIsThisPoint(
-            //                 lastPointOffset, picOffsetmap)] ==
-            //             inWhichCardIsThisPoint(
-            //                 firstPointOffset, wordOffsetmap)))) {
-            //       Flame.audio.play('good.mp3');
-            //       // scoreMap[''] = true;
-            //       setState(() {
-            //         firstPointOffset = null;
-            //         lastPointOffset = null;
-            //       });
-            //     }
-            //                                  else {
-            //        setState(() {
-            //          _points = [];
-            //         // scoreMap = {};
-            //        });
-            //        Flame.audio.play('error.mp3');
-            //        print('else 1');
-            //      }
-            //   } else {
-            //     setState(() {
-            //       _points = [];
-            //       // scoreMap = {};
-            //     });
-            //     Flame.audio.play('error.mp3');
-            //        print('else 2');
-            //   }
-            // } else {
-            //   setState(() {
-            //     _points = [];
-            //     // scoreMap = {};
-            //   });
-
-            //   Flame.audio.play('error.mp3');
-            //                      print('else 3');
-
-            // }
-
-            // if (pointsInrightCard(_points, rightCards) == true) {
-            //   print('scoreMap length');
-            //   print(scoreMap.length);
-            //   print('scoreMap ');
-            //   print(scoreMap);
-
-            //   print('ended with true ');
-            //   if (scoreMap[currentRightCardPosition] == null) {
-            //     print('it is new');
-            //     setState(() {
-            //       scoreMap[currentRightCardPosition] = true;
-            //     });
-            //     if (scoreMap.length == rightCardsIndexes.length) {
-            //       // print(_points);
-            //       // audioCache.play('goodComplete.mp3', volume: 3);
-            //       // Flame.bgm.play('goodComplete.mp3');
-            //       Flame.audio.play('goodComplete.mp3');
-
-            //       showDialog(
-            //           context: context,
-            //           builder: (context) {
-            //             Future.delayed(Duration(seconds: 5), () {
-            //               Navigator.of(context).pop(true);
-            //             });
-            //             return Theme(
-            //               data: Theme.of(context).copyWith(
-            //                   dialogBackgroundColor: Colors.transparent),
-            //               child: ResultSucessQuestion(),
-            //             );
-            //           });
-
-            //       setState(() {
-            //         _points = [];
-            //         scoreMap = {};
-            //       });
-            //     } else {
-            //       // audioCache.play('good.mp3', volume: 3);
-            //       // Flame.bgm.play('good.mp3');
-            //       Flame.audio.play('good.mp3');
-            //     }
-            //   } else {
-            //     print('its not new :p ');
-            //   }
-
-            //   print('scoreMap length');
-            //   print(scoreMap.length);
-            //   print('scoreMap ');
-            //   print(scoreMap);
-            // } else {
-            //   print('ended with false');
-            //   setState(() {
-            //     _points = [];
-            //     scoreMap = {};
-            //   });
-            //   // audioCache.play('error.mp3', volume: 3);
-            //   Flame.audio.play('error.mp3');
-            // }
           },
           child: new CustomPaint(
             painter: new Signature(points: _points, trues: _truePoints),
@@ -452,12 +306,11 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: List.generate(3, (index) {
-                          var keys = picChoiceMap.keys.toList();
+                           var keys = initialpicChoiceMap.keys.toList();
                           return GestureDetector(
                             onTap: () {
                               print('tapped pic');
                               print(index);
-                              // getSizeAndPosition(_picCardKey[index]);
                             },
                             child: Container(
                               key: _picCardKey[index],
@@ -476,12 +329,11 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: List.generate(3, (index) {
-                          var choices = picChoiceMap.values.toList();
+                           var choices = initialpicChoiceMap.values.toList();
                           return GestureDetector(
                             onTap: () {
                               print('tapped pic');
                               print(index);
-                              // getSizeAndPosition(_picCardKey[index]);
                             },
                             child: Container(
                               key: _wordCardKey[index],
@@ -504,51 +356,6 @@ class _ExerciceThreeState extends State<ExerciceThree> {
           )),
     );
   }
-
-// Directionality(
-//                   textDirection: TextDirection.rtl,
-//                   child: new GridView.count(
-//                     shrinkWrap: true,
-//                     physics: ClampingScrollPhysics(),
-//                     crossAxisCount: 5,
-//                     children: List.generate(
-//                       10,
-//                       (index) {
-//                         return GestureDetector(
-//                             onTap: () {
-//                               print('tapped');
-//                               print(index);
-//                               // getSizeAndPosition(_picCardKey[index]);
-//                             },
-//                             child: Container(
-//                               decoration: BoxDecoration(
-//                                 border: Border.all(),
-//                               ),
-//                               child: Padding(
-//                                   key: _picCardKey[index],
-//                                   padding: const EdgeInsets.all(50.0),
-//                                   child: rightCardsIndexes.contains(index)
-//                                       ? Center(
-//                                           // key: _picCardKey[index],
-//                                           child: Text(
-//                                             subQuestion,
-//                                             style: TextStyle(
-//                                                 fontSize: 32,
-//                                                 color: Colors.red),
-//                                           ),
-//                                           // Circle(),
-//                                         )
-//                                       : Container(
-//                                           child: new Image.asset(
-//                                             'assets/aliff.png',
-//                                             fit: BoxFit.fill,
-//                                           ),
-//                                         )),
-//                             ));
-//                       },
-//                     ),
-//                   ),
-//                 ),
 
   @override
   Widget build(BuildContext context) {

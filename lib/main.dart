@@ -1,12 +1,13 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:audioplayers/audio_cache.dart';
-import 'package:flame/flame.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sanabelsecondexercice/pages/Exercice2/Splash.dart';
+import 'package:sanabelsecondexercice/pages/Exercice3.dart';
+import 'package:sanabelsecondexercice/pages/home.dart';
 
 final RouteObserver<PageRoute> routeObserver = new RouteObserver<PageRoute>();
 
@@ -67,7 +68,7 @@ class MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       navigatorObservers: <NavigatorObserver>[routeObserver],
       theme: ThemeData(primaryColor: Colors.black),
-      home: SplashScreen(),
+      home: HomePage(),
     );
   }
 }
