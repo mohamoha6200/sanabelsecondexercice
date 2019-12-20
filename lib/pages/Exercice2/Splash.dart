@@ -4,6 +4,7 @@ import 'package:flame/flame.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sanabelsecondexercice/components/widgets/Balloon.dart';
 import 'package:sanabelsecondexercice/components/widgets/sanabelFrame.dart';
 
 import 'package:sanabelsecondexercice/pages/Exercice2/Exercice2.dart';
@@ -78,52 +79,26 @@ class _SplashScreenState extends State<SplashScreen> {
                 children: <Widget>[
                   Container(
                     //   decoration: BoxDecoration(gradient: gradient4),
-                    child: Center(
-                      child: Container(
-                        child: Image.asset(
-                          'assets/bas0.png',
-                          fit: BoxFit.fill,
-                          width: screenSize.width / 6,
-                        ),
+                    child: Container(
+                      child: Image.asset(
+                        'assets/bas0.png',
+                        fit: BoxFit.fill,
+                        width: screenSize.width / 6,
                       ),
                     ),
                   ),
+                  Balloon(letter: 'ح', pic: 'bull.png'),
                   Container(
                     //   decoration: BoxDecoration(gradient: gradient4),
-                    child: Center(
-                      child: Container(
-                        child: Image.asset(
-                          'assets/bas1.png',
-                          fit: BoxFit.fill,
-                          width: screenSize.width / 6,
-                        ),
+                    child: Container(
+                      child: Image.asset(
+                        'assets/bas2.png',
+                        fit: BoxFit.fill,
+                        width: screenSize.width / 6,
                       ),
                     ),
                   ),
-                  Container(
-                    //   decoration: BoxDecoration(gradient: gradient4),
-                    child: Center(
-                      child: Container(
-                        child: Image.asset(
-                          'assets/bas2.png',
-                          fit: BoxFit.fill,
-                          width: screenSize.width / 6,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    //   decoration: BoxDecoration(gradient: gradient4),
-                    child: Center(
-                      child: Container(
-                        child: Image.asset(
-                          'assets/bas3.png',
-                          fit: BoxFit.fill,
-                          width: screenSize.width / 6,
-                        ),
-                      ),
-                    ),
-                  ),
+                  Balloon(letter: 'ب', pic: 'bulle0.png'),
                 ],
               ),
             ),
@@ -134,7 +109,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: InkWell(
                   onTap: () {
                     print('should play funny');
-                     Flame.bgm.play('funny.mp3');
+                    //  Flame.bgm.play('funny.mp3');
 
                     Navigator.push(context,
                         MaterialPageRoute(builder: (BuildContext context) {
