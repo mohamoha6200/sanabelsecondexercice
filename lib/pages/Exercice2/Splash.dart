@@ -134,7 +134,7 @@ class _SplashScreenState extends State<SplashScreen> {
               child: InkWell(
                   onTap: () {
                     print('should play funny');
-                    // Flame.bgm.play('funny.mp3');
+                     Flame.bgm.play('funny.mp3');
 
                     Navigator.push(context,
                         MaterialPageRoute(builder: (BuildContext context) {
