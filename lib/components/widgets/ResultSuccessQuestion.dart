@@ -1,5 +1,4 @@
 import 'dart:core';
-import 'package:audioplayers/audio_cache.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +9,6 @@ class ResultSucessQuestion extends StatefulWidget {
 }
 
 class _ResultSucessQuestionState extends State<ResultSucessQuestion> {
-  AudioCache audioCache = AudioCache();
   @override
   void initState() {
     super.initState();

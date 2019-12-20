@@ -44,13 +44,11 @@ class _ExerciceThreeState extends State<ExerciceThree> {
     'assets/berkar.png': 'assets/berkarword.png'
   };
 
-  Map<String, String>  initialpicChoiceMap = {
-     'assets/berkar.png': 'assets/birdword.png',
+  Map<String, String> initialpicChoiceMap = {
+    'assets/berkar.png': 'assets/birdword.png',
     'assets/bird.png': 'assets/doorword.png',
     'assets/door.png': 'assets/berkarword.png'
   };
-
-
 
   Size cardSize;
   // Offset picCardPosition;
@@ -82,7 +80,7 @@ class _ExerciceThreeState extends State<ExerciceThree> {
   }
 
   bool pointInOffset(Offset point, Offset cardOffset) {
-    // print('cardwidth' + cardSize.width.toString());
+     print('cardwidth' + cardSize.width.toString());
 
     // print(point);
     if ((point.dx >= cardOffset.dx) &&
@@ -155,7 +153,6 @@ class _ExerciceThreeState extends State<ExerciceThree> {
   }
 
   Widget childWidget() {
-
     return Center(
       child: GestureDetector(
           onPanUpdate: (DragUpdateDetails details) {
@@ -306,7 +303,7 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: List.generate(3, (index) {
-                           var keys = initialpicChoiceMap.keys.toList();
+                          var keys = initialpicChoiceMap.keys.toList();
                           return GestureDetector(
                             onTap: () {
                               print('tapped pic');
@@ -314,12 +311,19 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                             },
                             child: Container(
                               key: _picCardKey[index],
-                              width: 200,
+                              width: 300,
                               height: 200,
+                              decoration: BoxDecoration(
+                                border: Border.all(width: 3.0,color: Colors.lightBlueAccent),
+                                borderRadius: BorderRadius.all(Radius.circular(
+                                        5.0) //         <--- border radius here
+                                    ),
+                              ),
                               child: new Image.asset(
                                 keys[index],
                                 // 'assets/aliff.png',
                                 fit: BoxFit.fill,
+                                
                               ),
                             ),
                           );
@@ -329,7 +333,7 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: List.generate(3, (index) {
-                           var choices = initialpicChoiceMap.values.toList();
+                          var choices = initialpicChoiceMap.values.toList();
                           return GestureDetector(
                             onTap: () {
                               print('tapped pic');
@@ -337,8 +341,15 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                             },
                             child: Container(
                               key: _wordCardKey[index],
-                              width: 200,
+                              width: 300,
                               height: 200,
+                              decoration: BoxDecoration(
+                                border: Border.all(width: 3.0 , color: Colors.lightBlueAccent),
+                                // color: Colors.blueAccent,
+                                borderRadius: BorderRadius.all(Radius.circular(
+                                        5.0) //         <--- border radius here
+                                    ),
+                              ),
                               child: new Image.asset(
                                 choices[index],
                                 // 'assets/aliff.png',
