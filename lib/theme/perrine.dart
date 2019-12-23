@@ -79,7 +79,7 @@ TextStyle mStyle1black = new TextStyle(
     fontWeight: FontWeight.w900);
 
 TextStyle mStyle1ex = new TextStyle(
-    color: Colors.purple,
+    color: Color.fromRGBO(80, 47, 136, 1),
     fontSize: 35.0,
     fontWeight: FontWeight.w500);
 

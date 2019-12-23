@@ -5,9 +5,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:sanabelsecondexercice/components/widgets/sanabelFrame.dart';
+import 'package:sanabelsecondexercice/pages/Exercice1.dart';
 
-import 'package:sanabelsecondexercice/pages/Exercice2/Exercice2.dart';
 import 'package:sanabelsecondexercice/pages/Exercice3.dart';
+import 'package:sanabelsecondexercice/pages/Exercice4.dart';
 import 'package:sanabelsecondexercice/pages/home.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -25,7 +26,6 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     print('should stop everything');
     Flame.bgm.initialize();
-    Flame.bgm.pause();
   }
 
   @override
@@ -139,7 +139,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
                     Navigator.push(context,
                         MaterialPageRoute(builder: (BuildContext context) {
-                      return HomePage();
+                      return ExerciceFour();
                     }));
                   },
                   child: Center(child: SanabelFrame(title: 'دُخُولْ'))),

@@ -52,15 +52,11 @@ class Balloon extends StatelessWidget {
           fit: BoxFit.contain,
         ),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Expanded(
-            
-            flex: 2,
-            child: Row(
+      child: letter == 'أ'
+          ? Center(
+              child: Column(
+                // mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
                   Text(
                     letter,
@@ -69,13 +65,51 @@ class Balloon extends StatelessWidget {
                         color: color,
                         fontWeight: FontWeight.bold),
                   ),
+                  SizedBox(
+                    height: screenSize.width / 40,
+                  )
                 ],
               ),
-          ),
-          Expanded(child: Container()),
-          
-        ],
-      ),
+            )
+          : (letter == 'ح' ||
+                  letter == 'خ' ||
+                  letter == 'س' ||
+                  letter == 'ش' ||
+                  letter == 'ص' ||
+                  letter == 'غ' ||
+                  letter == 'ع' ||
+                  letter == 'ق' ||
+                  letter == 'م' ||
+                  letter == 'و' ||
+                  letter == 'ي')
+              ? Stack(
+                  alignment: AlignmentDirectional.topCenter,
+                  children: <Widget>[
+                    Positioned(
+                      top: -screenSize.width / 123,
+                      child: Text(
+                        letter,
+                        style: TextStyle(
+                            fontSize: screenSize.width / 10,
+                            color: color,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                )
+              : Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      letter,
+                      style: TextStyle(
+                          fontSize: screenSize.width / 10,
+                          color: color,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
     );
   }
 }

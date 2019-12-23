@@ -86,26 +86,25 @@ class _HomePageState extends State<HomePage> {
               if ((a % 5 == 0) && (a != 0)) {
                 print(a);
                 return InkWell(
-                 
-                  child: Container(
-                    width: screenSize.width / 10,
-                    height: screenSize.width / 10,
-                    child: Image.asset(
-                      'assets/recap.png',
-                      fit: BoxFit.contain,
+                  child: Padding(
+                    padding:  EdgeInsets.all(screenSize.width/60),
+                    child: Container(
+                      child: Image.asset(
+                        'assets/recap.png',
+                      ),
                     ),
                   ),
                 );
               } else {
                 return InkWell(
-                   onTap: () {
+                  onTap: () {
                     print('to ex 3');
                     Navigator.push(context,
                         MaterialPageRoute(builder: (BuildContext context) {
                       return ExerciceThree();
                     }));
                   },
-                                  child: Balloon(
+                  child: Balloon(
                       letter: letters[a - 1].letter,
                       letterColor: letters[a - 1].letterColor,
                       balloonColor: letters[a - 1].balloonColor),

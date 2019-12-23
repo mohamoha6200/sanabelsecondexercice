@@ -4,15 +4,16 @@ import 'package:sanabelsecondexercice/theme/perrine.dart';
 class ExQuestionBar extends StatelessWidget {
   final String kidPic;
   final String question;
-  // = 'أَرَسْمِ دائرة حول الحرف ';
   final String subQuestion;
+  final bool logos ;
   final String bookPic = 'Logo-sanabel-Vec.png';
 
   ExQuestionBar({
     @required this.kidPic,
     @required this.question,
     this.subQuestion,
-    //this.bookPic,
+    // this.bookPic,
+    this.logos
   });
 
   @override
@@ -25,7 +26,7 @@ class ExQuestionBar extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Row(
+          logos == false ? Container() : Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Container(
@@ -69,7 +70,7 @@ class ExQuestionBar extends StatelessWidget {
                   child: Image.asset(
                     'assets/$kidPic',
                     fit: BoxFit.fill,
-                    width: 80,
+                    width: 120,
                     height: 80,
                   ),
                 ),

@@ -5,8 +5,8 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:sanabelsecondexercice/pages/Exercice2/Splash.dart';
 import 'package:sanabelsecondexercice/pages/Exercice3.dart';
+import 'package:sanabelsecondexercice/pages/Splash.dart';
 import 'package:sanabelsecondexercice/pages/home.dart';
 
 final RouteObserver<PageRoute> routeObserver = new RouteObserver<PageRoute>();
@@ -68,7 +68,7 @@ class MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       navigatorObservers: <NavigatorObserver>[routeObserver],
       theme: ThemeData(primaryColor: Colors.black),
-      home: HomePage(),
-    );
+      home: SplashScreen(), 
+    );  
   }
 }
