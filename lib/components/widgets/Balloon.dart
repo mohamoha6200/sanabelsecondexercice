@@ -19,12 +19,12 @@ class Balloon extends StatelessWidget {
     switch (stringColor) {
       case 'red':
         {
-          color = Colors.red;
+          color = Color.fromRGBO(229, 68, 33, 1);
         }
         break;
       case 'orange':
         {
-          color = Colors.orange;
+          color = Color.fromRGBO(225, 87, 59, 1);
         }
         break;
       case 'white':
@@ -72,14 +72,18 @@ class Balloon extends StatelessWidget {
               ),
             )
           : (letter == 'ح' ||
+          letter == 'ج' ||
                   letter == 'خ' ||
                   letter == 'س' ||
                   letter == 'ش' ||
                   letter == 'ص' ||
+                  letter == 'ض' ||
                   letter == 'غ' ||
                   letter == 'ع' ||
+                  letter == 'ف' ||
                   letter == 'ق' ||
                   letter == 'م' ||
+                  letter == 'ن' ||
                   letter == 'و' ||
                   letter == 'ي')
               ? Stack(

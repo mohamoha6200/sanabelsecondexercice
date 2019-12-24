@@ -182,7 +182,7 @@ class _ExerciceFourState extends State<ExerciceFour> {
               Container(
                 width: screenSize.width / 6,
                 alignment: Alignment.center,
-                child: Image.asset('assets/balloonblueaccent.png'),
+                child: Image.asset('assets/balloonpurpleaccent.png'),
               ),
               Positioned(
                 bottom: screenSize.height / 5,
@@ -203,7 +203,7 @@ class _ExerciceFourState extends State<ExerciceFour> {
               Container(
                 width: screenSize.width / 6,
                 alignment: Alignment.center,
-                child: Image.asset('assets/balloonblueaccent.png'),
+                child: Image.asset('assets/balloonpurpleaccent.png'),
               ),
               // Container(
               //   child: Text(
@@ -305,7 +305,9 @@ class Emoji extends StatelessWidget {
     Size screenSize = MediaQuery.of(context).size;
     return Material(
       color: Colors.transparent,
-      child: Container(
+      child: 
+      emojiStr!='' ?
+      Container(
         margin: new EdgeInsets.only(top: screenSize.height / 20),
         child: Image.asset(
           emojiStr,
@@ -313,7 +315,7 @@ class Emoji extends StatelessWidget {
           //width: screenSize.width / 7,
           height: screenSize.height / 5,
         ),
-      ),
+      ): Container()
     );
   }
 }

@@ -4,6 +4,7 @@ import 'package:sanabelsecondexercice/components/models/LetterBalloon.dart';
 import 'package:sanabelsecondexercice/components/widgets/Balloon.dart';
 import 'package:sanabelsecondexercice/components/widgets/PerrineAppBar.dart';
 import 'package:sanabelsecondexercice/pages/Exercice3.dart';
+import 'package:sanabelsecondexercice/pages/Exercice4.dart';
 import 'package:sanabelsecondexercice/theme/style.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,7 +14,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<LettreBalloon> letters = [
-    new LettreBalloon(letter: 'أ', letterColor: 'red', balloonColor: 'pink'),
+    new LettreBalloon(
+        letter: 'أ', letterColor: 'red', balloonColor: 'purpleaccent'),
     new LettreBalloon(
         letter: 'ب', letterColor: 'yellow', balloonColor: 'green'),
     new LettreBalloon(
@@ -25,7 +27,8 @@ class _HomePageState extends State<HomePage> {
         letter: 'ح', letterColor: 'orange', balloonColor: 'yellow'),
     new LettreBalloon(
         letter: 'خ', letterColor: 'yellow', balloonColor: 'purple'),
-    new LettreBalloon(letter: 'د', letterColor: 'red', balloonColor: 'pink'),
+    new LettreBalloon(
+        letter: 'د', letterColor: 'red', balloonColor: 'purpleaccent'),
     new LettreBalloon(
         letter: 'ذ', letterColor: 'yellow', balloonColor: 'green'),
     new LettreBalloon(
@@ -37,7 +40,8 @@ class _HomePageState extends State<HomePage> {
         letter: 'ش', letterColor: 'orange', balloonColor: 'yellow'),
     new LettreBalloon(
         letter: 'ص', letterColor: 'yellow', balloonColor: 'purple'),
-    new LettreBalloon(letter: 'ض', letterColor: 'red', balloonColor: 'pink'),
+    new LettreBalloon(
+        letter: 'ض', letterColor: 'red', balloonColor: 'purpleaccent'),
     new LettreBalloon(
         letter: 'ط', letterColor: 'yellow', balloonColor: 'green'),
     new LettreBalloon(
@@ -49,7 +53,8 @@ class _HomePageState extends State<HomePage> {
         letter: 'ف', letterColor: 'orange', balloonColor: 'yellow'),
     new LettreBalloon(
         letter: 'ق', letterColor: 'yellow', balloonColor: 'purple'),
-    new LettreBalloon(letter: 'ك', letterColor: 'red', balloonColor: 'pink'),
+    new LettreBalloon(
+        letter: 'ك', letterColor: 'red', balloonColor: 'purpleaccent'),
     new LettreBalloon(
         letter: 'ل', letterColor: 'yellow', balloonColor: 'green'),
     new LettreBalloon(
@@ -72,6 +77,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget childWidget() {
     Size screenSize = MediaQuery.of(context).size;
+    Widget conditional;
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Container(
@@ -79,39 +85,39 @@ class _HomePageState extends State<HomePage> {
           // shrinkWrap: true,
           physics: ClampingScrollPhysics(),
           crossAxisCount: 4,
-          children: List.generate(
-            letters.length,
-            (i) {
-              var a = i + 1;
-              if ((a % 5 == 0) && (a != 0)) {
-                print(a);
-                return InkWell(
-                  child: Padding(
-                    padding:  EdgeInsets.all(screenSize.width/60),
-                    child: Container(
-                      child: Image.asset(
-                        'assets/recap.png',
-                      ),
+
+          children: List.generate(letters.length, (i) {
+            var a = i + 1;
+
+            if ((a % 5 != 0)) {
+              print(a);
+              conditional = InkWell(
+                onTap: () { 
+                  print('to ex 3');
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (BuildContext context) {
+                    return ExerciceFour();
+                  }));
+                },
+                child: Balloon(
+                    letter: letters[a - 1].letter,
+                    letterColor: letters[a - 1].letterColor,
+                    balloonColor: letters[a - 1].balloonColor),
+              );
+            } else {
+              conditional = InkWell(
+                child: Padding(
+                  padding: EdgeInsets.all(screenSize.width / 60),
+                  child: Container(
+                    child: Image.asset(
+                      'assets/recap.png',
                     ),
                   ),
-                );
-              } else {
-                return InkWell(
-                  onTap: () {
-                    print('to ex 3');
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (BuildContext context) {
-                      return ExerciceThree();
-                    }));
-                  },
-                  child: Balloon(
-                      letter: letters[a - 1].letter,
-                      letterColor: letters[a - 1].letterColor,
-                      balloonColor: letters[a - 1].balloonColor),
-                );
-              }
-            },
-          ),
+                ),
+              );
+            }
+            return conditional;
+          }),
         ),
       ),
     );
