@@ -80,7 +80,7 @@ TextStyle mStyle1black = new TextStyle(
 
 TextStyle mStyle1ex = new TextStyle(
     color: Color.fromRGBO(80, 47, 136, 1),
-    fontSize: 35.0,
+    fontSize: 40.0,
     fontWeight: FontWeight.w500);
 
     TextStyle questionLetter = new TextStyle(

@@ -7,14 +7,12 @@ import 'package:sanabelsecondexercice/components/widgets/ResultSuccessQuestion.d
 import 'package:sanabelsecondexercice/theme/style.dart';
 
 class ExerciceFour extends StatefulWidget {
-
   @override
   _ExerciceFourState createState() => _ExerciceFourState();
 }
 
 class _ExerciceFourState extends State<ExerciceFour> {
   Map<String, bool> scoreMap = {};
-
 
   Map letterList = letterListRed;
 
@@ -57,7 +55,6 @@ class _ExerciceFourState extends State<ExerciceFour> {
   @override
   void initState() {
     super.initState();
- 
   }
 
   Widget exView() {
@@ -93,12 +90,13 @@ class _ExerciceFourState extends State<ExerciceFour> {
                               emojiStr: (scoreMap[emoji] == true) ? '' : emoji),
                           feedback: Emoji(emojiStr: emoji),
                           childWhenDragging: Container(
-                            height: screenSize.height / 7,
+                            width: screenSize.width / 7,
                           ),
                           onDragEnd: (value) {
                             print('the is value ' + scoreMap[emoji].toString());
 
-                            if ((scoreMap[emoji] == null) && (scoreMap.length!=0)) {
+                            if ((scoreMap[emoji] == null) &&
+                                (scoreMap.length != 0)) {
                               Flame.audio.play('error.mp3');
                             }
                           },
@@ -174,7 +172,6 @@ class _ExerciceFourState extends State<ExerciceFour> {
       builder: (BuildContext context, List<String> candidateData,
           List rejectedData) {
         print('creating target for--' + letterList[emoji].toString());
-
         if (scoreMap[emoji] == true) {
           return Stack(
             alignment: Alignment.center,
@@ -205,15 +202,6 @@ class _ExerciceFourState extends State<ExerciceFour> {
                 alignment: Alignment.center,
                 child: Image.asset('assets/balloonpurpleaccent.png'),
               ),
-              // Container(
-              //   child: Text(
-              //     letterList[emoji],
-              //     style: TextStyle(color: Colors.blue),
-              //   ),
-              //   alignment: Alignment.center,
-              //   color: Colors.transparent,
-              //   height: screenSize.height / 5,
-              // ),
             ],
           );
         }
@@ -226,10 +214,19 @@ class _ExerciceFourState extends State<ExerciceFour> {
         setState(() {
           scoreMap[data] = true;
           if (scoreMap.length == 3) {
+            //  letterList = {
+            //     'assets/transparent.png': 'kasra',
+            //     'assets/aliff.png': 'thama',
+            //    'assets/transparent.png': 'fatha',
+            //   };
+            // letterList=scoreMap;
+
+            print('letterList = ');
+            print(letterList);
             showDialog(
                 context: context,
                 builder: (context) {
-                  Future.delayed(Duration(seconds: 5), () {
+                  Future.delayed(Duration(seconds: 3), () {
                     Navigator.of(context).pop(true);
                   });
                   return Theme(
@@ -238,16 +235,20 @@ class _ExerciceFourState extends State<ExerciceFour> {
                     child: ResultSucessQuestion(),
                   );
                 });
-          letterList=letterListRed;
-          scoreMap={};
-          selectedButtonIndex=-1;
-          var colors = buttonList.keys.toList();
-          for (var i = 0; i < colors.length; i++) {
-                   
-                      setState(() {
-                        buttonList[colors[i]] = 0.5;
-                      });
-                    }
+            Future.delayed(Duration(seconds: 5), () {
+              setState(() {
+                letterList = letterListRed;
+                scoreMap = {};
+              });
+            });
+
+            selectedButtonIndex = -1;
+            var colors = buttonList.keys.toList();
+            for (var i = 0; i < colors.length; i++) {
+              setState(() {
+                buttonList[colors[i]] = 0.5;
+              });
+            }
           } else {
             Flame.audio.play('good.mp3');
           }
@@ -304,18 +305,16 @@ class Emoji extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
     return Material(
-      color: Colors.transparent,
-      child: 
-      emojiStr!='' ?
-      Container(
-        margin: new EdgeInsets.only(top: screenSize.height / 20),
-        child: Image.asset(
-          emojiStr,
-
-          //width: screenSize.width / 7,
-          height: screenSize.height / 5,
-        ),
-      ): Container()
-    );
+        color: Colors.transparent,
+        child: emojiStr != ''
+            ? Container(
+                margin: new EdgeInsets.only(top: screenSize.height / 20),
+                child: Image.asset(
+                  emojiStr,
+                  width: screenSize.width / 7,
+                  height: screenSize.height / 5,
+                ),
+              )
+            : Container());
   }
 }
