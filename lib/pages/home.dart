@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:sanabelsecondexercice/components/models/LetterBalloon.dart';
 import 'package:sanabelsecondexercice/components/widgets/Balloon.dart';
 import 'package:sanabelsecondexercice/components/widgets/PerrineAppBar.dart';
+import 'package:sanabelsecondexercice/pages/Exercice2.dart';
 import 'package:sanabelsecondexercice/pages/Exercice3.dart';
 import 'package:sanabelsecondexercice/pages/Exercice4.dart';
 import 'package:sanabelsecondexercice/pages/Exercice5.dart';
+import 'package:sanabelsecondexercice/pages/Exercice6.dart';
 import 'package:sanabelsecondexercice/theme/style.dart';
 
 class HomePage extends StatefulWidget {
@@ -110,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                   print('to ex 3');
                   Navigator.push(context,
                       MaterialPageRoute(builder: (BuildContext context) {
-                    return ExerciceFive();
+                    return ExerciceSix();
                   }));
                 },
                 child: Balloon(

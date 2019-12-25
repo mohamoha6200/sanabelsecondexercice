@@ -5,16 +5,15 @@ class ExQuestionBar extends StatelessWidget {
   final String kidPic;
   final String question;
   final String subQuestion;
-  final bool logos ;
+  final bool logos;
   final String bookPic = 'Logo-sanabel-Vec.png';
 
-  ExQuestionBar({
-    @required this.kidPic,
-    @required this.question,
-    this.subQuestion,
-    // this.bookPic,
-    this.logos
-  });
+  ExQuestionBar(
+      {@required this.kidPic,
+      @required this.question,
+      this.subQuestion,
+      // this.bookPic,
+      this.logos});
 
   @override
   Widget build(BuildContext context) {
@@ -26,33 +25,38 @@ class ExQuestionBar extends StatelessWidget {
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          logos == false ? Container() : Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Container(
-                child: Image.asset(
-                  'assets/$bookPic',
-                  width: 150,
+          logos == false
+              ? Container()
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Container(
+                      child: Image.asset(
+                        'assets/$bookPic',
+                        width: 150,
+                      ),
+                    ),
+                    Container(
+                      child: Image.asset(
+                        'assets/Logo-sanabel-Vec.png',
+                        width: 150,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              Container(
-                child: Image.asset(
-                  'assets/Logo-sanabel-Vec.png',
-                  width: 150,
-                ),
-              ),
-            ],
-          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.end,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               this.subQuestion != null
-                  ? Container(
-                      child: Text(
-                        subQuestion,
-                        style: questionLetter,
+                  ? Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: Container(
+                        child: Text(
+                          subQuestion,
+                          style: questionLetter,
+                        ),
                       ),
                     )
                   : Container(),
@@ -62,10 +66,11 @@ class ExQuestionBar extends StatelessWidget {
                   style: mStyle1ex,
                 ),
               ),
-                  SizedBox(width: 20,),
-
+              SizedBox(
+                width: 20,
+              ),
               Padding(
-                padding: const EdgeInsets.only(right: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Container(
                   child: Image.asset(
                     'assets/$kidPic',

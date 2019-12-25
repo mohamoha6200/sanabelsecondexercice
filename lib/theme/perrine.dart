@@ -85,7 +85,7 @@ TextStyle mStyle1ex = new TextStyle(
 
     TextStyle questionLetter = new TextStyle(
     color: Colors.red,
-    fontSize: 35.0,
+    fontSize: 45.0,
     fontWeight: FontWeight.w500);
 
 TextStyle mStyleNext = new TextStyle(
