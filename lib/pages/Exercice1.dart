@@ -24,9 +24,9 @@ class _FirstExerciceState extends State<FirstExercice> {
   String fileName;
 
   Map letterList = {
-    'assets/aliff.png': 'fatha',
-    'assets/alifthama.png': 'thama',
-    'assets/alifkasra.png': 'kasra',
+    'assets/alif-fatha.png': 'fatha',
+    'assets/alif-thama.png': 'thama',
+    'assets/alif-kasra.png': 'kasra',
   };
 
 

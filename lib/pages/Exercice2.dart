@@ -277,7 +277,7 @@ class _ExerciceTwoState extends State<ExerciceTwo> {
                                         )
                                       : Container(
                                           child: new Image.asset(
-                                            'assets/aliff.png',
+                                            'assets/alif-fatha.png',
                                             fit: BoxFit.fill,
                                           ),
                                         )),

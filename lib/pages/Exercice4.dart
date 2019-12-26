@@ -7,29 +7,35 @@ import 'package:sanabelsecondexercice/components/widgets/ResultSuccessQuestion.d
 import 'package:sanabelsecondexercice/theme/style.dart';
 
 class ExerciceFour extends StatefulWidget {
+  final subQuestion;
+
+  ExerciceFour({this.subQuestion});
+
   @override
   _ExerciceFourState createState() => _ExerciceFourState();
 }
 
 class _ExerciceFourState extends State<ExerciceFour> {
+  var subQuestion;
+
   Map<String, bool> scoreMap = {};
 
-  Map letterList = letterListRed;
-
+  // Map letterList = letterListRed;
+  Map letterList;
   static Map letterListRed = {
-    'assets/ba-kasra.png': 'kasra',
-    'assets/ba-thama.png': 'thama',
-    'assets/ba-fatha.png': 'fatha',
+    // 'assets/ba-kasra.png': 'kasra',
+    // 'assets/ba-thama.png': 'thama',
+    // 'assets/ba-fatha.png': 'fatha',
   };
   static Map letterListGreen = {
-    'assets/ba-fatha.png': 'fatha',
-    'assets/ba-kasra.png': 'kasra',
-    'assets/ba-thama.png': 'thama',
+    // 'assets/ba-fatha.png': 'fatha',
+    // 'assets/ba-kasra.png': 'kasra',
+    // 'assets/ba-thama.png': 'thama',
   };
   static Map letterListBlue = {
-    'assets/ba-thama.png': 'thama',
-    'assets/ba-fatha.png': 'fatha',
-    'assets/ba-kasra.png': 'kasra',
+    // 'assets/ba-thama.png': 'thama',
+    // 'assets/ba-fatha.png': 'fatha',
+    // 'assets/ba-kasra.png': 'kasra',
   };
 
   Map<String, double> buttonList = {
@@ -38,23 +44,132 @@ class _ExerciceFourState extends State<ExerciceFour> {
     'Blue': 0.5,
   };
 
-  Map<String, List<String>> colorSoundMap = {
-    'Red': ['ba', 'bu', 'bi'],
-    'Green': ['bu', 'bi', 'ba'],
-    'Blue': ['bi', 'ba', 'bu'],
+  Map<String, String> colorSoundMap = {
+    // 'Red': 'babubi',
+    // 'Green': 'bubiba',
+    // 'Blue': 'bibabu',
   };
 
   Map<String, Map> letterListMapList = {
-    'Red': letterListRed,
-    'Green': letterListGreen,
-    'Blue': letterListBlue
+    // 'Red': letterListRed,
+    // 'Green': letterListGreen,
+    // 'Blue': letterListBlue
   };
 
   int selectedButtonIndex = -1;
 
+  String subQuestionLatin;
+
   @override
   void initState() {
-    super.initState();
+    super.initState(); 
+    subQuestion = widget.subQuestion;
+    initialiseSubQuestionLatin();
+    colorSoundMap = fillColorSoundMap(subQuestion);
+    letterListRed = fillLetterListRed(subQuestion);
+    letterListGreen = fillLetterListGreen(subQuestion);
+    letterListBlue = fillLetterListBlue(subQuestion);
+    letterList = letterListRed;
+    letterListMapList = fillLetterList();
+  }
+
+  fillLetterList() {
+    return {
+      'Red': letterListRed,
+      'Green': letterListGreen,
+      'Blue': letterListBlue
+    };
+  }
+
+  initialiseSubQuestionLatin() {
+    switch (subQuestion) {
+      case 'أ':
+        {
+          setState(() {
+            subQuestionLatin = 'alif';
+          });
+        }
+        break;
+      case 'ب':
+        {
+          setState(() {
+            subQuestionLatin = 'ba';
+          });
+        }
+        break;
+
+      default:
+        {
+          setState(() {
+            subQuestionLatin = 'ba';
+          });
+        }
+    }
+  }
+
+  Map fillLetterListRed(subQuestion) {
+    return {
+      'assets/$subQuestionLatin-kasra.png': 'kasra',
+      'assets/$subQuestionLatin-thama.png': 'thama',
+      'assets/$subQuestionLatin-fatha.png': 'fatha',
+    };
+  }
+
+  Map fillLetterListGreen(subQuestion) {
+    return {
+      'assets/$subQuestionLatin-fatha.png': 'fatha',
+      'assets/$subQuestionLatin-kasra.png': 'kasra',
+      'assets/$subQuestionLatin-thama.png': 'thama',
+    };
+  }
+
+  Map fillLetterListBlue(subQuestion) {
+    return {
+      'assets/$subQuestionLatin-thama.png': 'thama',
+      'assets/$subQuestionLatin-fatha.png': 'fatha',
+      'assets/$subQuestionLatin-kasra.png': 'kasra',
+    };
+  }
+
+  Map<String, String> fillColorSoundMap(subQuestion) {
+    String soundRed;
+    String soundGreen;
+    String soundBlue;
+
+    switch (subQuestion) {
+      case 'أ':
+        {
+          setState(() {
+            subQuestionLatin = 'alif';
+          });
+          soundRed = 'aauuii';
+          soundGreen = 'uuiiaa';
+          soundBlue = 'iiaauu';
+        }
+        break;
+      case 'ب':
+        {
+          setState(() {
+            subQuestionLatin = 'ba';
+          });
+          soundRed = 'babubi';
+          soundGreen = 'bubiba';
+          soundBlue = 'bibabu';
+        }
+        break;
+
+      default:
+        {
+          soundRed = 'babubi';
+          soundGreen = 'bubiba';
+          soundBlue = 'bibabu';
+        }
+    }
+    return {
+      'Red': soundRed,
+      'Green': soundGreen,
+      'Blue': soundBlue,
+    };
   }
 
   Widget exView() {
@@ -131,8 +246,7 @@ class _ExerciceFourState extends State<ExerciceFour> {
                   for (var i = 0; i < colors.length; i++) {
                     if (i == selectedButtonIndex) {
                       var color = colors[i];
-                      var audioTab = colorSoundMap[color];
-                      String audioFile = audioTab.join();
+                      String audioFile = colorSoundMap[color];
                       Flame.audio.play('$audioFile.mp3');
 
                       setState(() {

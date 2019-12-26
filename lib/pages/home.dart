@@ -113,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (BuildContext context ) {
                     // return ExerciceFive(subQuestion:letters[a-1].letter);
-                    return ExerciceSix();
+                    return ExerciceFour(subQuestion:letters[a-1].letter);
                   }));
                 },
                 child: Balloon(

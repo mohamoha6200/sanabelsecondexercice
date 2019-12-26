@@ -321,7 +321,6 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                               ),
                               child: new Image.asset(
                                 keys[index],
-                                // 'assets/aliff.png',
                                 fit: BoxFit.fill,
                                 
                               ),
@@ -352,7 +351,6 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                               ),
                               child: new Image.asset(
                                 choices[index],
-                                // 'assets/aliff.png',
                                 fit: BoxFit.fill,
                               ),
                             ),
