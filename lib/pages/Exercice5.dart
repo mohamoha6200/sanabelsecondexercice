@@ -7,6 +7,10 @@ import 'package:sanabelsecondexercice/components/widgets/ResultSuccessQuestion.d
 import 'package:sanabelsecondexercice/theme/style.dart';
 
 class ExerciceFive extends StatefulWidget {
+  final subQuestion;
+
+  ExerciceFive({this.subQuestion});
+
   @override
   _ExerciceFiveState createState() => _ExerciceFiveState();
 }
@@ -25,19 +29,181 @@ class _ExerciceFiveState extends State<ExerciceFive> {
   };
 
   Map<String, String> boxsMap = {
-    'assets/baEnd2.png': 'end',
-    'assets/baMiddleToEnd2.png': 'middleToEnd',
-    'assets/baMiddle2.png': 'middle',
-    'assets/baStart2.png': 'start',
+    // 'assets/baEnd2.png': 'end',
+    // 'assets/baMiddleToEnd2.png': 'middleToEnd',
+    // 'assets/baMiddle2.png': 'middle',
+    // 'assets/baStart2.png': 'start',
   };
   int rightAnswersCount;
+
+  var subQuestion;
 
   @override
   void initState() {
     super.initState();
     setState(() {
       rightAnswersCount = fnRightAnswersCount();
+      subQuestion = widget.subQuestion;
+      boxsMap = fillBoxMap(subQuestion);
     });
+  }
+
+  Map<String, String> fillBoxMap(subQuestion) {
+    String prefix;
+    switch (subQuestion) {
+      case 'أ':
+        {
+          prefix = 'alif';
+        }
+        break;
+      case 'ب':
+        {
+          prefix = 'ba';
+        }
+        break;
+      case 'ت':
+        {
+          prefix = 'te';
+        }
+        break;
+      case 'ث':
+        {
+          prefix = 'the';
+        }
+        break;
+      case 'ج':
+        {
+          prefix = 'ja';
+        }
+        break;
+      case 'ح':
+        {
+          prefix = '7a';
+        }
+        break;
+      case 'خ':
+        {
+          prefix = '5a';
+        }
+        break;
+      case 'د':
+        {
+          prefix = 'da';
+        }
+        break;
+      case 'ذ':
+        {
+          prefix = 'tha';
+        }
+        break;
+      case 'ر':
+        {
+          prefix = 'ra';
+        }
+        break;
+      case 'ز':
+        {
+          prefix = 'za';
+        }
+        break;
+      case 'س':
+        {
+          prefix = 'sa';
+        }
+        break;
+      case 'ش':
+        {
+          prefix = 'cha';
+        }
+        break;
+      case 'ص':
+        {
+          prefix = 'sad';
+        }
+        break;
+      case 'ض':
+        {
+          prefix = 'dhad';
+        }
+        break;
+      case 'ط':
+        {
+          prefix = 'ta';
+        }
+        break;
+      case 'ظ':
+        {
+          prefix = 'dha';
+        }
+        break;
+      case 'ع':
+        {
+          prefix = '3a';
+        }
+        break;
+      case 'غ':
+        {
+          prefix = '8a';
+        }
+        break;
+      case 'ف':
+        {
+          prefix = 'fa';
+        }
+        break;
+      case 'ق':
+        {
+          prefix = '9a';
+        }
+        break;
+      case 'ك':
+        {
+          prefix = 'ka';
+        }
+        break;
+      case 'ل':
+        {
+          prefix = 'la';
+        }
+        break;
+      case 'م':
+        {
+          prefix = 'ma';
+        }
+        break;
+
+      case 'ن':
+        {
+          prefix = 'na';
+        }
+        break;
+      case 'ه':
+        {
+          prefix = 'ha';
+        }
+        break;
+      case 'و':
+        {
+          prefix = 'wa';
+        }
+        break;
+      case 'ي':
+        {
+          prefix = 'ya';
+        }
+        break;
+      default:
+        {
+          prefix = 'ba';
+        }
+    }
+    return  {
+     'assets/$prefix''End.png': 'end',
+     'assets/$prefix''MiddleToEnd.png': 'middleToEnd',
+     'assets/$prefix''Middle.png': 'middle',
+     'assets/$prefix''Start.png': 'start',
+  };
+
   }
 
   int fnRightAnswersCount() {

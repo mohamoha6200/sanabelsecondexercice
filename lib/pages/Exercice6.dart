@@ -16,6 +16,8 @@ class _ExerciceSixState extends State<ExerciceSix> {
   final String subQuestion = 'ب';
 
   List<Offset> _points = <Offset>[];
+  List<Offset> _truePoints = <Offset>[];
+
   static final GlobalKey _cardKey0 = GlobalKey();
   static final GlobalKey _cardKey1 = GlobalKey();
   static final GlobalKey _cardKey2 = GlobalKey();
@@ -34,18 +36,18 @@ class _ExerciceSixState extends State<ExerciceSix> {
   List<GlobalKey> _cardKey = <GlobalKey>[
     _cardKey0,
     _cardKey1,
-     _cardKey2,
-     _cardKey3,
-     _cardKey4,
-     _cardKey5,
-     _cardKey6,
-     _cardKey7,
-     _cardKey8,
-     _cardKey9,
-     _cardKey10,
-     _cardKey11,
-     _cardKey12,
-     _cardKey13,
+    _cardKey2,
+    _cardKey3,
+    _cardKey4,
+    _cardKey5,
+    _cardKey6,
+    _cardKey7,
+    _cardKey8,
+    _cardKey9,
+    _cardKey10,
+    _cardKey11,
+    _cardKey12,
+    _cardKey13,
   ];
 
   Size cardSize;
@@ -58,42 +60,42 @@ class _ExerciceSixState extends State<ExerciceSix> {
     1: {
       0: ['ذُ', 'ج', 'ش']
     },
-     2: {
-       0: ['نــِ', 'ا', 'ب']
+    2: {
+      0: ['نــِ', 'ا', 'ب']
     },
-     3: {
-       1: ['ب', 'ـبِـ', 'ب']
-     },
-     4: {
-       0: ['جُـ', 'ت', 'ب']
-     },
-     5: {
-       2: ['ر', 'ي', 'ـبٌ']
-     },
+    3: {
+      1: ['ب', 'ـبِـ', 'ب']
+    },
+    4: {
+      0: ['جُـ', 'ت', 'ب']
+    },
+    5: {
+      2: ['ر', 'ي', 'ـبٌ']
+    },
     6: {
-       2: ['ا', 'ا', 'تٍ']
-     },
-     7: {
-       2: ['ت', 'ا', 'بُ']
-     },
-     8: {
-       1: ['س', 'ـتَـ', 'ر']
-     },
-     9: {
-       1: ['ص', 'ـبَـ', 'ر']
-     },
+      2: ['ا', 'ا', 'تٍ']
+    },
+    7: {
+      2: ['ت', 'ا', 'بُ']
+    },
+    8: {
+      1: ['س', 'ـتَـ', 'ر']
+    },
+    9: {
+      1: ['ص', 'ـبَـ', 'ر']
+    },
     10: {
-       0: ['بُـ', 'د', 'ر']
-     },
-     11: {
-       1: ['ب', 'ـنُـ', 'ت']
-     },
-     12: {
-       0: ['تِـ', 'ب', 'ن']
-     }, 
-     13: {
-       2: ['ن', 'ا', 'بٍ']
-     },
+      0: ['بُـ', 'د', 'ر']
+    },
+    11: {
+      1: ['ب', 'ـنُـ', 'ت']
+    },
+    12: {
+      0: ['تِـ', 'ب', 'ن']
+    },
+    13: {
+      2: ['ن', 'ا', 'بٍ']
+    },
   };
 
   Map<int, Offset> indexOffsetsMap = {
@@ -108,7 +110,7 @@ class _ExerciceSixState extends State<ExerciceSix> {
     // 8: Offset(192.0, 289.2),
     // 9: Offset(0.0, 289.2)
   };
-  List<int> rightCardsIndexes = [0, 3,5, 7,9,10,13];
+  List<int> rightCardsIndexes = [0, 3, 5, 7, 9, 10, 13];
   List<Offset> rightCards = [
     // Offset(768.0, 97.2),
     // Offset(0.0, 97.2),
@@ -186,7 +188,7 @@ class _ExerciceSixState extends State<ExerciceSix> {
     for (var index = 0; index < _cardKey.length; index++) {
       RenderBox _cardBox = _cardKey[index].currentContext.findRenderObject();
       setState(() {
-      cardSize = _cardBox.size;        
+        cardSize = _cardBox.size;
       });
       cardPosition = _cardBox.localToGlobal(Offset.zero);
       // print('cardSize [$index]' + cardSize.toString());
@@ -232,6 +234,8 @@ class _ExerciceSixState extends State<ExerciceSix> {
             if (scoreMap[currentRightCardPosition] == null) {
               print('it is new');
               setState(() {
+                _truePoints += _points;
+                _points = [];
                 scoreMap[currentRightCardPosition] = true;
               });
               if (scoreMap.length == rightCardsIndexes.length) {
@@ -254,6 +258,8 @@ class _ExerciceSixState extends State<ExerciceSix> {
 
                 setState(() {
                   _points = [];
+                  _truePoints = [];
+
                   scoreMap = {};
                 });
               } else {
@@ -273,14 +279,12 @@ class _ExerciceSixState extends State<ExerciceSix> {
             print('ended with false');
             setState(() {
               _points = [];
-              scoreMap = {};
             });
-            // audioCache.play('error.mp3', volume: 3);
             Flame.audio.play('error.mp3');
           }
         },
         child: new CustomPaint(
-            painter: new Signature(points: _points),
+            painter: new Signature(points: _points,trues: _truePoints),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -308,7 +312,7 @@ class _ExerciceSixState extends State<ExerciceSix> {
                         // padding: const EdgeInsets.all(50.0),
                         child: LetterOrText(
                           pos: key,
-                          textList:value,
+                          textList: value,
                         ),
                       );
                     }).toList(),

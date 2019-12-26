@@ -111,7 +111,8 @@ class _HomePageState extends State<HomePage> {
                 onTap: () {
                   print('to ex 3');
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (BuildContext context) {
+                      MaterialPageRoute(builder: (BuildContext context ) {
+                    // return ExerciceFive(subQuestion:letters[a-1].letter);
                     return ExerciceSix();
                   }));
                 },
