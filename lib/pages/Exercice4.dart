@@ -807,7 +807,7 @@ Widget letterWidget(String emojiStr, String subQuestion, context) {
                 // mainAxisAlignment: MainAxisAlignment.start,
                 overflow: Overflow.visible,
                 alignment: (emojiStr == 'kasra')
-                    ? Alignment.bottomCenter
+                    ? Alignment.bottomRight
                     : Alignment.topCenter,
                 children: [
                   Padding(
@@ -818,7 +818,7 @@ Widget letterWidget(String emojiStr, String subQuestion, context) {
             // overflow: TextOverflow.visible,
             style: new TextStyle(
                 fontWeight: FontWeight.bold,
-                fontSize: 70,
+                fontSize: (screenSize.width+screenSize.height) / 18 ,
                 color: Colors.red)),
                   ),
                   Padding(
@@ -835,10 +835,10 @@ Widget letterWidget(String emojiStr, String subQuestion, context) {
                     textList[0] != 'ث' &&
                     textList[0] != 'ط' &&
                     textList[0] != 'ل' &&
-                    textList[0] != 'ز' &&
+                    // textList[0] != 'ز' &&
                     textList[0] != 'ز'))
             ? EdgeInsets.only(top: screenSize.height / 25) //18
-            : EdgeInsets.only(top: screenSize.height / 50), //5
+            : EdgeInsets.only(top: screenSize.height / 80), //5
                     child: Padding(
           padding: ((emojiStr == 'kasra') &&
                    (textList[0] != 'غ') &&
@@ -862,7 +862,7 @@ Widget letterWidget(String emojiStr, String subQuestion, context) {
           ),
                     ),
                   ),
-                ],
+                ], 
               )
           : Container());
 }

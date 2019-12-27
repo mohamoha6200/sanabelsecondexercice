@@ -33,13 +33,13 @@ class ExQuestionBar extends StatelessWidget {
                     Container(
                       child: Image.asset(
                         'assets/$bookPic',
-                        width: 150,
+                        width: screenSize.width / 6.4,
                       ),
                     ),
                     Container(
                       child: Image.asset(
                         'assets/Logo-sanabel-Vec.png',
-                        width: 150,
+                        width: screenSize.width / 6.4,
                       ),
                     ),
                   ],
@@ -51,7 +51,9 @@ class ExQuestionBar extends StatelessWidget {
             children: <Widget>[
               this.subQuestion != null
                   ? Padding(
-                      padding: const EdgeInsets.only(right: 8),
+                      padding: EdgeInsets.only(
+                        right: screenSize.width / 120,
+                      ),
                       child: Container(
                         child: Text(
                           subQuestion,
@@ -63,20 +65,24 @@ class ExQuestionBar extends StatelessWidget {
               Container(
                 child: Text(
                   question,
-                  style: mStyle1ex,
+                  style: TextStyle(
+                      color: Color.fromRGBO(80, 47, 136, 1),
+                      fontSize: screenSize.width/27,
+                      fontWeight: FontWeight.w500),
                 ),
               ),
               SizedBox(
-                width: 20,
+                width: screenSize.width / 48,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding:
+                    EdgeInsets.symmetric(horizontal: screenSize.width / 48),
                 child: Container(
                   child: Image.asset(
                     'assets/$kidPic',
                     fit: BoxFit.fill,
-                    width: 120,
-                    height: 80,
+                    width: screenSize.width / 8,
+                    height: screenSize.height / 6.75,
                   ),
                 ),
               ),
