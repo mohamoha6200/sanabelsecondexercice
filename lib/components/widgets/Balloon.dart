@@ -80,7 +80,7 @@ class Balloon extends StatelessWidget {
                   letter == 'ض' ||
                   letter == 'غ' ||
                   letter == 'ع' ||
-                  letter == 'ف' ||
+                  // letter == 'ف' ||
                   letter == 'ق' ||
                   letter == 'م' ||
                   letter == 'ن' ||

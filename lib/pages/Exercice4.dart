@@ -62,7 +62,7 @@ class _ExerciceFourState extends State<ExerciceFour> {
 
   @override
   void initState() {
-    super.initState(); 
+    super.initState();
     subQuestion = widget.subQuestion;
     initialiseSubQuestionLatin();
     colorSoundMap = fillColorSoundMap(subQuestion);
@@ -94,6 +94,188 @@ class _ExerciceFourState extends State<ExerciceFour> {
         {
           setState(() {
             subQuestionLatin = 'ba';
+          });
+        }
+        break;
+      case 'ت':
+        {
+          setState(() {
+            subQuestionLatin = 'te';
+          });
+        }
+        break;
+      case 'ث':
+        {
+          setState(() {
+            subQuestionLatin = 'the';
+          });
+        }
+        break;
+      case 'ج':
+        {
+          setState(() {
+            subQuestionLatin = 'ja';
+          });
+        }
+        break;
+      case 'ح':
+        {
+          setState(() {
+            subQuestionLatin = '7a';
+          });
+        }
+        break;
+      case 'خ':
+        {
+          setState(() {
+            subQuestionLatin = '5a';
+          });
+        }
+        break;
+      case 'د':
+        {
+          setState(() {
+            subQuestionLatin = 'da';
+          });
+        }
+        break;
+      case 'ذ':
+        {
+          setState(() {
+            subQuestionLatin = 'tha';
+          });
+        }
+        break;
+      case 'ر':
+        {
+          setState(() {
+            subQuestionLatin = 'ra';
+          });
+        }
+        break;
+      case 'ز':
+        {
+          setState(() {
+            subQuestionLatin = 'za';
+          });
+        }
+        break;
+      case 'س':
+        {
+          setState(() {
+            subQuestionLatin = 'sa';
+          });
+        }
+        break;
+      case 'ش':
+        {
+          setState(() {
+            subQuestionLatin = 'cha';
+          });
+        }
+        break;
+      case 'ص':
+        {
+          setState(() {
+            subQuestionLatin = 'sad';
+          });
+        }
+        break;
+      case 'ض':
+        {
+          setState(() {
+            subQuestionLatin = 'dhad';
+          });
+        }
+        break;
+      case 'ط':
+        {
+          setState(() {
+            subQuestionLatin = 'ta';
+          });
+        }
+        break;
+      case 'ظ':
+        {
+          setState(() {
+            subQuestionLatin = 'dha';
+          });
+        }
+        break;
+      case 'ع':
+        {
+          setState(() {
+            subQuestionLatin = '3a';
+          });
+        }
+        break;
+      case 'غ':
+        {
+          setState(() {
+            subQuestionLatin = '8a';
+          });
+        }
+        break;
+      case 'ف':
+        {
+          setState(() {
+            subQuestionLatin = 'fa';
+          });
+        }
+        break;
+      case 'ق':
+        {
+          setState(() {
+            subQuestionLatin = '9a';
+          });
+        }
+        break;
+      case 'ك':
+        {
+          setState(() {
+            subQuestionLatin = 'ka';
+          });
+        }
+        break;
+      case 'ل':
+        {
+          setState(() {
+            subQuestionLatin = 'la';
+          });
+        }
+        break;
+      case 'م':
+        {
+          setState(() {
+            subQuestionLatin = 'ma';
+          });
+        }
+        break;
+      case 'ن':
+        {
+          setState(() {
+            subQuestionLatin = 'na';
+          });
+        }
+        break;
+      case 'ه':
+        {
+          setState(() {
+            subQuestionLatin = 'ha';
+          });
+        }
+        break;
+      case 'و':
+        {
+          setState(() {
+            subQuestionLatin = 'wa';
+          });
+        }
+        break;
+      case 'ي':
+        {
+          setState(() {
+            subQuestionLatin = 'ya';
           });
         }
         break;
@@ -139,9 +321,6 @@ class _ExerciceFourState extends State<ExerciceFour> {
     switch (subQuestion) {
       case 'أ':
         {
-          setState(() {
-            subQuestionLatin = 'alif';
-          });
           soundRed = 'aauuii';
           soundGreen = 'uuiiaa';
           soundBlue = 'iiaauu';
@@ -149,15 +328,193 @@ class _ExerciceFourState extends State<ExerciceFour> {
         break;
       case 'ب':
         {
-          setState(() {
-            subQuestionLatin = 'ba';
-          });
           soundRed = 'babubi';
           soundGreen = 'bubiba';
           soundBlue = 'bibabu';
         }
         break;
-
+      case 'ت':
+        {
+          soundRed = 'tetuti';
+          soundGreen = 'tutite';
+          soundBlue = 'titetu';
+        }
+        break;
+      case 'ث':
+        {
+          soundRed = 'theathuthi';
+          soundGreen = 'thuthithea';
+          soundBlue = 'thitheathu';
+        }
+        break;
+      case 'ج':
+        {
+          soundRed = 'jajuji';
+          soundGreen = 'jujija';
+          soundBlue = 'jijaju';
+        }
+        break;
+      case 'ح':
+        {
+          soundRed = '7a7u7i';
+          soundGreen = '7u7i7a';
+          soundBlue = '7i7a7u';
+        }
+        break;
+      case 'خ':
+        {
+          soundRed = '5a5u5i';
+          soundGreen = '5u5i5a';
+          soundBlue = '5i5a5u';
+        }
+        break;
+      case 'د':
+        {
+          soundRed = 'dadudi';
+          soundGreen = 'dudida';
+          soundBlue = 'didadu';
+        }
+        break;
+      case 'ذ':
+        {
+          soundRed = 'thathuthi';
+          soundGreen = 'thuthitha';
+          soundBlue = 'thithathu';
+        }
+        break;
+      case 'ر':
+        {
+          soundRed = 'raruri';
+          soundGreen = 'rurira';
+          soundBlue = 'riraru';
+        }
+        break;
+      case 'ز':
+        {
+          soundRed = 'zazuzi';
+          soundGreen = 'zuziza';
+          soundBlue = 'zizazu';
+        }
+        break;
+      case 'س':
+        {
+          soundRed = 'sasusi';
+          soundGreen = 'susisa';
+          soundBlue = 'sisasu';
+        }
+        break;
+      case 'ش':
+        {
+          soundRed = 'chachuchi';
+          soundGreen = 'chuchicha';
+          soundBlue = 'chichachu';
+        }
+        break;
+      case 'ص':
+        {
+          soundRed = 'sadasadusadi';
+          soundGreen = 'sadusadisada';
+          soundBlue = 'sadisadasadu';
+        }
+        break;
+      case 'ض':
+        {
+          soundRed = 'dhadadhadudhadi';
+          soundGreen = 'dhadudhadidhada';
+          soundBlue = 'dhadidhadadhadu';
+        }
+        break;
+      case 'ط':
+        {
+          soundRed = 'tatuti';
+          soundGreen = 'tutita';
+          soundBlue = 'titatu';
+        }
+        break;
+      case 'ظ':
+        {
+          soundRed = 'dhadhudhi';
+          soundGreen = 'dhudhidha';
+          soundBlue = 'dhidhadhu';
+        }
+        break;
+      case 'ع':
+        {
+          soundRed = '3a3u3i';
+          soundGreen = '3u3i3a';
+          soundBlue = '3i3a3u';
+        }
+        break;
+      case 'غ':
+        {
+          soundRed = '8a8u8i';
+          soundGreen = '8u8i8a';
+          soundBlue = '8i8a8u';
+        }
+        break;
+      case 'ف':
+        {
+          soundRed = 'fafufi';
+          soundGreen = 'fufifa';
+          soundBlue = 'fifafu';
+        }
+        break;
+      case 'ق':
+        {
+          soundRed = '9a9u9i';
+          soundGreen = '9u9i9a';
+          soundBlue = '9i9a9u';
+        }
+        break;
+      case 'ك':
+        {
+          soundRed = 'kakuki';
+          soundGreen = 'kukika';
+          soundBlue = 'kikaku';
+        }
+        break;
+      case 'ل':
+        {
+          soundRed = 'laluli';
+          soundGreen = 'lulila';
+          soundBlue = 'lilalu';
+        }
+        break;
+      case 'م':
+        {
+          soundRed = 'mamumi';
+          soundGreen = 'mumima';
+          soundBlue = 'mimamu';
+        }
+        break;
+      case 'ن':
+        {
+          soundRed = 'nanuni';
+          soundGreen = 'nunina';
+          soundBlue = 'ninanu';
+        }
+        break;
+      case 'ه':
+        {
+          soundRed = 'hahuhi';
+          soundGreen = 'huhiha';
+          soundBlue = 'hihahu';
+        }
+        break;
+      case 'و':
+        {
+          soundRed = 'wawuwi';
+          soundGreen = 'wuwiwa';
+          soundBlue = 'wiwawu';
+        }
+        break;
+      case 'ي':
+        {
+          soundRed = 'yayuyi';
+          soundGreen = 'yuyiya';
+          soundBlue = 'yiyayu';
+        }
+        break;
       default:
         {
           soundRed = 'babubi';
@@ -205,6 +562,7 @@ class _ExerciceFourState extends State<ExerciceFour> {
                               emojiStr: (scoreMap[emoji] == true) ? '' : emoji),
                           feedback: Emoji(emojiStr: emoji),
                           childWhenDragging: Container(
+                            height: screenSize.height / 5,
                             width: screenSize.width / 7,
                           ),
                           onDragEnd: (value) {
@@ -422,7 +780,7 @@ class Emoji extends StatelessWidget {
         color: Colors.transparent,
         child: emojiStr != ''
             ? Container(
-                margin: new EdgeInsets.only(top: screenSize.height / 20),
+                // margin: new EdgeInsets.only(top: screenSize.height / 20),
                 child: Image.asset(
                   emojiStr,
                   width: screenSize.width / 7,

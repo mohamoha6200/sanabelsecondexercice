@@ -8,6 +8,7 @@ import 'package:sanabelsecondexercice/pages/Exercice3.dart';
 import 'package:sanabelsecondexercice/pages/Exercice4.dart';
 import 'package:sanabelsecondexercice/pages/Exercice5.dart';
 import 'package:sanabelsecondexercice/pages/Exercice6.dart';
+import 'package:sanabelsecondexercice/pages/ExerciceSeven.dart';
 import 'package:sanabelsecondexercice/theme/style.dart';
 
 class HomePage extends StatefulWidget {
@@ -64,7 +65,7 @@ class _HomePageState extends State<HomePage> {
         letter: 'ف', letterColor: 'orange', balloonColor: 'yellow'),
     new LettreBalloon(
         letter: 'ق', letterColor: 'yellow', balloonColor: 'purple'),
-        new LettreBalloon(
+    new LettreBalloon(
         letter: 'ق', letterColor: 'yellow', balloonColor: 'purple'),
     new LettreBalloon(
         letter: 'ك', letterColor: 'red', balloonColor: 'purpleaccent'),
@@ -80,9 +81,8 @@ class _HomePageState extends State<HomePage> {
         letter: 'و', letterColor: 'orange', balloonColor: 'yellow'),
     new LettreBalloon(
         letter: 'ي', letterColor: 'orange', balloonColor: 'purple'),
-        new LettreBalloon(
+    new LettreBalloon(
         letter: 'ي', letterColor: 'orange', balloonColor: 'purple'),
-   
   ];
 
   @override
@@ -111,9 +111,10 @@ class _HomePageState extends State<HomePage> {
                 onTap: () {
                   print('to ex 3');
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (BuildContext context ) {
+                      MaterialPageRoute(builder: (BuildContext context) {
                     // return ExerciceFive(subQuestion:letters[a-1].letter);
-                    return ExerciceFour(subQuestion:letters[a-1].letter);
+                    return ExerciceFour(subQuestion: letters[a - 1].letter);
+                    //return ExerciceSeven();
                   }));
                 },
                 child: Balloon(
@@ -133,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               );
             }
-            return conditional;
+            return conditional; 
           }),
         ),
       ),

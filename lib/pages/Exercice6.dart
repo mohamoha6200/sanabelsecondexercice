@@ -306,7 +306,7 @@ class _ExerciceSixState extends State<ExerciceSix> {
                     children: answers.keys.map((index) {
                       var key = answers[index].keys.toList()[0];
                       var value = answers[index].values.toList()[0];
-
+    
                       return Center(
                         key: _cardKey[index],
                         // padding: const EdgeInsets.all(50.0),
