@@ -21,22 +21,21 @@ class _ExerciceFourState extends State<ExerciceFour> {
   Map<String, bool> scoreMap = {};
 
   // Map letterList = letterListRed;
-  Map letterList;
-  static Map letterListRed = {
-    // 'assets/ba-kasra.png': 'kasra',
-    // 'assets/ba-thama.png': 'thama',
-    // 'assets/ba-fatha.png': 'fatha',
-  };
-  static Map letterListGreen = {
-    // 'assets/ba-fatha.png': 'fatha',
-    // 'assets/ba-kasra.png': 'kasra',
-    // 'assets/ba-thama.png': 'thama',
-  };
-  static Map letterListBlue = {
-    // 'assets/ba-thama.png': 'thama',
-    // 'assets/ba-fatha.png': 'fatha',
-    // 'assets/ba-kasra.png': 'kasra',
-  };
+  List<String> letterList;
+  static List<String> letterListRed = [];
+  // 'assets/ba-kasra.png': 'kasra',
+  // 'assets/ba-thama.png': 'thama',
+  // 'assets/ba-fatha.png': 'fatha',
+
+  static List<String> letterListGreen = [];
+  // 'assets/ba-fatha.png': 'fatha',
+  // 'assets/ba-kasra.png': 'kasra',
+  // 'assets/ba-thama.png': 'thama',
+
+  static List<String> letterListBlue = [];
+  // 'assets/ba-thama.png': 'thama',
+  // 'assets/ba-fatha.png': 'fatha',
+  // 'assets/ba-kasra.png': 'kasra',
 
   Map<String, double> buttonList = {
     'Red': 0.5,
@@ -50,7 +49,7 @@ class _ExerciceFourState extends State<ExerciceFour> {
     // 'Blue': 'bibabu',
   };
 
-  Map<String, Map> letterListMapList = {
+  Map<String, List<String>> letterListMapList = {
     // 'Red': letterListRed,
     // 'Green': letterListGreen,
     // 'Blue': letterListBlue
@@ -289,28 +288,28 @@ class _ExerciceFourState extends State<ExerciceFour> {
     }
   }
 
-  Map fillLetterListRed(subQuestion) {
-    return {
-      'assets/$subQuestionLatin-kasra.png': 'kasra',
-      'assets/$subQuestionLatin-thama.png': 'thama',
-      'assets/$subQuestionLatin-fatha.png': 'fatha',
-    };
+  List<String> fillLetterListRed(subQuestion) {
+    return [
+      'kasra',
+      'thama',
+      'fatha',
+    ];
   }
 
-  Map fillLetterListGreen(subQuestion) {
-    return {
-      'assets/$subQuestionLatin-fatha.png': 'fatha',
-      'assets/$subQuestionLatin-kasra.png': 'kasra',
-      'assets/$subQuestionLatin-thama.png': 'thama',
-    };
+  List<String> fillLetterListGreen(subQuestion) {
+    return [
+      'fatha',
+      'kasra',
+      'thama',
+    ];
   }
 
-  Map fillLetterListBlue(subQuestion) {
-    return {
-      'assets/$subQuestionLatin-thama.png': 'thama',
-      'assets/$subQuestionLatin-fatha.png': 'fatha',
-      'assets/$subQuestionLatin-kasra.png': 'kasra',
-    };
+  List<String> fillLetterListBlue(subQuestion) {
+    return [
+      'thama',
+      'fatha',
+      'kasra',
+    ];
   }
 
   Map<String, String> fillColorSoundMap(subQuestion) {
@@ -533,8 +532,8 @@ class _ExerciceFourState extends State<ExerciceFour> {
     Size screenSize = MediaQuery.of(context).size;
     print(screenSize);
     return Row(
-      mainAxisSize: MainAxisSize.max,
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Expanded(
           flex: 5,
@@ -546,21 +545,23 @@ class _ExerciceFourState extends State<ExerciceFour> {
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.end,
-                  children: letterList.keys
+                  children: letterList
                       .map((emoji) => _buildDragTarget(emoji))
                       .toList()
                   // ..shuffle(Random(random)),
                   ),
               (selectedButtonIndex != -1)
                   ? Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: letterListRed.keys.map((emoji) {
+                      children: letterListRed.map((emoji) {
                         return Draggable<String>(
                           data: emoji,
-                          child: Emoji(
-                              emojiStr: (scoreMap[emoji] == true) ? '' : emoji),
-                          feedback: Emoji(emojiStr: emoji),
+                          child: letterWidget(
+                              (scoreMap[emoji] == true) ? '' : emoji,
+                              subQuestion,
+                              context),
+                          feedback: letterWidget(emoji, subQuestion, context),
                           childWhenDragging: Container(
                             height: screenSize.height / 5,
                             width: screenSize.width / 7,
@@ -577,10 +578,11 @@ class _ExerciceFourState extends State<ExerciceFour> {
                       }).toList(),
                     )
                   : Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: letterList.keys.map((emoji) {
-                        return Container(child: Emoji(emojiStr: emoji));
+                      children: letterList.map((emoji) {
+                        return Container(
+                            child: letterWidget(emoji, subQuestion, context));
                       }).toList(),
                     )
             ],
@@ -590,7 +592,7 @@ class _ExerciceFourState extends State<ExerciceFour> {
           flex: 1,
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: List.generate(3, (index) {
               var colors = buttonList.keys.toList();
               var opacities = buttonList.values.toList();
@@ -643,26 +645,17 @@ class _ExerciceFourState extends State<ExerciceFour> {
     return DragTarget<String>(
       builder: (BuildContext context, List<String> candidateData,
           List rejectedData) {
-        print('creating target for--' + letterList[emoji].toString());
+        print('creating target for--' + emoji);
         if (scoreMap[emoji] == true) {
           return Stack(
-            alignment: Alignment.center,
+            alignment: Alignment.topCenter,
             children: <Widget>[
               Container(
                 width: screenSize.width / 6,
                 alignment: Alignment.center,
                 child: Image.asset('assets/balloonpurpleaccent.png'),
               ),
-              Positioned(
-                bottom: screenSize.height / 5,
-                child: Container(
-                  child: Image.asset(
-                    emoji,
-                  ),
-                  alignment: Alignment.center,
-                  height: screenSize.height / 5,
-                ),
-              ),
+              letterWidget(emoji, subQuestion, context),
             ],
           );
         } else {
@@ -769,24 +762,127 @@ class _ExerciceFourState extends State<ExerciceFour> {
   }
 }
 
-class Emoji extends StatelessWidget {
-  final String emojiStr;
+Widget letterWidget(String emojiStr, String subQuestion, context) {
+  Size screenSize = MediaQuery.of(context).size;
 
-  Emoji({Key key, this.emojiStr}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
-    return Material(
-        color: Colors.transparent,
-        child: emojiStr != ''
-            ? Container(
-                // margin: new EdgeInsets.only(top: screenSize.height / 20),
-                child: Image.asset(
-                  emojiStr,
-                  width: screenSize.width / 7,
-                  height: screenSize.height / 5,
-                ),
-              )
-            : Container());
+  List<String> textList = [subQuestion];
+  String chakl;
+  switch (emojiStr) {
+    case 'kasra':
+      {
+        if (subQuestion == 'أ') textList[0] = 'إ';
+        textList.add(' ِ');
+        chakl = 'fatha-kasra';
+      }
+      break;
+    case 'fatha':
+      {
+        textList.add(' َ');
+        chakl = 'fatha-kasra';
+      }
+      break;
+
+    case 'thama':
+      {
+        textList.add(' ُ');
+        chakl = 'thama';
+      }
+      break;
+    default:
+      {
+        chakl = 'fatha-kasra';
+        textList.add(' ِ');
+      }
   }
+  print(subQuestion + emojiStr);
+
+  return Material(
+      color: Colors.transparent,
+      
+      child: emojiStr != ''
+          ? Stack(
+              
+                // crossAxisAlignment: CrossAxisAlignment.center,
+                // mainAxisSize: MainAxisSize.min,
+                // mainAxisAlignment: MainAxisAlignment.start,
+                overflow: Overflow.visible,
+                alignment: (emojiStr == 'kasra')
+                    ? Alignment.bottomCenter
+                    : Alignment.topCenter,
+                children: [
+                  Padding(
+                    padding: (textList[0] == 'أ')
+            ? EdgeInsets.only(top: screenSize.height / 15.42) //35
+            : EdgeInsets.only(top: 0),
+                    child: Text(textList[0],
+            // overflow: TextOverflow.visible,
+            style: new TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 70,
+                color: Colors.red)),
+                  ),
+                  Padding(
+                    padding: ((emojiStr == 'thama' || emojiStr == 'fatha') &&
+                (textList[0] != 'ض' &&
+                    textList[0] != 'ظ' &&
+                    textList[0] != 'ذ' &&
+                    textList[0] != 'خ' &&
+                    textList[0] != 'ز' &&
+                    textList[0] != 'غ' && 
+                    textList[0] != 'ق' &&
+                    textList[0] != 'ف' &&
+                    textList[0] != 'ت' &&
+                    textList[0] != 'ث' &&
+                    textList[0] != 'ط' &&
+                    textList[0] != 'ل' &&
+                    textList[0] != 'ز' &&
+                    textList[0] != 'ز'))
+            ? EdgeInsets.only(top: screenSize.height / 25) //18
+            : EdgeInsets.only(top: screenSize.height / 50), //5
+                    child: Padding(
+          padding: ((emojiStr == 'kasra') &&
+                   (textList[0] != 'غ') &&
+                  (textList[0] != 'خ') &&
+                  (textList[0] != 'ح') &&
+                  (textList[0] != 'ج') &&
+                  textList[0] != 'ق' &&
+                  textList[0] != 'ل' &&
+                  textList[0] != 'ن' &&
+                  textList[0] != 'ي' &&
+                  (textList[0] != 'ع'))
+              ? EdgeInsets.only(bottom: screenSize.height / 36) //15
+              : EdgeInsets.only(bottom: screenSize.height / 150),
+          child: Container(
+            width: screenSize.width / 48, //20
+            height: screenSize.height / 27, //20
+            child: Image.asset(
+              'assets/$chakl.png',
+              fit: BoxFit.contain,
+            ),
+          ),
+                    ),
+                  ),
+                ],
+              )
+          : Container());
 }
+
+// width: screenSize.width / 7,
+//               height: screenSize.height / 5,
+// new RichText(
+//                   textScaleFactor: 0.5,
+//                 overflow: TextOverflow.visible,
+//                 text: new TextSpan(
+//                   style: new TextStyle(fontSize: 90),
+//                   children: <TextSpan>[
+//                     new TextSpan(
+//                         text: textList[0],
+//                         style: new TextStyle(
+//                             fontWeight: FontWeight.bold, color: Colors.red)),
+//                     new TextSpan(
+//                         text: textList[1],
+//                         style: new TextStyle(
+//                             fontWeight: FontWeight.bold,
+//                             color: Colors.green)),
+//                   ],
+//                 ))

@@ -11,7 +11,7 @@ import 'package:sanabelsecondexercice/pages/Exercice6.dart';
 import 'package:sanabelsecondexercice/pages/ExerciceSeven.dart';
 import 'package:sanabelsecondexercice/theme/style.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatefulWidget { 
   @override
   _HomePageState createState() => _HomePageState();
 }
