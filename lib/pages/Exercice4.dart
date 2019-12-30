@@ -798,72 +798,76 @@ Widget letterWidget(String emojiStr, String subQuestion, context) {
 
   return Material(
       color: Colors.transparent,
-      
       child: emojiStr != ''
           ? Stack(
-              
-                // crossAxisAlignment: CrossAxisAlignment.center,
-                // mainAxisSize: MainAxisSize.min,
-                // mainAxisAlignment: MainAxisAlignment.start,
-                overflow: Overflow.visible,
-                alignment: (emojiStr == 'kasra')
-                    ? Alignment.bottomRight
-                    : Alignment.topCenter,
-                children: [
-                  Padding(
-                    padding: (textList[0] == 'أ')
-            ? EdgeInsets.only(top: screenSize.height / 15.42) //35
-            : EdgeInsets.only(top: 0),
-                    child: Text(textList[0],
-            // overflow: TextOverflow.visible,
-            style: new TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: (screenSize.width+screenSize.height) / 18 ,
-                color: Colors.red)),
-                  ),
-                  Padding(
-                    padding: ((emojiStr == 'thama' || emojiStr == 'fatha') &&
-                (textList[0] != 'ض' &&
-                    textList[0] != 'ظ' &&
-                    textList[0] != 'ذ' &&
-                    textList[0] != 'خ' &&
-                    textList[0] != 'ز' &&
-                    textList[0] != 'غ' && 
-                    textList[0] != 'ق' &&
-                    textList[0] != 'ف' &&
-                    textList[0] != 'ت' &&
-                    textList[0] != 'ث' &&
-                    textList[0] != 'ط' &&
-                    textList[0] != 'ل' &&
-                    // textList[0] != 'ز' &&
-                    textList[0] != 'ز'))
-            ? EdgeInsets.only(top: screenSize.height / 25) //18
-            : EdgeInsets.only(top: screenSize.height / 80), //5
-                    child: Padding(
-          padding: ((emojiStr == 'kasra') &&
-                   (textList[0] != 'غ') &&
-                  (textList[0] != 'خ') &&
-                  (textList[0] != 'ح') &&
-                  (textList[0] != 'ج') &&
-                  textList[0] != 'ق' &&
-                  textList[0] != 'ل' &&
-                  textList[0] != 'ن' &&
-                  textList[0] != 'ي' &&
-                  (textList[0] != 'ع'))
-              ? EdgeInsets.only(bottom: screenSize.height / 36) //15
-              : EdgeInsets.only(bottom: screenSize.height / 150),
-          child: Container(
-            width: screenSize.width / 48, //20
-            height: screenSize.height / 27, //20
-            child: Image.asset(
-              'assets/$chakl.png',
-              fit: BoxFit.contain,
-            ),
-          ),
+              // crossAxisAlignment: CrossAxisAlignment.center,
+              // mainAxisSize: MainAxisSize.min,
+              // mainAxisAlignment: MainAxisAlignment.start,
+              overflow: Overflow.visible,
+              alignment: (emojiStr == 'kasra')
+                  ? Alignment.bottomRight
+                  : Alignment.topCenter,
+              children: [
+                Padding(
+                  padding: (textList[0] == 'أ')
+                      ? EdgeInsets.only(top: screenSize.height / 15.42) //35
+                      : EdgeInsets.only(top: 0),
+                  child: Text(textList[0],
+                      // overflow: TextOverflow.visible,
+                      style: new TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: (textList[0] == 'إ' || textList[0] == 'أ')
+                              ? (screenSize.width + screenSize.height) / 15
+                              : (screenSize.width + screenSize.height) / 13,
+                          color: Colors.red)),
+                ),
+                Padding(
+                  padding: ((emojiStr == 'thama' || emojiStr == 'fatha') &&
+                          (textList[0] != 'ض' &&
+                              textList[0] != 'ظ' &&
+                              textList[0] != 'ذ' &&
+                              textList[0] != 'خ' &&
+                              textList[0] != 'ز' &&
+                              textList[0] != 'غ' &&
+                              textList[0] != 'أ' &&
+                              textList[0] != 'ف' &&
+                              textList[0] != 'ت' &&
+                              textList[0] != 'ث' &&
+                              textList[0] != 'ط' &&
+                              textList[0] != 'ل' &&
+                              // textList[0] != 'ز' &&
+                              textList[0] != 'ز'))
+                      ? EdgeInsets.only(top: screenSize.height / 12) //18
+                      : EdgeInsets.only(top: screenSize.height / 23), //5
+                  child: Padding(
+                    padding: ((emojiStr == 'kasra') &&
+                            (textList[0] != 'غ') &&
+                            (textList[0] != 'خ') &&
+                            (textList[0] != 'ح') &&
+                            (textList[0] != 'ج') &&
+                            (textList[0] != 'إ') &&
+                            textList[0] != 'ق' &&
+                            textList[0] != 'ل' &&
+                            textList[0] != 'ن' &&
+                            textList[0] != 'و' &&
+                            textList[0] != 'ر' &&
+                            textList[0] != 'ز' &&
+                            textList[0] != 'ي' &&
+                            (textList[0] != 'ع'))
+                        ? EdgeInsets.only(bottom: screenSize.height / 10) //15
+                        : EdgeInsets.only(bottom: screenSize.height / 23),
+                    child: Container(
+                      width: screenSize.width / 48, //20
+                      height: screenSize.height / 27, //20
+                      child: Image.asset(
+                        'assets/$chakl.png',
+                        fit: BoxFit.contain,
+                      ),
                     ),
                   ),
-                ], 
-              )
+                ),
+              ],
+            )
           : Container());
 }
 

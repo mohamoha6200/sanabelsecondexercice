@@ -20,7 +20,7 @@ class ExQuestionBar extends StatelessWidget {
     Size screenSize = MediaQuery.of(context).size;
 
     return Container(
-      height: screenSize.height * 0.18,
+      height: screenSize.height * 0.15,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
