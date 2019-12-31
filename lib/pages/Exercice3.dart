@@ -1,10 +1,14 @@
+import 'package:collection/collection.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sanabelsecondexercice/components/ExQuestionBar.dart';
+import 'package:sanabelsecondexercice/components/models/redLetterWord.dart';
 import 'package:sanabelsecondexercice/components/widgets/ResultSuccessQuestion.dart';
 import 'package:sanabelsecondexercice/components/widgets/Signature.dart';
 import 'package:sanabelsecondexercice/pages/fakePage.dart';
+
 import 'package:sanabelsecondexercice/theme/style.dart';
 
 class ExerciceThree extends StatefulWidget {
@@ -12,7 +16,7 @@ class ExerciceThree extends StatefulWidget {
   _ExerciceThreeState createState() => _ExerciceThreeState();
 }
 
-class _ExerciceThreeState extends State<ExerciceThree> {
+class _ExerciceThreeState extends State<ExerciceThree> { 
   List<Offset> _points = <Offset>[];
   List<Offset> _truePoints = <Offset>[];
 
@@ -38,23 +42,35 @@ class _ExerciceThreeState extends State<ExerciceThree> {
     _wordCardKey2,
   ];
 
-  Map<String, String> picChoiceMap = {
-    'assets/bird.png': 'assets/birdword.png',
-    'assets/door.png': 'assets/doorword.png',
-    'assets/berkar.png': 'assets/berkarword.png'
+  Map<String, Map<int, List<String>>> picChoiceMap = {
+    'assets/bird.png': {
+      0: ['بُ', 'لْ', 'بُ', 'لٌ']
+    },
+    'assets/door.png': {
+      0: ['بَ', 'ا', 'بٌ']
+    },
+    'assets/berkar.png': {
+      0: ['بِ', 'رْ', 'كَ', 'ا', 'رٌ']
+    }
   };
 
-  Map<String, String> initialpicChoiceMap = {
-    'assets/berkar.png': 'assets/birdword.png',
-    'assets/bird.png': 'assets/doorword.png',
-    'assets/door.png': 'assets/berkarword.png'
+  Map<String, Map<int, List<String>>> initialpicChoiceMap = {
+    'assets/berkar.png': {
+      0: ['بُ', 'لْ', 'بُ', 'لٌ']
+    },
+    'assets/bird.png': {
+      0: ['بَ', 'ا', 'بٌ']
+    },
+    'assets/door.png': {
+      0: ['بِ', 'رْ', 'كَ', 'ا', 'رٌ']
+    }
   };
 
   Size cardSize;
   // Offset picCardPosition;
 
   Map<String, Offset> picOffsetmap = {};
-  Map<String, Offset> wordOffsetmap = {};
+  Map<Map<int, List<String>>, Offset> wordOffsetmap = {};
 
   Map<String, bool> scoreMap = {};
 
@@ -64,15 +80,38 @@ class _ExerciceThreeState extends State<ExerciceThree> {
 
   Offset firstPointOffset;
 
-  String inWhichCardIsThisPoint(
-      Offset point, Map<String, Offset> stringOffsetmap) {
+  var startingPic = null;
+  var startingWord = null;
+  var endingPic = null;
+  var endingWord = null;
+  bool startedWithPic = false;
+  bool startedWithWord = false;
+  bool endedWithPic = false;
+  bool endedWithWord = false;
+
+  String inWhichPicIsThisPoint(Offset point, Map<String, Offset> picOffsetmap) {
     String card = '';
-    var strings = stringOffsetmap.keys.toList();
+    var strings = picOffsetmap.keys.toList();
     for (var index = 0; index < strings.length; index++) {
-      print(strings[index]);
-      print((pointInOffset(point, stringOffsetmap[strings[index]]) == true));
-      if (pointInOffset(point, stringOffsetmap[strings[index]]) == true) {
+      if (pointInOffset(point, picOffsetmap[strings[index]]) == true) {
         card = strings[index];
+        print(strings[index]);
+        print((pointInOffset(point, picOffsetmap[strings[index]]) == true));
+      }
+    }
+
+    return card;
+  }
+
+  Map<int, List<String>> inWhichWordIsThisPoint(
+      Offset point, Map<Map<int, List<String>>, Offset> wordOffsetmap) {
+    Map<int, List<String>> card = null;
+    var words = wordOffsetmap.keys.toList();
+    for (var index = 0; index < words.length; index++) {
+      if (pointInOffset(point, wordOffsetmap[words[index]]) == true) {
+        card = words[index];
+        print(words[index]);
+        print((pointInOffset(point, wordOffsetmap[words[index]]) == true));
       }
     }
 
@@ -80,7 +119,7 @@ class _ExerciceThreeState extends State<ExerciceThree> {
   }
 
   bool pointInOffset(Offset point, Offset cardOffset) {
-     print('cardwidth' + cardSize.width.toString());
+    //  print('cardwidth' + cardSize.width.toString());
 
     // print(point);
     if ((point.dx >= cardOffset.dx) &&
@@ -102,6 +141,10 @@ class _ExerciceThreeState extends State<ExerciceThree> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       getPicsCardsSizesAndPositions();
       getWordsCardsSizesAndPositions();
+      print('picOffsetmap');
+      print(picOffsetmap);
+      print('wordOffsetmap');
+      print(wordOffsetmap);
     });
     setState(() {
       print('init');
@@ -173,120 +216,159 @@ class _ExerciceThreeState extends State<ExerciceThree> {
             firstPointOffset = _points[0];
             lastPointOffset = _points[_points.length - 2];
 
-            if (((inWhichCardIsThisPoint(firstPointOffset, picOffsetmap) !=
-                        '') &&
-                    (inWhichCardIsThisPoint(lastPointOffset, wordOffsetmap) !=
-                        '')) ||
-                ((inWhichCardIsThisPoint(firstPointOffset, wordOffsetmap) !=
-                        '') &&
-                    (inWhichCardIsThisPoint(lastPointOffset, picOffsetmap) !=
-                        ''))) {
-              if (((picChoiceMap[inWhichCardIsThisPoint(
-                          firstPointOffset, picOffsetmap)] ==
-                      inWhichCardIsThisPoint(
-                          lastPointOffset, wordOffsetmap))) ||
-                  ((picChoiceMap[inWhichCardIsThisPoint(
-                          lastPointOffset, picOffsetmap)] ==
-                      inWhichCardIsThisPoint(
-                          firstPointOffset, wordOffsetmap)))) {
-                if (picChoiceMap[inWhichCardIsThisPoint(
-                        firstPointOffset, picOffsetmap)] ==
-                    inWhichCardIsThisPoint(lastPointOffset, wordOffsetmap)) {
-                  if (scoreMap[picChoiceMap[inWhichCardIsThisPoint(
-                          firstPointOffset, picOffsetmap)]] ==
-                      null) {
-                    setState(() {
-                      _truePoints += _points;
-                      _points = [];
-                      scoreMap[picChoiceMap[inWhichCardIsThisPoint(
-                          firstPointOffset, picOffsetmap)]] = true;
-                    });
-                    if (scoreMap.length == picChoiceMap.length) {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            Future.delayed(Duration(seconds: 5), () {
-                              Navigator.of(context).pop(true);
-                            });
-                            return Theme(
-                              data: Theme.of(context).copyWith(
-                                  dialogBackgroundColor: Colors.transparent),
-                              child: ResultSucessQuestion(),
-                            );
-                          });
-                      setState(() {
-                        _points = [];
-                        _truePoints = [];
-                        scoreMap = {};
-                      });
-                    } else {
-                      print('shouldnt good');
-                      Flame.audio.play('good.mp3');
-                    }
-                  } else
-                    setState(() {
-                      _points = [];
-                    });
-                } else if (picChoiceMap[inWhichCardIsThisPoint(
-                        lastPointOffset, picOffsetmap)] ==
-                    inWhichCardIsThisPoint(firstPointOffset, wordOffsetmap)) {
-                  if (scoreMap[picChoiceMap[inWhichCardIsThisPoint(
-                          lastPointOffset, picOffsetmap)]] ==
-                      null) {
-                    setState(() {
-                      _truePoints += _points;
-                      _points = [];
+            if (inWhichPicIsThisPoint(firstPointOffset, picOffsetmap) != '') {
+              startedWithPic = true;
+              startingPic =
+                  inWhichPicIsThisPoint(firstPointOffset, picOffsetmap);
+            }
 
-                      scoreMap[picChoiceMap[inWhichCardIsThisPoint(
-                          lastPointOffset, picOffsetmap)]] = true;
-                    });
-                    if (scoreMap.length == picChoiceMap.length) {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            Future.delayed(Duration(seconds: 5), () {
-                              Navigator.of(context).pop(true);
-                            });
-                            return Theme(
-                              data: Theme.of(context).copyWith(
-                                  dialogBackgroundColor: Colors.transparent),
-                              child: ResultSucessQuestion(),
-                            );
-                          });
-                      setState(() {
-                        _points = [];
-                        _truePoints = [];
-                        scoreMap = {};
-                      });
-                    } else {
-                      print('shouldnt good');
+            if (inWhichWordIsThisPoint(firstPointOffset, wordOffsetmap) !=
+                null) {
+              startedWithWord = true;
+              startingWord =
+                  inWhichWordIsThisPoint(firstPointOffset, wordOffsetmap);
+            }
+            if (inWhichPicIsThisPoint(lastPointOffset, picOffsetmap) != '') {
+              endedWithPic = true;
+              endingPic = inWhichPicIsThisPoint(lastPointOffset, picOffsetmap);
+            }
+            if (inWhichWordIsThisPoint(lastPointOffset, wordOffsetmap) !=
+                null) {
+              endedWithWord = true;
+              endingWord =
+                  inWhichWordIsThisPoint(lastPointOffset, wordOffsetmap);
+            }
+            print('startedWithPic ' + startedWithPic.toString());
+            print('startedWithWord ' + startedWithWord.toString());
+            print('endedWithPic ' + endedWithPic.toString());
+            print('endedWithWord ' + endedWithWord.toString());
 
-                      Flame.audio.play('good.mp3');
-                    }
+            print('startingPic =' + startingPic.toString());
+            print('startingWord =' + startingWord.toString());
+            print('endingPic =' + endingPic.toString());
+            print('endingWord =' + endingWord.toString());
+
+            if (startedWithPic == true && endedWithWord == true) {
+              print('startedWithPic&&endedWithWord');
+              print('picChoiceMap[startingPic] =');
+              print(picChoiceMap[startingPic]);
+              if ((picChoiceMap[startingPic].toString() ==
+                  endingWord.toString())) {
+                if (scoreMap[startingPic] == null) {
+                  print('inside scoreMap[startingPic] == null');
+                  setState(() {
+                    _truePoints += _points;
+                    _points = [];
+                    scoreMap[startingPic] = true;
+                  });
+
+                  if (scoreMap.length == picChoiceMap.length) {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          Future.delayed(Duration(seconds: 5), () {
+                            Navigator.of(context).pop(true);
+                          });
+                          return Theme(
+                            data: Theme.of(context).copyWith(
+                                dialogBackgroundColor: Colors.transparent),
+                            child: ResultSucessQuestion(),
+                          );
+                        });
+                    setState(() {
+                      _points = [];
+                      _truePoints = [];
+                      scoreMap = {};
+                    });
                   } else {
+                    print('gj');
+                    Flame.audio.play('good.mp3');
                     setState(() {
                       _points = [];
                     });
                   }
-                }
+                } else
+                  setState(() {
+                    _points = [];
+                  });
               } else {
-                Flame.audio.play('error.mp3');
-                print(('meloul'));
+                print('nah');
+                Flame.audio.play('error.mp3'); 
                 setState(() {
                   _points = [];
                   _truePoints = [];
-                  scoreMap = {};
+                  scoreMap={};
                 });
               }
-            } else {
-              Flame.audio.play('error.mp3');
-              print(('meloul'));
-              setState(() {
-                _points = [];
-                _truePoints = [];
-                scoreMap = {};
-              });
-            }
+            } else if (startedWithWord == true && endedWithPic == true) {
+              print('startedWithWord&&endedWithPic');
+              if ((picChoiceMap[endingPic].toString() ==
+                  startingWord.toString())) {
+                if (scoreMap[endingPic] == null) {
+                  print('inside scoreMap[startingPic] == null');
+                  setState(() {
+                    _truePoints += _points;
+                    _points = [];
+                    scoreMap[endingPic] = true;
+                  });
+
+                  if (scoreMap.length == picChoiceMap.length) {
+                    showDialog(
+                        context: context,
+                        builder: (context) {
+                          Future.delayed(Duration(seconds: 5), () {
+                            Navigator.of(context).pop(true);
+                          });
+                          return Theme(
+                            data: Theme.of(context).copyWith(
+                                dialogBackgroundColor: Colors.transparent),
+                            child: ResultSucessQuestion(),
+                          );
+                        });
+                    setState(() {
+                      _points = [];
+                      _truePoints = [];
+                      scoreMap = {};
+                    });
+                  } else {
+                    print('gj');
+                    Flame.audio.play('good.mp3');
+                    setState(() {
+                      _points = [];
+                    });
+                  }
+                } else
+                  setState(() {
+                    _points = [];
+                  });
+              } else {
+                print('nah');
+                Flame.audio.play('error.mp3');
+                setState(() {
+                  _points = [];
+                  _truePoints = [];
+                  scoreMap={};
+                });
+              }
+            } else {print('neither');
+                Flame.audio.play('error.mp3');
+                setState(() {
+                  _points = [];
+                  _truePoints = [];
+                  scoreMap={};
+                });}
+            print('scoreMap=' + scoreMap.toString());
+
+            setState(() {
+              startingPic = null;
+              startingWord = null;
+              endingPic = null;
+              endingWord = null;
+              startedWithPic = false;
+              startedWithWord = false;
+              endedWithPic = false;
+              endedWithWord = false;
+            });
           },
           child: new CustomPaint(
             painter: new Signature(points: _points, trues: _truePoints),
@@ -314,7 +396,8 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                               width: 300,
                               height: 200,
                               decoration: BoxDecoration(
-                                border: Border.all(width: 3.0,color: Colors.lightBlueAccent),
+                                border: Border.all(
+                                    width: 3.0, color: Colors.lightBlueAccent),
                                 borderRadius: BorderRadius.all(Radius.circular(
                                         5.0) //         <--- border radius here
                                     ),
@@ -322,7 +405,6 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                               child: new Image.asset(
                                 keys[index],
                                 fit: BoxFit.fill,
-                                
                               ),
                             ),
                           );
@@ -339,21 +421,23 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                               print(index);
                             },
                             child: Container(
-                              key: _wordCardKey[index],
-                              width: 300,
-                              height: 200,
-                              decoration: BoxDecoration(
-                                border: Border.all(width: 3.0 , color: Colors.lightBlueAccent),
-                                // color: Colors.blueAccent,
-                                borderRadius: BorderRadius.all(Radius.circular(
-                                        5.0) //         <--- border radius here
-                                    ),
-                              ),
-                              child: new Image.asset(
-                                choices[index],
-                                fit: BoxFit.fill,
-                              ),
-                            ),
+                                key: _wordCardKey[index],
+                                width: 300,
+                                height: 200,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                      width: 3.0,
+                                      color: Colors.lightBlueAccent),
+                                  // color: Colors.blueAccent,
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                          5.0) //         <--- border radius here
+                                      ),
+                                ),
+                                child: RedLetterWord(
+                                  textList: choices[index].values.toList()[0],
+                                  pos: choices[index].keys.toList()[0],
+                                )),
                           );
                         }),
                       ),
@@ -383,7 +467,7 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                     _truePoints = [];
                     _points = [];
                     scoreMap = {};
-                  }),
+                  }), 
                 }),
       ),
     );

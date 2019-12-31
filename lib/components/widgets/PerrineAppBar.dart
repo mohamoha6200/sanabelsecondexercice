@@ -68,7 +68,7 @@ class PerrineAppBar extends StatelessWidget implements PreferredSizeWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               // _getBackButton(context),
-              _rightImage(context),
+             // _rightImage(context),
 
               Container(
                 child: Container(

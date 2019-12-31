@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sanabelsecondexercice/components/models/LetterBalloon.dart';
 import 'package:sanabelsecondexercice/components/widgets/Balloon.dart';
 import 'package:sanabelsecondexercice/components/widgets/PerrineAppBar.dart';
+import 'package:sanabelsecondexercice/components/widgets/secondDrawer.dart';
 import 'package:sanabelsecondexercice/pages/Exercice2.dart';
 import 'package:sanabelsecondexercice/pages/Exercice3.dart';
 import 'package:sanabelsecondexercice/pages/Exercice4.dart';
@@ -11,7 +12,7 @@ import 'package:sanabelsecondexercice/pages/Exercice6.dart';
 import 'package:sanabelsecondexercice/pages/ExerciceSeven.dart';
 import 'package:sanabelsecondexercice/theme/style.dart';
 
-class HomePage extends StatefulWidget { 
+class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -113,8 +114,9 @@ class _HomePageState extends State<HomePage> {
                   Navigator.push(context,
                       MaterialPageRoute(builder: (BuildContext context) {
                     // return ExerciceFive(subQuestion:letters[a-1].letter);
-                    return ExerciceFour(subQuestion: letters[a - 1].letter);
+                    // return ExerciceFour(subQuestion: letters[a - 1].letter);
                     //return ExerciceSeven();
+                    return ExerciceThree();
                   }));
                 },
                 child: Balloon(
@@ -134,7 +136,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               );
             }
-            return conditional; 
+            return conditional;
           }),
         ),
       ),
@@ -146,6 +148,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
         backgroundColor: backgroundMainColor,
         appBar: PerrineAppBar(height: 80, title: 'الْخرُوفُ الْعَرَبِيَّةُ'),
+        drawer: AppDrawer(),
         body: childWidget());
   }
 }
