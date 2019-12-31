@@ -147,7 +147,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: backgroundMainColor,
-        appBar: PerrineAppBar(height: 80, title: 'الْخرُوفُ الْعَرَبِيَّةُ'),
+        appBar: PerrineAppBar(height: 80, title: 'الْخرُوفُ الْعَرَبِيَّةُ',menuIcon:true),
         drawer: AppDrawer(),
         body: childWidget());
   }

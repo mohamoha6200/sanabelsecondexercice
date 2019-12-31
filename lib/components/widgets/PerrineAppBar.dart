@@ -4,35 +4,37 @@ import 'package:sanabelsecondexercice/theme/perrine.dart';
 class PerrineAppBar extends StatelessWidget implements PreferredSizeWidget {
   final double height;
   final String title;
-  final bool backPage;
+  final bool menuIcon;
   final bool noSettings;
 
   const PerrineAppBar(
       {Key key,
       @required this.height,
       @required this.title,
-      this.backPage,
+      this.menuIcon,
       this.noSettings})
       : super(key: key);
 
   _getBackButton(context) {
-    if (backPage == true) {
+    if (menuIcon == true) {
       return InkWell(
         child: Container(
           margin: EdgeInsets.only(left: 10, top: 15, right: 10),
           child: Icon(
-            Icons.chevron_left,
-            color: Colors.white,
-            size: 25.0,
+            Icons.menu,
+            color: Colors.green,
+            size: 40.0,
           ),
-        ),
+        ), 
         onTap: () {
+
+          
           /* Navigator.push(context, MaterialPageRoute(
                 builder: (BuildContext context) {
               return backPage;
             }));*/
 
-          Navigator.pop(context);
+         // Navigator.pop(context);
         },
       );
     } else {
@@ -44,13 +46,9 @@ class PerrineAppBar extends StatelessWidget implements PreferredSizeWidget {
     Size screenSize = MediaQuery.of(context).size;
 
     return Row(
-      children: <Widget>[
-        
-      ],
+      children: <Widget>[],
     );
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -59,39 +57,27 @@ class PerrineAppBar extends StatelessWidget implements PreferredSizeWidget {
     return new Stack(children: <Widget>[
       Positioned(
         child: Container(
-          color: Colors.transparent,
-          width: size.width,
-          height: height,
-          child: Row(
-            // mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              // _getBackButton(context),
-             // _rightImage(context),
-
-              Container(
-                child: Container(
-                    alignment: Alignment.bottomCenter,
-                    child: Text(
-                      title,
-                      style: styleAppBarGreen,
-                    )),
-              ),
-              SizedBox(width: 50),
-              Container(
-              child: Image.asset(
-                'assets/ecoute.png',
-                width: 50,
-              ),
-                ),
-            ],
-          ),
-        ),
+            alignment: Alignment.bottomCenter,
+            child: Text(
+              title,
+              style: styleAppBarGreen,
+            )),
       ),
+      Positioned(
+        child: _getBackButton(context),
+      )
     ]);
   }
 
   @override
   Size get preferredSize => Size.fromHeight(height);
 }
+//  _getBackButton(context),
+// _rightImage(context),
+// SizedBox(width: 50),
+// Container(
+// child: Image.asset(
+//   'assets/ecoute.png',
+//   width: 50,
+// ),
+//   ),
