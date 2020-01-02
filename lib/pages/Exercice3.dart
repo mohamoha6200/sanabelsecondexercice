@@ -7,6 +7,7 @@ import 'package:sanabelsecondexercice/components/ExQuestionBar.dart';
 import 'package:sanabelsecondexercice/components/models/redLetterWord.dart';
 import 'package:sanabelsecondexercice/components/widgets/ResultSuccessQuestion.dart';
 import 'package:sanabelsecondexercice/components/widgets/Signature.dart';
+import 'package:sanabelsecondexercice/components/widgets/secondDrawer.dart';
 import 'package:sanabelsecondexercice/pages/fakePage.dart';
 
 import 'package:sanabelsecondexercice/theme/style.dart';
@@ -16,7 +17,7 @@ class ExerciceThree extends StatefulWidget {
   _ExerciceThreeState createState() => _ExerciceThreeState();
 }
 
-class _ExerciceThreeState extends State<ExerciceThree> { 
+class _ExerciceThreeState extends State<ExerciceThree> {
   List<Offset> _points = <Offset>[];
   List<Offset> _truePoints = <Offset>[];
 
@@ -214,30 +215,35 @@ class _ExerciceThreeState extends State<ExerciceThree> {
             // print(_points);
 
             firstPointOffset = _points[0];
-            lastPointOffset = _points[_points.length - 2];
+            if (_points.length >= 2)
+              lastPointOffset = _points[_points.length - 2];
 
-            if (inWhichPicIsThisPoint(firstPointOffset, picOffsetmap) != '') {
-              startedWithPic = true;
-              startingPic =
-                  inWhichPicIsThisPoint(firstPointOffset, picOffsetmap);
+            if (firstPointOffset != null && lastPointOffset != null) {
+              if (inWhichPicIsThisPoint(firstPointOffset, picOffsetmap) != '') {
+                startedWithPic = true;
+                startingPic =
+                    inWhichPicIsThisPoint(firstPointOffset, picOffsetmap);
+              }
+
+              if (inWhichWordIsThisPoint(firstPointOffset, wordOffsetmap) !=
+                  null) {
+                startedWithWord = true;
+                startingWord =
+                    inWhichWordIsThisPoint(firstPointOffset, wordOffsetmap);
+              }
+              if (inWhichPicIsThisPoint(lastPointOffset, picOffsetmap) != '') {
+                endedWithPic = true;
+                endingPic =
+                    inWhichPicIsThisPoint(lastPointOffset, picOffsetmap);
+              }
+              if (inWhichWordIsThisPoint(lastPointOffset, wordOffsetmap) !=
+                  null) {
+                endedWithWord = true;
+                endingWord =
+                    inWhichWordIsThisPoint(lastPointOffset, wordOffsetmap);
+              }
             }
 
-            if (inWhichWordIsThisPoint(firstPointOffset, wordOffsetmap) !=
-                null) {
-              startedWithWord = true;
-              startingWord =
-                  inWhichWordIsThisPoint(firstPointOffset, wordOffsetmap);
-            }
-            if (inWhichPicIsThisPoint(lastPointOffset, picOffsetmap) != '') {
-              endedWithPic = true;
-              endingPic = inWhichPicIsThisPoint(lastPointOffset, picOffsetmap);
-            }
-            if (inWhichWordIsThisPoint(lastPointOffset, wordOffsetmap) !=
-                null) {
-              endedWithWord = true;
-              endingWord =
-                  inWhichWordIsThisPoint(lastPointOffset, wordOffsetmap);
-            }
             print('startedWithPic ' + startedWithPic.toString());
             print('startedWithWord ' + startedWithWord.toString());
             print('endedWithPic ' + endedWithPic.toString());
@@ -293,11 +299,11 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                   });
               } else {
                 print('nah');
-                Flame.audio.play('error.mp3'); 
+                Flame.audio.play('error.mp3');
                 setState(() {
                   _points = [];
                   _truePoints = [];
-                  scoreMap={};
+                  scoreMap = {};
                 });
               }
             } else if (startedWithWord == true && endedWithPic == true) {
@@ -347,16 +353,18 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                 setState(() {
                   _points = [];
                   _truePoints = [];
-                  scoreMap={};
+                  scoreMap = {};
                 });
               }
-            } else {print('neither');
-                Flame.audio.play('error.mp3');
-                setState(() {
-                  _points = [];
-                  _truePoints = [];
-                  scoreMap={};
-                });}
+            } else {
+              print('neither');
+              Flame.audio.play('error.mp3');
+              setState(() {
+                _points = [];
+                _truePoints = [];
+                scoreMap = {};
+              });
+            }
             print('scoreMap=' + scoreMap.toString());
 
             setState(() {
@@ -395,13 +403,13 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                               key: _picCardKey[index],
                               width: 300,
                               height: 200,
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 3.0, color: Colors.lightBlueAccent),
-                                borderRadius: BorderRadius.all(Radius.circular(
-                                        5.0) //         <--- border radius here
-                                    ),
-                              ),
+                              // decoration: BoxDecoration(
+                              //   border: Border.all(
+                              //       width: 3.0, color: Colors.lightBlueAccent),
+                              //   borderRadius: BorderRadius.all(Radius.circular(
+                              //           5.0) //         <--- border radius here
+                              //       ),
+                              // ),
                               child: new Image.asset(
                                 keys[index],
                                 fit: BoxFit.fill,
@@ -424,16 +432,16 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                                 key: _wordCardKey[index],
                                 width: 300,
                                 height: 200,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                      width: 3.0,
-                                      color: Colors.lightBlueAccent),
-                                  // color: Colors.blueAccent,
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(
-                                          5.0) //         <--- border radius here
-                                      ),
-                                ),
+                                // decoration: BoxDecoration(
+                                //   border: Border.all(
+                                //       width: 3.0,
+                                //       color: Colors.lightBlueAccent),
+                                //   // color: Colors.blueAccent,
+                                //   borderRadius: BorderRadius.all(
+                                //       Radius.circular(
+                                //           5.0) //         <--- border radius here
+                                //       ),
+                                // ),
                                 child: RedLetterWord(
                                   textList: choices[index].values.toList()[0],
                                   pos: choices[index].keys.toList()[0],
@@ -456,7 +464,7 @@ class _ExerciceThreeState extends State<ExerciceThree> {
 
     return Scaffold(
       backgroundColor: backgroundMainColor,
-      // appBar: ExQuestionBar(),
+      drawer: AppDrawer(),
       body: childWidget(),
       bottomNavigationBar: Container(
         height: screenSize.height * 0.05,
@@ -467,7 +475,7 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                     _truePoints = [];
                     _points = [];
                     scoreMap = {};
-                  }), 
+                  }),
                 }),
       ),
     );

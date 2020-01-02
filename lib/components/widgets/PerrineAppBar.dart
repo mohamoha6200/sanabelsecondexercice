@@ -6,13 +6,16 @@ class PerrineAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final bool menuIcon;
   final bool noSettings;
+  final Function menuTap ;
 
   const PerrineAppBar(
       {Key key,
       @required this.height,
       @required this.title,
       this.menuIcon,
-      this.noSettings})
+      this.noSettings,
+      this.menuTap
+      })
       : super(key: key);
 
   _getBackButton(context) {

@@ -60,7 +60,7 @@ TextStyle styleAppBar1 = new TextStyle(
 
 TextStyle styleAppBarGreen = new TextStyle(
     color: mainColorText,
-    fontSize: 50.0,
+    fontSize: 60.0,
     fontFamily: 'font arab bold',
     fontWeight: FontWeight.w500);
 

@@ -5,7 +5,9 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     //
     return Drawer(
+
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Expanded(flex: 1, child: _createHeader(context)),
           Expanded(
@@ -14,31 +16,49 @@ class AppDrawer extends StatelessWidget {
               padding: EdgeInsets.zero,
               children: <Widget>[
                 _createDrawerItem(
-                    icon: Icons.contacts, text: 'Contacts', onTap: () => {}
+                    icon: Icons.event,
+                    text: 'التَمرين الأول',
+                    onTap: () => {} //contacts
                     // Navigator.pushReplacementNamed(context, Routes.contacts)
                     ),
+                Divider(),
+
                 _createDrawerItem(
-                    icon: Icons.event, text: 'Events', onTap: () => {}
+                    icon: Icons.collections_bookmark,
+                    text: 'التَمرين الثاني',
+                    onTap: () => {}
                     //        Navigator.pushReplacementNamed(context, Routes.events)
                     ),
+                Divider(),
+
                 _createDrawerItem(
-                    icon: Icons.note, text: 'Notes', onTap: () => {}
+                    icon: Icons.event,
+                    text: 'التَمرين الثالث',
+                    onTap: () => {} //note
                     //       Navigator.pushReplacementNamed(context, Routes.notes)
                     ),
                 Divider(),
+
                 _createDrawerItem(
-                    icon: Icons.collections_bookmark, text: 'Steps'),
-                _createDrawerItem(icon: Icons.face, text: 'Authors'),
-                _createDrawerItem(
-                    icon: Icons.account_box, text: 'Flutter Documentation'),
-                _createDrawerItem(icon: Icons.stars, text: 'Useful Links'),
+                    icon: Icons.collections_bookmark,
+                    text: 'التَمرين الرابع',
+                    onTap: () => {}
+                    //       Navigator.pushReplacementNamed(context, Routes.notes)
+                    ),
                 Divider(),
-                _createDrawerItem(
-                    icon: Icons.bug_report, text: 'Report an issue'),
-                ListTile(
-                  title: Text('0.0.1'),
-                  onTap: () {},
-                ),
+                // _createDrawerItem(
+                //     icon: Icons.collections_bookmark, text: 'Steps'),
+                // _createDrawerItem(icon: Icons.face, text: 'Authors'),
+                // _createDrawerItem(
+                //     icon: Icons.account_box, text: 'Flutter Documentation'),
+                // _createDrawerItem(icon: Icons.stars, text: 'Useful Links'),
+                // Divider(),
+                // _createDrawerItem(
+                //     icon: Icons.bug_report, text: 'Report an issue'),
+                // ListTile(
+                //   title: Text('0.0.1'),
+                //   onTap: () {},
+                // ),
               ],
             ),
           ),

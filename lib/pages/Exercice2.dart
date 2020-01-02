@@ -237,10 +237,10 @@ class _ExerciceTwoState extends State<ExerciceTwo> {
             painter: new Signature(points: _points),
             child: Column(
               children: <Widget>[
-                ExQuestionBar(
+                ExQuestionBar( 
                   subQuestion: subQuestion,
                   question: 'أَرَسْمِ دائرة حول الحرف ',
-                  kidPic: 'ecoute2.png',
+                  kidPic: 'listen.png', 
                 ),
                 Directionality(
                   textDirection: TextDirection.rtl,

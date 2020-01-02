@@ -3,13 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:sanabelsecondexercice/components/models/LetterBalloon.dart';
 import 'package:sanabelsecondexercice/components/widgets/Balloon.dart';
 import 'package:sanabelsecondexercice/components/widgets/PerrineAppBar.dart';
+import 'package:sanabelsecondexercice/components/widgets/SanabelAppBar.dart';
 import 'package:sanabelsecondexercice/components/widgets/secondDrawer.dart';
+import 'package:sanabelsecondexercice/pages/DragToBoxExercice.dart';
+import 'package:sanabelsecondexercice/pages/Exercice1.dart';
 import 'package:sanabelsecondexercice/pages/Exercice2.dart';
 import 'package:sanabelsecondexercice/pages/Exercice3.dart';
 import 'package:sanabelsecondexercice/pages/Exercice4.dart';
 import 'package:sanabelsecondexercice/pages/Exercice5.dart';
 import 'package:sanabelsecondexercice/pages/Exercice6.dart';
+import 'package:sanabelsecondexercice/pages/Exercice8.dart';
 import 'package:sanabelsecondexercice/pages/ExerciceSeven.dart';
+import 'package:sanabelsecondexercice/pages/NavigateLetter.dart';
+import 'package:sanabelsecondexercice/theme/perrine.dart';
 import 'package:sanabelsecondexercice/theme/style.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,6 +24,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // final GlobalKey _scaffoldKey = new GlobalKey();
+
   List<LettreBalloon> letters = [
     new LettreBalloon(
         letter: 'أ', letterColor: 'red', balloonColor: 'purpleaccent'),
@@ -85,12 +93,10 @@ class _HomePageState extends State<HomePage> {
     new LettreBalloon(
         letter: 'ي', letterColor: 'orange', balloonColor: 'purple'),
   ];
-
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   void initState() {
     super.initState();
-
-    setState(() {});
   }
 
   Widget childWidget() {
@@ -113,10 +119,13 @@ class _HomePageState extends State<HomePage> {
                   print('to ex 3');
                   Navigator.push(context,
                       MaterialPageRoute(builder: (BuildContext context) {
-                    // return ExerciceFive(subQuestion:letters[a-1].letter);
-                    // return ExerciceFour(subQuestion: letters[a - 1].letter);
-                    //return ExerciceSeven();
-                    return ExerciceThree();
+                   //   return ExerciceFive(subQuestion:letters[a-1].letter);  // 7 cards and 4 boxes only Ba
+                   //  return ExerciceFour(subQuestion: letters[a - 1].letter); // parametered listen and drag
+                    // return ExerciceThree(); match right answer 
+                  //  return ExerciceSeven(); // click pic when u see letter 
+                   //  return ExerciceEight(subQuestion: letters[a - 1].letter); // drag cirlce to box 
+                  // return DragToExercice(subQuestion: letters[a-1].letter);
+                   return NavigateLetter(letter: letters[a-1].letter).redirectToExercice();
                   }));
                 },
                 child: Balloon(
@@ -145,9 +154,61 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+
     return Scaffold(
+        key: _scaffoldKey,
         backgroundColor: backgroundMainColor,
-        appBar: PerrineAppBar(height: 80, title: 'الْخرُوفُ الْعَرَبِيَّةُ',menuIcon:true),
+        //  appBar: PerrineAppBar(height: 80, title: 'الْخرُوفُ الْعَرَبِيَّةُ',menuIcon:true , menuTap: _scaffoldKey.currentState.toggle()),
+        // appBar: PreferredSize(
+        //     preferredSize: Size.fromHeight(screenSize.height / 6.75),
+        //     child: new SanabelAppBar(
+        //       title: 'الْحُرُوفُ الْعَرَبِيَّةُ',
+        //     )),
+        // -----------------------------
+        //   appBar: AppBar(
+        //   title: Text("Change Hamburger Icon Example"),
+        //   leading: IconButton(
+        //     icon: Icon(Icons.person),
+        //     onPressed: () {
+        //       _scaffoldKey.currentState.openDrawer();
+        //     },
+        //   ),
+        // ),
+        // ------------------
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(screenSize.height / 6),
+          child: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0.0,
+            centerTitle: true,
+            // leading: new Icon(Icons.menu),
+            automaticallyImplyLeading: false,
+
+            // iconTheme: IconThemeData(color: mainColorText, size: 40),
+
+            leading: Padding(
+              padding: EdgeInsets.only(top: screenSize.height / 20),
+              child: IconButton(
+                icon: Icon(
+                  Icons.message,
+                  color: redColor,
+                ),
+                onPressed: () {
+                  _scaffoldKey.currentState.openDrawer();
+                },
+              ),
+            ),
+// titleSpacing: screenSize.height/2,
+
+            flexibleSpace: Center(
+              child: new Text(
+                'الْحُرُوفُ الْعَرَبِيَّةُ',
+                style: styleAppBarGreen,
+              ),
+            ),
+          ),
+        ),
         drawer: AppDrawer(),
         body: childWidget());
   }
