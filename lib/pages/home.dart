@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_page_transition/flutter_page_transition.dart';
 import 'package:sanabelsecondexercice/components/models/LetterBalloon.dart';
 import 'package:sanabelsecondexercice/components/widgets/Balloon.dart';
 import 'package:sanabelsecondexercice/components/widgets/PerrineAppBar.dart';
@@ -116,17 +117,28 @@ class _HomePageState extends State<HomePage> {
             if ((a % 5 != 0)) {
               conditional = InkWell(
                 onTap: () {
-                  print('to ex 3');
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (BuildContext context) {
-                   //   return ExerciceFive(subQuestion:letters[a-1].letter);  // 7 cards and 4 boxes only Ba
-                   //  return ExerciceFour(subQuestion: letters[a - 1].letter); // parametered listen and drag
-                    // return ExerciceThree(); match right answer 
-                  //  return ExerciceSeven(); // click pic when u see letter 
-                   //  return ExerciceEight(subQuestion: letters[a - 1].letter); // drag cirlce to box 
-                  // return DragToExercice(subQuestion: letters[a-1].letter);
-                   return NavigateLetter(letter: letters[a-1].letter).redirectToExercice();
-                  }));
+                  Navigator.of(context).push(
+                    PageTransition(
+                      duration: Duration(milliseconds: 2000),
+                      type: PageTransitionType.rippleMiddle,
+                      child: 
+                      ExerciceFour(subQuestion: letters[a - 1].letter),
+                    ),
+                  );
+
+                  // Navigator.push(context,
+                  //     MaterialPageRoute(builder: (BuildContext context) {
+                  //   //   return ExerciceFive(subQuestion:letters[a-1].letter);  // 7 cards and 4 boxes only Ba
+                  //   return ExerciceFour(
+                  //       subQuestion: letters[a - 1]
+                  //           .letter); // parametered listen and drag
+                  //   //   return ExerciceThree(); //match right answer
+                  //   //  return ExerciceSeven(); // click pic when u see letter
+                  //   //  return ExerciceEight(subQuestion: letters[a - 1].letter); // drag cirlce to box
+                  //   // return DragToExercice(subQuestion: letters[a-1].letter);
+                  //   //return NavigateLetter(letter: letters[a-1].letter).redirectToExercice();
+                  //   // return ExerciceSix(subQuestion: letters[a - 1].letter);
+                  // }));
                 },
                 child: Balloon(
                     letter: letters[a - 1].letter,
@@ -157,59 +169,71 @@ class _HomePageState extends State<HomePage> {
     Size screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-        key: _scaffoldKey,
-        backgroundColor: backgroundMainColor,
-        //  appBar: PerrineAppBar(height: 80, title: 'الْخرُوفُ الْعَرَبِيَّةُ',menuIcon:true , menuTap: _scaffoldKey.currentState.toggle()),
-        // appBar: PreferredSize(
-        //     preferredSize: Size.fromHeight(screenSize.height / 6.75),
-        //     child: new SanabelAppBar(
-        //       title: 'الْحُرُوفُ الْعَرَبِيَّةُ',
-        //     )),
-        // -----------------------------
-        //   appBar: AppBar(
-        //   title: Text("Change Hamburger Icon Example"),
-        //   leading: IconButton(
-        //     icon: Icon(Icons.person),
-        //     onPressed: () {
-        //       _scaffoldKey.currentState.openDrawer();
-        //     },
-        //   ),
-        // ),
-        // ------------------
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(screenSize.height / 6),
-          child: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0.0,
-            centerTitle: true,
-            // leading: new Icon(Icons.menu),
-            automaticallyImplyLeading: false,
+      key: _scaffoldKey,
+      backgroundColor: backgroundMainColor,
+      //  appBar: PerrineAppBar(height: 80, title: 'الْخرُوفُ الْعَرَبِيَّةُ',menuIcon:true , menuTap: _scaffoldKey.currentState.toggle()),
+      // appBar: PreferredSize(
+      //     preferredSize: Size.fromHeight(screenSize.height / 6.75),
+      //     child: new SanabelAppBar(
+      //       title: 'الْحُرُوفُ الْعَرَبِيَّةُ',
+      //     )),
+      // -----------------------------
+      //   appBar: AppBar(
+      //   title: Text("Change Hamburger Icon Example"),
+      //   leading: IconButton(
+      //     icon: Icon(Icons.person),
+      //     onPressed: () {
+      //       _scaffoldKey.currentState.openDrawer();
+      //     },
+      //   ),
+      // ),
+      // ------------------
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(screenSize.height / 6),
+        child: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0.0,
+          centerTitle: true,
+          // leading: new Icon(Icons.menu),
+          automaticallyImplyLeading: false,
 
-            // iconTheme: IconThemeData(color: mainColorText, size: 40),
+          // iconTheme: IconThemeData(color: mainColorText, size: 40),
 
-            leading: Padding(
-              padding: EdgeInsets.only(top: screenSize.height / 20),
-              child: IconButton(
-                icon: Icon(
-                  Icons.message,
-                  color: redColor,
-                ),
-                onPressed: () {
-                  _scaffoldKey.currentState.openDrawer();
-                },
+          leading: Padding(
+            padding: EdgeInsets.only(top: screenSize.height / 20),
+            child: IconButton(
+              icon: Icon(
+                Icons.message,
+                color: redColor,
               ),
+              onPressed: () {
+                _scaffoldKey.currentState.openDrawer();
+              },
             ),
-// titleSpacing: screenSize.height/2,
+          ),
 
-            flexibleSpace: Center(
-              child: new Text(
-                'الْحُرُوفُ الْعَرَبِيَّةُ',
-                style: styleAppBarGreen,
-              ),
+          // titleSpacing: screenSize.height/2,
+
+          flexibleSpace: Center(
+            child: new Text(
+              'الْحُرُوفُ الْعَرَبِيَّةُ',
+              style: styleAppBarGreen,
             ),
           ),
         ),
-        drawer: AppDrawer(),
-        body: childWidget());
+      ),
+      drawer: AppDrawer(),
+      body: DecoratedBox(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/classroom3.png"),
+            fit: BoxFit.fill,
+            colorFilter: new ColorFilter.mode(
+                Colors.black.withOpacity(0.25), BlendMode.dstATop),
+          ),
+        ),
+        child: childWidget(),
+      ),
+    );
   }
 }

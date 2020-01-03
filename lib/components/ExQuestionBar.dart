@@ -18,7 +18,7 @@ class ExQuestionBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-  
+
     return AppBar(
       backgroundColor: Colors.transparent,
       elevation: 0.0,
@@ -26,10 +26,10 @@ class ExQuestionBar extends StatelessWidget {
       // leading: IconButton(
       //   icon: Icon(Icons.menu, color: Colors.red), // set your color here
       //   onPressed: () {
-          
+
       //   },
       // ),
-       automaticallyImplyLeading: false,
+      automaticallyImplyLeading: false,
       // height: screenSize.height * 0.15,
       flexibleSpace: Padding(
         padding: EdgeInsets.only(left: screenSize.width / 16),
@@ -58,7 +58,9 @@ class ExQuestionBar extends StatelessWidget {
                   ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.end,
+              crossAxisAlignment: this.subQuestion != null
+                  ? CrossAxisAlignment.center
+                  : CrossAxisAlignment.end,
               mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 this.subQuestion != null
@@ -66,11 +68,12 @@ class ExQuestionBar extends StatelessWidget {
                         padding: EdgeInsets.only(
                           right: screenSize.width / 120,
                         ),
-                        child: Container(
-                          child: Text(
-                            subQuestion,
-                            style: questionLetter,
-                          ),
+                        child: Text(
+                          subQuestion,
+                          style: TextStyle(
+                              color: Colors.red,
+                              fontSize: screenSize.width / 20,
+                              fontWeight: FontWeight.w500),
                         ),
                       )
                     : Container(),

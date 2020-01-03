@@ -7,7 +7,7 @@ import 'package:sanabelsecondexercice/components/widgets/ResultSuccessQuestion.d
 import 'package:sanabelsecondexercice/theme/style.dart';
 
 class DragToExercice extends StatefulWidget {
-  final subQuestion;
+  final subQuestion; 
 
   DragToExercice({@required this.subQuestion});
 
@@ -324,7 +324,7 @@ class _DragToExerciceState extends State<DragToExercice> {
                       childAspectRatio: 2.5,
                       physics: ClampingScrollPhysics(),
                       crossAxisCount: 4,
-                      children: circlesMap.keys.map((emoji) {
+                      children: draggablesMap.keys.map((emoji) {
                         return Draggable<String>(
                           data: emoji,
                           child: EmojiForCircle(

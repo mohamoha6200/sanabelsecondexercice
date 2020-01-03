@@ -610,6 +610,7 @@ class _ExerciceFourState extends State<ExerciceFour> {
                       Flame.audio.play('$audioFile.mp3');
 
                       setState(() {
+                        scoreMap={};
                         buttonList[colors[i]] = 1;
                         letterList = letterListMapList[color];
                       });
@@ -655,7 +656,10 @@ class _ExerciceFourState extends State<ExerciceFour> {
                 alignment: Alignment.center,
                 child: Image.asset('assets/balloonpurpleaccent.png'),
               ),
-              letterWidget(emoji, subQuestion, context),
+              Positioned(
+                top: -screenSize.width / 75,
+                child: letterWidget(emoji, subQuestion, context),
+              ),
             ],
           );
         } else {
@@ -751,8 +755,8 @@ class _ExerciceFourState extends State<ExerciceFour> {
       body: DecoratedBox(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/classroom.jpg"),
-              fit: BoxFit.cover,
+              image: AssetImage("assets/classroom3.png"),
+              fit: BoxFit.fill,
               colorFilter: new ColorFilter.mode(
                   Colors.black.withOpacity(0.25), BlendMode.dstATop),
             ),
@@ -870,23 +874,3 @@ Widget letterWidget(String emojiStr, String subQuestion, context) {
             )
           : Container());
 }
-
-// width: screenSize.width / 7,
-//               height: screenSize.height / 5,
-// new RichText(
-//                   textScaleFactor: 0.5,
-//                 overflow: TextOverflow.visible,
-//                 text: new TextSpan(
-//                   style: new TextStyle(fontSize: 90),
-//                   children: <TextSpan>[
-//                     new TextSpan(
-//                         text: textList[0],
-//                         style: new TextStyle(
-//                             fontWeight: FontWeight.bold, color: Colors.red)),
-//                     new TextSpan(
-//                         text: textList[1],
-//                         style: new TextStyle(
-//                             fontWeight: FontWeight.bold,
-//                             color: Colors.green)),
-//                   ],
-//                 ))

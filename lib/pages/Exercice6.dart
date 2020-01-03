@@ -8,12 +8,15 @@ import 'package:sanabelsecondexercice/components/widgets/letterOrText.dart';
 import 'package:sanabelsecondexercice/theme/style.dart';
 
 class ExerciceSix extends StatefulWidget {
+  final String subQuestion ;
+
+  const ExerciceSix({this.subQuestion}) ;
+
   @override
   _ExerciceSixState createState() => _ExerciceSixState();
 }
 
 class _ExerciceSixState extends State<ExerciceSix> {
-  final String subQuestion = 'ب';
 
   List<Offset> _points = <Offset>[];
   List<Offset> _truePoints = <Offset>[];
@@ -98,6 +101,8 @@ class _ExerciceSixState extends State<ExerciceSix> {
     },
   };
 
+  var subQuestion;
+
   Map<int, Offset> indexOffsetsMap = {
     // 0: Offset(768.0, 97.2),
     // 1: Offset(576.0, 97.2),
@@ -118,7 +123,19 @@ class _ExerciceSixState extends State<ExerciceSix> {
   ];
   Map<Offset, bool> scoreMap = {};
 
-  Offset currentRightCardPosition;
+  Offset currentRightCardPosition; 
+
+
+  @override
+  void initState() {
+    super.initState();
+      subQuestion = widget.subQuestion;
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => getSizeAndPosition());
+    setState(() {
+      print('init');
+    });
+  }
 
   bool pointsInrightCard(List<Offset> pointsList, List<Offset> rightCards) {
     bool insideOneAndOnlyCorrectAnswer = true;
@@ -174,15 +191,6 @@ class _ExerciceSixState extends State<ExerciceSix> {
     }
   }
 
-  @override
-  void initState() {
-    super.initState();
-
-    WidgetsBinding.instance.addPostFrameCallback((_) => getSizeAndPosition());
-    setState(() {
-      print('init');
-    });
-  }
 
   getSizeAndPosition() {
     for (var index = 0; index < _cardKey.length; index++) {
@@ -291,8 +299,8 @@ class _ExerciceSixState extends State<ExerciceSix> {
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 ExQuestionBar(
-                  subQuestion: subQuestion,
-                  question: 'أَرَسْمِ دائرة حول الحرف',
+                  subQuestion: subQuestion, 
+                  question: 'أَرَسْمِ دائرة حول الحرف    ',
                   kidPic: 'kids7.png',
                   logos: false,
                 ),
