@@ -19,6 +19,7 @@ import 'package:sanabelsecondexercice/pages/NavigateLetter.dart';
 import 'package:sanabelsecondexercice/theme/perrine.dart';
 import 'package:sanabelsecondexercice/theme/style.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -111,67 +112,88 @@ class _HomePageState extends State<HomePage> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Container(
-        child: new GridView.count(
-          // shrinkWrap: true,
-          physics: ClampingScrollPhysics(),
-          crossAxisCount: 4,
+        child: AnimationLimiter(
+          child: new GridView.count(
+            // shrinkWrap: true,
+            physics: ClampingScrollPhysics(),
+            crossAxisCount: 4,
 
-          children: List.generate(letters.length, (i) {
-            var a = i + 1;
+            children: List.generate(letters.length, (i) {
+              var a = i + 1;
 
-            if ((a % 5 != 0)) {
-              conditional = InkWell(
-                onTap: () async {
-                  SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
+              if ((a % 5 != 0)) {
+                conditional = AnimationConfiguration.staggeredGrid(
+                  position: i,
+                  duration: const Duration(milliseconds: 1000),
+                  columnCount: 4,
+                  child: ScaleAnimation(
+                    child: FadeInAnimation(
+                      child: InkWell(
+                        onTap: () async {
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
 
-                  await prefs.setString('currentLetter', letters[a - 1].letter);
-                  print('got from shared in home');
-                  print(prefs.getString('currentLetter'));
-                  Navigator.of(context).push(
-                    PageTransition(
-                      duration: Duration(milliseconds: 2000),
-                      type: PageTransitionType.rippleMiddle,
-                      child: ExerciceFour(),
+                          await prefs.setString(
+                              'currentLetter', letters[a - 1].letter);
+                          print('got from shared in home');
+                          print(prefs.getString('currentLetter'));
+                          Navigator.of(context).push(
+                            PageTransition(
+                              duration: Duration(milliseconds: 2000),
+                              type: PageTransitionType.rippleMiddle,
+                              child: ExerciceFour(),
+                            ),
+                          );
+
+                          // Navigator.push(context,
+                          //     MaterialPageRoute(builder: (BuildContext context) {
+                          //   //   return ExerciceFive(subQuestion:letters[a-1].letter);  // 7 cards and 4 boxes only Ba
+                          //   return ExerciceFour(
+                          //       subQuestion: letters[a - 1]
+                          //           .letter); // parametered listen and drag
+                          //   //   return ExerciceThree(); //match right answer
+                          //   //  return ExerciceSeven(); // click pic when u see letter
+                          //   //  return ExerciceEight(subQuestion: letters[a - 1].letter); // drag cirlce to box
+                          //   // return DragToExercice(subQuestion: letters[a-1].letter);
+                          //   //return NavigateLetter(letter: letters[a-1].letter).redirectToExercice();
+                          //   // return ExerciceSix(subQuestion: letters[a - 1].letter);
+                          // }));
+                        },
+                        child: Balloon(
+                            letter: letters[a - 1].letter,
+                            letterColor: letters[a - 1].letterColor,
+                            balloonColor: letters[a - 1].balloonColor),
+                      ),
                     ),
-                  );
-
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (BuildContext context) {
-                  //   //   return ExerciceFive(subQuestion:letters[a-1].letter);  // 7 cards and 4 boxes only Ba
-                  //   return ExerciceFour(
-                  //       subQuestion: letters[a - 1]
-                  //           .letter); // parametered listen and drag
-                  //   //   return ExerciceThree(); //match right answer
-                  //   //  return ExerciceSeven(); // click pic when u see letter
-                  //   //  return ExerciceEight(subQuestion: letters[a - 1].letter); // drag cirlce to box
-                  //   // return DragToExercice(subQuestion: letters[a-1].letter);
-                  //   //return NavigateLetter(letter: letters[a-1].letter).redirectToExercice();
-                  //   // return ExerciceSix(subQuestion: letters[a - 1].letter);
-                  // }));
-                },
-                child: Balloon(
-                    letter: letters[a - 1].letter,
-                    letterColor: letters[a - 1].letterColor,
-                    balloonColor: letters[a - 1].balloonColor),
-              );
-            } else {
-              setState(() {
-                if (recapIndex < 6) {
-                  recapIndex++;
-                }
-              });
-              conditional = InkWell(
-                child: Container(
-                  child: Image.asset(
-                    'assets/recap$recapIndex.png',
-                    fit: BoxFit.fitWidth,
                   ),
-                ),
-              );
-            }
-            return conditional;
-          }),
+                );
+              } else {
+                setState(() {
+                  if (recapIndex < 6) {
+                    recapIndex++;
+                  }
+                });
+                conditional = AnimationConfiguration.staggeredGrid(
+                  position: i,
+                  duration: const Duration(milliseconds: 1000),
+                  columnCount: 4,
+                  child: ScaleAnimation(
+                    child: FadeInAnimation(
+                      child: InkWell(
+                        child: Container(
+                          child: Image.asset(
+                            'assets/recap$recapIndex.png',
+                            fit: BoxFit.fitWidth,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              }
+              return conditional;
+            }),
+          ),
         ),
       ),
     );
