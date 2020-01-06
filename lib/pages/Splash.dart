@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   CircularSplashController _controller = CircularSplashController(
     color: backgroundMainColor, //optional, default is White.
-    duration: Duration(milliseconds: 1800), //optional.
+    duration: Duration(milliseconds: 400), //optional.
   );
 
   var twenty;

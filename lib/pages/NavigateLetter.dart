@@ -9,7 +9,7 @@ class NavigateLetter {
 
   redirectToExercice() {
     
-      return DragToExercice(subQuestion: letter); // 7 cards and 4 boxes only Ba
+      return DragToExercice(); // 7 cards and 4 boxes only Ba
   
      
    

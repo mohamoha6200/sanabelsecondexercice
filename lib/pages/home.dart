@@ -18,6 +18,7 @@ import 'package:sanabelsecondexercice/pages/ExerciceSeven.dart';
 import 'package:sanabelsecondexercice/pages/NavigateLetter.dart';
 import 'package:sanabelsecondexercice/theme/perrine.dart';
 import 'package:sanabelsecondexercice/theme/style.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -95,9 +96,13 @@ class _HomePageState extends State<HomePage> {
         letter: 'ي', letterColor: 'orange', balloonColor: 'purple'),
   ];
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  int recapIndex;
+
   @override
   void initState() {
     super.initState();
+    recapIndex = 0;
   }
 
   Widget childWidget() {
@@ -116,13 +121,18 @@ class _HomePageState extends State<HomePage> {
 
             if ((a % 5 != 0)) {
               conditional = InkWell(
-                onTap: () {
+                onTap: () async {
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+
+                  await prefs.setString('currentLetter', letters[a - 1].letter);
+                  print('got from shared in home');
+                  print(prefs.getString('currentLetter'));
                   Navigator.of(context).push(
                     PageTransition(
                       duration: Duration(milliseconds: 2000),
                       type: PageTransitionType.rippleMiddle,
-                      child: 
-                      ExerciceFour(subQuestion: letters[a - 1].letter),
+                      child: ExerciceFour(),
                     ),
                   );
 
@@ -146,13 +156,16 @@ class _HomePageState extends State<HomePage> {
                     balloonColor: letters[a - 1].balloonColor),
               );
             } else {
+              setState(() {
+                if (recapIndex < 6) {
+                  recapIndex++;
+                }
+              });
               conditional = InkWell(
-                child: Padding(
-                  padding: EdgeInsets.all(screenSize.width / 60),
-                  child: Container(
-                    child: Image.asset(
-                      'assets/recap.png',
-                    ),
+                child: Container(
+                  child: Image.asset(
+                    'assets/recap$recapIndex.png',
+                    fit: BoxFit.fitWidth,
                   ),
                 ),
               );
@@ -199,17 +212,15 @@ class _HomePageState extends State<HomePage> {
 
           // iconTheme: IconThemeData(color: mainColorText, size: 40),
 
-          leading: Padding(
-            padding: EdgeInsets.only(top: screenSize.height / 20),
-            child: IconButton(
-              icon: Icon(
-                Icons.message,
-                color: redColor,
-              ),
-              onPressed: () {
-                _scaffoldKey.currentState.openDrawer();
-              },
+          leading: IconButton(
+            icon: Icon(
+              Icons.menu,
+              color: greenColor,
+              size: 30,
             ),
+            onPressed: () {
+              _scaffoldKey.currentState.openDrawer();
+            },
           ),
 
           // titleSpacing: screenSize.height/2,

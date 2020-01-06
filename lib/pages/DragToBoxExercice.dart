@@ -5,12 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:sanabelsecondexercice/components/ExQuestionBar.dart';
 import 'package:sanabelsecondexercice/components/widgets/ResultSuccessQuestion.dart';
 import 'package:sanabelsecondexercice/theme/style.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DragToExercice extends StatefulWidget {
-  final subQuestion; 
-
-  DragToExercice({@required this.subQuestion});
-
   @override
   _DragToExerciceState createState() => _DragToExerciceState();
 }
@@ -43,26 +40,43 @@ class _DragToExerciceState extends State<DragToExercice> {
 
   int rightAnswersCount;
 
-  var subQuestion;
+  String subQuestion = '';
+
+  bool nextExercice = false;
 
   Map<String, String> boxsMap = {};
   String cardOrCircle;
+  SharedPreferences prefs;
 
   @override
   void initState() {
     super.initState();
-    setState(() {
-      subQuestion = widget.subQuestion;
-      draggablesMap = fillDraggablesMap(subQuestion);
-      rightAnswersCount = fnRightAnswersCount();
-      boxsMap = fillBoxMap(subQuestion);
-      print('boxsMap');
-      print(boxsMap);
+
+    gettingLetter();
+
+    print(subQuestion);
+  }
+
+  gettingLetter() async {
+    SharedPreferences.getInstance().then((onValue) {
+      prefs = onValue;
+      setState(() {
+        subQuestion = prefs.getString('currentLetter');
+        draggablesMap = fillDraggablesMap(subQuestion);
+        print('draggablesMap = ' + draggablesMap.toString());
+        rightAnswersCount = fnRightAnswersCount();
+        print('rightAnswersCount = ' + rightAnswersCount.toString());
+        boxsMap = fillBoxMap(subQuestion);
+        print('boxsMap');
+        print(boxsMap);
+      });
     });
+    print("subQuestion === ");
+    print(subQuestion);
   }
 
   Map<String, List<String>> fillDraggablesMap(subQuestion) {
-    Map<String, List<String>> draggables;
+    Map<String, List<String>> draggables = {};
     if (subQuestion == 'ب') {
       draggables = cardsMap;
       setState(() {
@@ -436,6 +450,7 @@ class _DragToExerciceState extends State<DragToExercice> {
               : 'أضع كل كلمة في الصندوق المناسب',
           kidPic: 'kids6.png',
           logos: false,
+          nextExercice: nextExercice,
         ),
         Expanded(child: exView()),
       ],

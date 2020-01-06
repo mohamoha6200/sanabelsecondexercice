@@ -5,18 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:sanabelsecondexercice/components/ExQuestionBar.dart';
 import 'package:sanabelsecondexercice/components/widgets/ResultSuccessQuestion.dart';
 import 'package:sanabelsecondexercice/theme/style.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ExerciceFour extends StatefulWidget {
-  final subQuestion;
-
-  ExerciceFour({this.subQuestion});
-
   @override
   _ExerciceFourState createState() => _ExerciceFourState();
 }
 
 class _ExerciceFourState extends State<ExerciceFour> {
-  var subQuestion;
+  String subQuestion = '';
+  bool nextExercice ;
 
   Map<String, bool> scoreMap = {};
 
@@ -58,11 +56,11 @@ class _ExerciceFourState extends State<ExerciceFour> {
   int selectedButtonIndex = -1;
 
   String subQuestionLatin;
-
+  SharedPreferences prefs;
   @override
   void initState() {
     super.initState();
-    subQuestion = widget.subQuestion;
+    gettingLetter();
     initialiseSubQuestionLatin();
     colorSoundMap = fillColorSoundMap(subQuestion);
     letterListRed = fillLetterListRed(subQuestion);
@@ -70,6 +68,18 @@ class _ExerciceFourState extends State<ExerciceFour> {
     letterListBlue = fillLetterListBlue(subQuestion);
     letterList = letterListRed;
     letterListMapList = fillLetterList();
+  }
+
+  gettingLetter() async {
+    SharedPreferences.getInstance().then((onValue) {
+      prefs = onValue;
+      setState(() {
+        subQuestion = prefs.getString('currentLetter');
+      });
+
+    });
+    print("subQuestion === ");
+    print(subQuestion);
   }
 
   fillLetterList() {
@@ -610,7 +620,7 @@ class _ExerciceFourState extends State<ExerciceFour> {
                       Flame.audio.play('$audioFile.mp3');
 
                       setState(() {
-                        scoreMap={};
+                        scoreMap = {};
                         buttonList[colors[i]] = 1;
                         letterList = letterListMapList[color];
                       });
@@ -653,6 +663,7 @@ class _ExerciceFourState extends State<ExerciceFour> {
             children: <Widget>[
               Container(
                 width: screenSize.width / 6,
+                height: screenSize.height / 2.5,
                 alignment: Alignment.center,
                 child: Image.asset('assets/balloonpurpleaccent.png'),
               ),
@@ -668,6 +679,8 @@ class _ExerciceFourState extends State<ExerciceFour> {
             children: <Widget>[
               Container(
                 width: screenSize.width / 6,
+                height: screenSize.height / 2.5,
+
                 alignment: Alignment.center,
                 child: Image.asset('assets/balloonpurpleaccent.png'),
               ),
@@ -708,6 +721,7 @@ class _ExerciceFourState extends State<ExerciceFour> {
               setState(() {
                 letterList = letterListRed;
                 scoreMap = {};
+                nextExercice = true;
               });
             });
 
@@ -742,10 +756,120 @@ class _ExerciceFourState extends State<ExerciceFour> {
           question: 'أستمع و أرتب الحروف من اليمين الى اليسار    ',
           kidPic: 'kids5.png',
           logos: false,
+          nextExercice: nextExercice,
         ),
         Expanded(child: exView()),
       ],
     );
+  }
+
+  Widget letterWidget(String emojiStr, String subQuestion, context) {
+    Size screenSize = MediaQuery.of(context).size;
+
+    List<String> textList = [subQuestion];
+    String chakl;
+    switch (emojiStr) {
+      case 'kasra':
+        {
+          if (subQuestion == 'أ') textList[0] = 'إ';
+          textList.add(' ِ');
+          chakl = 'fatha-kasra';
+        }
+        break;
+      case 'fatha':
+        {
+          textList.add(' َ');
+          chakl = 'fatha-kasra';
+        }
+        break;
+
+      case 'thama':
+        {
+          textList.add(' ُ');
+          chakl = 'thama';
+        }
+        break;
+      default:
+        {
+          chakl = 'fatha-kasra';
+          textList.add(' ِ');
+        }
+    }
+    print(subQuestion + emojiStr);
+
+    return Material(
+        color: Colors.transparent,
+        child: emojiStr != ''
+            ? Stack(
+                // crossAxisAlignment: CrossAxisAlignment.center,
+                // mainAxisSize: MainAxisSize.min,
+                // mainAxisAlignment: MainAxisAlignment.start,
+                overflow: Overflow.visible,
+                alignment: (emojiStr == 'kasra')
+                    ? Alignment.bottomRight
+                    : Alignment.topCenter,
+                children: [
+                  Padding(
+                    padding: (textList[0] == 'أ')
+                        ? EdgeInsets.only(top: screenSize.height / 15.42) //35
+                        : EdgeInsets.only(top: 0),
+                    child: Text(textList[0],
+                        // overflow: TextOverflow.visible,
+                        style: new TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: (textList[0] == 'إ' || textList[0] == 'أ')
+                                ? (screenSize.width + screenSize.height) / 15
+                                : (screenSize.width + screenSize.height) / 13,
+                            color: Colors.red)),
+                  ),
+                  Padding(
+                    padding: ((emojiStr == 'thama' || emojiStr == 'fatha') &&
+                            (textList[0] != 'ض' &&
+                                textList[0] != 'ظ' &&
+                                textList[0] != 'ذ' &&
+                                textList[0] != 'خ' &&
+                                textList[0] != 'ز' &&
+                                textList[0] != 'غ' &&
+                                textList[0] != 'أ' &&
+                                textList[0] != 'ف' &&
+                                textList[0] != 'ت' &&
+                                textList[0] != 'ث' &&
+                                textList[0] != 'ط' &&
+                                textList[0] != 'ل' &&
+                                // textList[0] != 'ز' &&
+                                textList[0] != 'ز'))
+                        ? EdgeInsets.only(top: screenSize.height / 12) //18
+                        : EdgeInsets.only(top: screenSize.height / 23), //5
+                    child: Padding(
+                      padding: ((emojiStr == 'kasra') &&
+                              (textList[0] != 'غ') &&
+                              (textList[0] != 'خ') &&
+                              (textList[0] != 'ح') &&
+                              (textList[0] != 'ج') &&
+                              (textList[0] != 'إ') &&
+                              textList[0] != 'ق' &&
+                              textList[0] != 'ل' &&
+                              textList[0] != 'ن' &&
+                              textList[0] != 'و' &&
+                              textList[0] != 'ر' &&
+                              textList[0] != 'ز' &&
+                              textList[0] != 'ي' &&
+                              (textList[0] != 'ع'))
+                          ? EdgeInsets.only(bottom: screenSize.height / 10) //15
+                          : EdgeInsets.only(bottom: screenSize.height / 23),
+                      child: Container(
+                        width: screenSize.width / 48, //20
+                        height: screenSize.height / 27, //20
+                        child: Image.asset(
+                          'assets/$chakl.png',
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            : Container());
   }
 
   @override
@@ -764,113 +888,4 @@ class _ExerciceFourState extends State<ExerciceFour> {
           child: childItem()),
     );
   }
-}
-
-Widget letterWidget(String emojiStr, String subQuestion, context) {
-  Size screenSize = MediaQuery.of(context).size;
-
-  List<String> textList = [subQuestion];
-  String chakl;
-  switch (emojiStr) {
-    case 'kasra':
-      {
-        if (subQuestion == 'أ') textList[0] = 'إ';
-        textList.add(' ِ');
-        chakl = 'fatha-kasra';
-      }
-      break;
-    case 'fatha':
-      {
-        textList.add(' َ');
-        chakl = 'fatha-kasra';
-      }
-      break;
-
-    case 'thama':
-      {
-        textList.add(' ُ');
-        chakl = 'thama';
-      }
-      break;
-    default:
-      {
-        chakl = 'fatha-kasra';
-        textList.add(' ِ');
-      }
-  }
-  print(subQuestion + emojiStr);
-
-  return Material(
-      color: Colors.transparent,
-      child: emojiStr != ''
-          ? Stack(
-              // crossAxisAlignment: CrossAxisAlignment.center,
-              // mainAxisSize: MainAxisSize.min,
-              // mainAxisAlignment: MainAxisAlignment.start,
-              overflow: Overflow.visible,
-              alignment: (emojiStr == 'kasra')
-                  ? Alignment.bottomRight
-                  : Alignment.topCenter,
-              children: [
-                Padding(
-                  padding: (textList[0] == 'أ')
-                      ? EdgeInsets.only(top: screenSize.height / 15.42) //35
-                      : EdgeInsets.only(top: 0),
-                  child: Text(textList[0],
-                      // overflow: TextOverflow.visible,
-                      style: new TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: (textList[0] == 'إ' || textList[0] == 'أ')
-                              ? (screenSize.width + screenSize.height) / 15
-                              : (screenSize.width + screenSize.height) / 13,
-                          color: Colors.red)),
-                ),
-                Padding(
-                  padding: ((emojiStr == 'thama' || emojiStr == 'fatha') &&
-                          (textList[0] != 'ض' &&
-                              textList[0] != 'ظ' &&
-                              textList[0] != 'ذ' &&
-                              textList[0] != 'خ' &&
-                              textList[0] != 'ز' &&
-                              textList[0] != 'غ' &&
-                              textList[0] != 'أ' &&
-                              textList[0] != 'ف' &&
-                              textList[0] != 'ت' &&
-                              textList[0] != 'ث' &&
-                              textList[0] != 'ط' &&
-                              textList[0] != 'ل' &&
-                              // textList[0] != 'ز' &&
-                              textList[0] != 'ز'))
-                      ? EdgeInsets.only(top: screenSize.height / 12) //18
-                      : EdgeInsets.only(top: screenSize.height / 23), //5
-                  child: Padding(
-                    padding: ((emojiStr == 'kasra') &&
-                            (textList[0] != 'غ') &&
-                            (textList[0] != 'خ') &&
-                            (textList[0] != 'ح') &&
-                            (textList[0] != 'ج') &&
-                            (textList[0] != 'إ') &&
-                            textList[0] != 'ق' &&
-                            textList[0] != 'ل' &&
-                            textList[0] != 'ن' &&
-                            textList[0] != 'و' &&
-                            textList[0] != 'ر' &&
-                            textList[0] != 'ز' &&
-                            textList[0] != 'ي' &&
-                            (textList[0] != 'ع'))
-                        ? EdgeInsets.only(bottom: screenSize.height / 10) //15
-                        : EdgeInsets.only(bottom: screenSize.height / 23),
-                    child: Container(
-                      width: screenSize.width / 48, //20
-                      height: screenSize.height / 27, //20
-                      child: Image.asset(
-                        'assets/$chakl.png',
-                        fit: BoxFit.contain,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            )
-          : Container());
 }
