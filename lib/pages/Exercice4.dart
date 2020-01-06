@@ -14,7 +14,7 @@ class ExerciceFour extends StatefulWidget {
 
 class _ExerciceFourState extends State<ExerciceFour> {
   String subQuestion = '';
-  bool nextExercice ;
+  bool nextExercice;
 
   Map<String, bool> scoreMap = {};
 
@@ -76,7 +76,6 @@ class _ExerciceFourState extends State<ExerciceFour> {
       setState(() {
         subQuestion = prefs.getString('currentLetter');
       });
-
     });
     print("subQuestion === ");
     print(subQuestion);
@@ -570,12 +569,15 @@ class _ExerciceFourState extends State<ExerciceFour> {
                           child: letterWidget(
                               (scoreMap[emoji] == true) ? '' : emoji,
                               subQuestion,
-                              context),
-                          feedback: letterWidget(emoji, subQuestion, context),
-                          childWhenDragging: Container(
-                            height: screenSize.height / 5,
-                            width: screenSize.width / 7,
-                          ),
+                              context,
+                              false),
+                          feedback:
+                              letterWidget(emoji, subQuestion, context, false),
+                          childWhenDragging: letterWidget(
+                              (scoreMap[emoji] == true) ? '' : emoji,
+                              subQuestion,
+                              context,
+                              true),
                           onDragEnd: (value) {
                             print('the is value ' + scoreMap[emoji].toString());
 
@@ -592,7 +594,8 @@ class _ExerciceFourState extends State<ExerciceFour> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: letterList.map((emoji) {
                         return Container(
-                            child: letterWidget(emoji, subQuestion, context));
+                            child: letterWidget(
+                                emoji, subQuestion, context, false));
                       }).toList(),
                     )
             ],
@@ -669,7 +672,7 @@ class _ExerciceFourState extends State<ExerciceFour> {
               ),
               Positioned(
                 top: -screenSize.width / 75,
-                child: letterWidget(emoji, subQuestion, context),
+                child: letterWidget(emoji, subQuestion, context, false),
               ),
             ],
           );
@@ -680,7 +683,6 @@ class _ExerciceFourState extends State<ExerciceFour> {
               Container(
                 width: screenSize.width / 6,
                 height: screenSize.height / 2.5,
-
                 alignment: Alignment.center,
                 child: Image.asset('assets/balloonpurpleaccent.png'),
               ),
@@ -763,7 +765,8 @@ class _ExerciceFourState extends State<ExerciceFour> {
     );
   }
 
-  Widget letterWidget(String emojiStr, String subQuestion, context) {
+  Widget letterWidget(
+      String emojiStr, String subQuestion, context, bool transparentLetter) {
     Size screenSize = MediaQuery.of(context).size;
 
     List<String> textList = [subQuestion];
@@ -820,7 +823,9 @@ class _ExerciceFourState extends State<ExerciceFour> {
                             fontSize: (textList[0] == 'إ' || textList[0] == 'أ')
                                 ? (screenSize.width + screenSize.height) / 15
                                 : (screenSize.width + screenSize.height) / 13,
-                            color: Colors.red)),
+                            color: transparentLetter == true
+                                ? Colors.transparent
+                                : Colors.red)),
                   ),
                   Padding(
                     padding: ((emojiStr == 'thama' || emojiStr == 'fatha') &&
@@ -858,13 +863,14 @@ class _ExerciceFourState extends State<ExerciceFour> {
                           ? EdgeInsets.only(bottom: screenSize.height / 10) //15
                           : EdgeInsets.only(bottom: screenSize.height / 23),
                       child: Container(
-                        width: screenSize.width / 48, //20
-                        height: screenSize.height / 27, //20
-                        child: Image.asset(
-                          'assets/$chakl.png',
-                          fit: BoxFit.contain,
-                        ),
-                      ),
+                          width: screenSize.width / 48, //20
+                          height: screenSize.height / 27, //20
+                          child: transparentLetter == true
+                              ? Container()
+                              : Image.asset(
+                                  'assets/$chakl.png',
+                                  fit: BoxFit.contain,
+                                )),
                     ),
                   ),
                 ],
