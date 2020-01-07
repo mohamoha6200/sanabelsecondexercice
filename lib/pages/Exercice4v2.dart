@@ -3,7 +3,9 @@ import 'package:flame/flame.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sanabelsecondexercice/components/ExQuestionBar.dart';
+import 'package:sanabelsecondexercice/components/widgets/ExerciceDrawer.dart';
 import 'package:sanabelsecondexercice/components/widgets/ResultSuccessQuestion.dart';
+import 'package:sanabelsecondexercice/components/widgets/exAppBar.dart';
 import 'package:sanabelsecondexercice/theme/style.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,6 +15,8 @@ class ExerciceFourV2 extends StatefulWidget {
 }
 
 class _ExerciceFourV2State extends State<ExerciceFourV2> {
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   String subQuestion = '';
   bool nextExercice;
 
@@ -574,9 +578,13 @@ class _ExerciceFourV2State extends State<ExerciceFourV2> {
                           ),
                           feedback: letterWidget(emoji, subQuestion, context),
                           childWhenDragging: Container(
-                            width:  screenSize.width / 7,
-                            height: screenSize.height / 15 + screenSize.height / 5.5,
-                          
+                            width: screenSize.width / 7,
+                            height: emoji == 'kasra'
+                                ? screenSize.height / 15 +
+                                    screenSize.height / 5.5 +
+                                    screenSize.height / 15
+                                : screenSize.height / 15 +
+                                    screenSize.height / 5.5,
                           ),
                           // letterWidget(
                           //   (scoreMap[emoji] == true) ? '' : emoji,
@@ -675,7 +683,7 @@ class _ExerciceFourV2State extends State<ExerciceFourV2> {
                 child: Image.asset('assets/balloonpurpleaccent.png'),
               ),
               Positioned(
-                  top: emoji != 'kasra' ? screenSize.height / 100 : 0,
+                top: emoji != 'kasra' ? screenSize.height / 100 : 0,
                 child: letterWidget(emoji, subQuestion, context),
               ),
             ],
@@ -758,12 +766,6 @@ class _ExerciceFourV2State extends State<ExerciceFourV2> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        ExQuestionBar(
-          question: 'أستمع و أرتب الحروف من اليمين الى اليسار    ',
-          kidPic: 'kids5.png',
-          logos: false,
-          nextExercice: nextExercice,
-        ),
         Expanded(child: exView()),
       ],
     );
@@ -840,18 +842,35 @@ class _ExerciceFourV2State extends State<ExerciceFourV2> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgroundMainColor,
-      body: DecoratedBox(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/classroom3.png"),
-              fit: BoxFit.fill,
-              colorFilter: new ColorFilter.mode(
-                  Colors.black.withOpacity(0.25), BlendMode.dstATop),
-            ),
+    Size screenSize = MediaQuery.of(context).size;
+
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/classroom3.png"),
+          fit: BoxFit.fill,
+          colorFilter: new ColorFilter.mode(
+              Colors.yellow.withOpacity(0.65), BlendMode.luminosity),
+        ),
+      ),
+      child: Scaffold(
+        key: _scaffoldKey,
+        backgroundColor: Colors.transparent,
+        appBar: exAppBar(
+          screenSize,
+          _scaffoldKey,
+          ExQuestionBar(
+            question: 'أستمع و أرتب الحروف من اليمين الى اليسار    ',
+            kidPic: 'kids5.png',
+            logos: false,
+            // nextExercice: nextExercice,
           ),
-          child: childItem()),
+        ),
+        drawer: AppDrawer(),
+        body: childItem(),
+      ),
     );
   }
 }
+
+

@@ -2,8 +2,8 @@ import 'package:flame/flame.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sanabelsecondexercice/components/ExQuestionBar.dart';
+import 'package:sanabelsecondexercice/components/widgets/ExerciceDrawer.dart';
 import 'package:sanabelsecondexercice/components/widgets/ResultSuccessQuestion.dart';
-import 'package:sanabelsecondexercice/components/widgets/secondDrawer.dart';
 import 'package:sanabelsecondexercice/theme/style.dart';
 
 class ExerciceSeven extends StatefulWidget {
@@ -124,15 +124,7 @@ class _ExerciceSevenState extends State<ExerciceSeven> {
 
     return Scaffold(
       backgroundColor: backgroundMainColor,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        // iconTheme: new IconThemeData(color: mainColorText, size: 40),
-        leading: IconButton(
-          icon: Icon(Icons.menu, color: Colors.green), // set your color here
-          onPressed: () {},
-        ),
-      ),
+      
       drawer: AppDrawer(),
       body: childWidget(),
     );

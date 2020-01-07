@@ -99,7 +99,7 @@ class _ExerciceSixState extends State<ExerciceSix> {
     13: {
       2: ['ن', 'ا', 'بٍ']
     },
-  };
+  }; 
 
   var subQuestion;
 

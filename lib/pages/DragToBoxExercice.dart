@@ -450,7 +450,7 @@ class _DragToExerciceState extends State<DragToExercice> {
               : 'أضع كل كلمة في الصندوق المناسب',
           kidPic: 'kids6.png',
           logos: false,
-          nextExercice: nextExercice,
+          // nextExercice: nextExercice,
         ),
         Expanded(child: exView()),
       ],

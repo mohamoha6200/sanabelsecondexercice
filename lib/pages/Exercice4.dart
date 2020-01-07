@@ -758,7 +758,7 @@ class _ExerciceFourState extends State<ExerciceFour> {
           question: 'أستمع و أرتب الحروف من اليمين الى اليسار    ',
           kidPic: 'kids5.png',
           logos: false,
-          nextExercice: nextExercice,
+          // nextExercice: nextExercice,
         ),
         Expanded(child: exView()),
       ],

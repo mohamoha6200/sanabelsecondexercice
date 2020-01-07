@@ -1,16 +1,14 @@
-import 'package:collection/collection.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sanabelsecondexercice/components/ExQuestionBar.dart';
 import 'package:sanabelsecondexercice/components/models/redLetterWord.dart';
+import 'package:sanabelsecondexercice/components/widgets/ExerciceDrawer.dart';
 import 'package:sanabelsecondexercice/components/widgets/ResultSuccessQuestion.dart';
 import 'package:sanabelsecondexercice/components/widgets/Signature.dart';
-import 'package:sanabelsecondexercice/components/widgets/secondDrawer.dart';
-import 'package:sanabelsecondexercice/pages/fakePage.dart';
 
 import 'package:sanabelsecondexercice/theme/style.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ExerciceThree extends StatefulWidget {
   @override
@@ -20,6 +18,9 @@ class ExerciceThree extends StatefulWidget {
 class _ExerciceThreeState extends State<ExerciceThree> {
   List<Offset> _points = <Offset>[];
   List<Offset> _truePoints = <Offset>[];
+  String subQuestion = '';
+  String subQuestionLatin;
+  SharedPreferences prefs;
 
   static final GlobalKey _picCardKey0 = GlobalKey();
 
@@ -44,27 +45,27 @@ class _ExerciceThreeState extends State<ExerciceThree> {
   ];
 
   Map<String, Map<int, List<String>>> picChoiceMap = {
-    'assets/bird.png': {
-      0: ['بُ', 'لْ', 'بُ', 'لٌ']
-    },
-    'assets/door.png': {
-      0: ['بَ', 'ا', 'بٌ']
-    },
-    'assets/berkar.png': {
-      0: ['بِ', 'رْ', 'كَ', 'ا', 'رٌ']
-    }
+    // 'assets/bird.png': {
+    //   0: ['بُ', 'لْ', 'بُ', 'لٌ']
+    // },
+    // 'assets/door.png': {
+    //   0: ['بَ', 'ا', 'بٌ']
+    // },
+    // 'assets/berkar.png': {
+    //   0: ['بِ', 'رْ', 'كَ', 'ا', 'رٌ']
+    // }
   };
 
   Map<String, Map<int, List<String>>> initialpicChoiceMap = {
-    'assets/berkar.png': {
-      0: ['بُ', 'لْ', 'بُ', 'لٌ']
-    },
-    'assets/bird.png': {
-      0: ['بَ', 'ا', 'بٌ']
-    },
-    'assets/door.png': {
-      0: ['بِ', 'رْ', 'كَ', 'ا', 'رٌ']
-    }
+    // 'assets/berkar.png': {
+    //   0: ['بُ', 'لْ', 'بُ', 'لٌ']
+    // },
+    // 'assets/bird.png': {
+    //   0: ['بَ', 'ا', 'بٌ']
+    // },
+    // 'assets/door.png': {
+    //   0: ['بِ', 'رْ', 'كَ', 'ا', 'رٌ']
+    // }
   };
 
   Size cardSize;
@@ -138,18 +139,274 @@ class _ExerciceThreeState extends State<ExerciceThree> {
   @override
   void initState() {
     super.initState();
+    gettingLetter();
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      getPicsCardsSizesAndPositions();
-      getWordsCardsSizesAndPositions();
-      print('picOffsetmap');
-      print(picOffsetmap);
-      print('wordOffsetmap');
-      print(wordOffsetmap);
+    print('init');
+  }
+
+  gettingLetter() async {
+    SharedPreferences.getInstance().then((onValue) {
+      prefs = onValue;
+      setState(() {
+        subQuestion = prefs.getString('currentLetter');
+      });
+      initialiseSubQuestionLatin();
+
+      print('subQuestionLatin = ' + subQuestionLatin);
+
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        getPicsCardsSizesAndPositions();
+        getWordsCardsSizesAndPositions();
+        print('picOffsetmap');
+        print(picOffsetmap);
+        print('wordOffsetmap');
+        print(wordOffsetmap);
+      });
+      print("subQuestion === ");
+      print(subQuestion);
     });
-    setState(() {
-      print('init');
-    });
+  }
+
+  initialiseSubQuestionLatin() {
+    switch (subQuestion) {
+      case 'أ':
+        {
+          setState(() {
+            subQuestionLatin = 'alif';
+            picChoiceMap = {
+              'assets/bird.png': {
+                0: ['بُ', 'لْ', 'بُ', 'لٌ']
+              },
+              'assets/door.png': {
+                0: ['بَ', 'ا', 'بٌ']
+              },
+              'assets/berkar.png': {
+                0: ['بِ', 'رْ', 'كَ', 'ا', 'رٌ']
+              }
+            };
+            initialpicChoiceMap = {
+              'assets/berkar.png': {
+                0: ['بُ', 'لْ', 'بُ', 'لٌ']
+              },
+              'assets/bird.png': {
+                0: ['بَ', 'ا', 'بٌ']
+              },
+              'assets/door.png': {
+                0: ['بِ', 'رْ', 'كَ', 'ا', 'رٌ']
+              }
+            };
+          });
+        }
+        break;
+      case 'ب':
+        {
+          setState(() {
+            subQuestionLatin = 'ba';
+            picChoiceMap = {
+              'assets/bird.png': {
+                0: ['بُ', 'لْ', 'بُ', 'لٌ']
+              },
+              'assets/door.png': {
+                0: ['بَ', 'ا', 'بٌ']
+              },
+              'assets/berkar.png': {
+                0: ['بِ', 'رْ', 'كَ', 'ا', 'رٌ']
+              }
+            };
+            initialpicChoiceMap = shuffleMap(picChoiceMap);
+          });
+        }
+        break;
+      case 'ت':
+        {
+          setState(() {
+            subQuestionLatin = 'te';
+          });
+        }
+        break;
+      case 'ث':
+        {
+          setState(() {
+            subQuestionLatin = 'the';
+          });
+        }
+        break;
+      case 'ج':
+        {
+          setState(() {
+            subQuestionLatin = 'ja';
+          });
+        }
+        break;
+      case 'ح':
+        {
+          setState(() {
+            subQuestionLatin = '7a';
+          });
+        }
+        break;
+      case 'خ':
+        {
+          setState(() {
+            subQuestionLatin = '5a';
+          });
+        }
+        break;
+      case 'د':
+        {
+          setState(() {
+            subQuestionLatin = 'da';
+          });
+        }
+        break;
+      case 'ذ':
+        {
+          setState(() {
+            subQuestionLatin = 'tha';
+          });
+        }
+        break;
+      case 'ر':
+        {
+          setState(() {
+            subQuestionLatin = 'ra';
+          });
+        }
+        break;
+      case 'ز':
+        {
+          setState(() {
+            subQuestionLatin = 'za';
+          });
+        }
+        break;
+      case 'س':
+        {
+          setState(() {
+            subQuestionLatin = 'sa';
+          });
+        }
+        break;
+      case 'ش':
+        {
+          setState(() {
+            subQuestionLatin = 'cha';
+          });
+        }
+        break;
+      case 'ص':
+        {
+          setState(() {
+            subQuestionLatin = 'sad';
+          });
+        }
+        break;
+      case 'ض':
+        {
+          setState(() {
+            subQuestionLatin = 'dhad';
+          });
+        }
+        break;
+      case 'ط':
+        {
+          setState(() {
+            subQuestionLatin = 'ta';
+          });
+        }
+        break;
+      case 'ظ':
+        {
+          setState(() {
+            subQuestionLatin = 'dha';
+          });
+        }
+        break;
+      case 'ع':
+        {
+          setState(() {
+            subQuestionLatin = '3a';
+          });
+        }
+        break;
+      case 'غ':
+        {
+          setState(() {
+            subQuestionLatin = '8a';
+          });
+        }
+        break;
+      case 'ف':
+        {
+          setState(() {
+            subQuestionLatin = 'fa';
+          });
+        }
+        break;
+      case 'ق':
+        {
+          setState(() {
+            subQuestionLatin = '9a';
+          });
+        }
+        break;
+      case 'ك':
+        {
+          setState(() {
+            subQuestionLatin = 'ka';
+          });
+        }
+        break;
+      case 'ل':
+        {
+          setState(() {
+            subQuestionLatin = 'la';
+          });
+        }
+        break;
+      case 'م':
+        {
+          setState(() {
+            subQuestionLatin = 'ma';
+          });
+        }
+        break;
+      case 'ن':
+        {
+          setState(() {
+            subQuestionLatin = 'na';
+          });
+        }
+        break;
+      case 'ه':
+        {
+          setState(() {
+            subQuestionLatin = 'ha';
+          });
+        }
+        break;
+      case 'و':
+        {
+          setState(() {
+            subQuestionLatin = 'wa';
+          });
+        }
+        break;
+      case 'ي':
+        {
+          setState(() {
+            subQuestionLatin = 'ya';
+          });
+        }
+        break;
+
+      default:
+        {
+          setState(() {
+            subQuestionLatin = 'ba';
+          });
+        }
+    }
   }
 
   getPicsCardsSizesAndPositions() {
@@ -395,27 +652,28 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                         children: List.generate(3, (index) {
                           var keys = initialpicChoiceMap.keys.toList();
                           return GestureDetector(
-                            onTap: () {
-                              print('tapped pic');
-                              print(index);
-                            },
-                            child: Container(
-                              key: _picCardKey[index],
-                              width: 300,
-                              height: 200,
-                              // decoration: BoxDecoration(
-                              //   border: Border.all(
-                              //       width: 3.0, color: Colors.lightBlueAccent),
-                              //   borderRadius: BorderRadius.all(Radius.circular(
-                              //           5.0) //         <--- border radius here
-                              //       ),
-                              // ),
-                              child: new Image.asset(
-                                keys[index],
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                          );
+                              onTap: () {
+                                print('tapped pic');
+                                print(index);
+                              },
+                              child: keys.length == 3
+                                  ? Container(
+                                      key: _picCardKey[index],
+                                      width: 300,
+                                      height: 200,
+                                      // decoration: BoxDecoration(
+                                      //   border: Border.all(
+                                      //       width: 3.0, color: Colors.lightBlueAccent),
+                                      //   borderRadius: BorderRadius.all(Radius.circular(
+                                      //           5.0) //         <--- border radius here
+                                      //       ),
+                                      // ),
+                                      child: new Image.asset(
+                                        keys[index],
+                                        fit: BoxFit.fill,
+                                      ),
+                                    )
+                                  : Container());
                         }),
                       ),
                       Row(
@@ -424,29 +682,31 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                         children: List.generate(3, (index) {
                           var choices = initialpicChoiceMap.values.toList();
                           return GestureDetector(
-                            onTap: () {
-                              print('tapped pic');
-                              print(index);
-                            },
-                            child: Container(
-                                key: _wordCardKey[index],
-                                width: 300,
-                                height: 200,
-                                // decoration: BoxDecoration(
-                                //   border: Border.all(
-                                //       width: 3.0,
-                                //       color: Colors.lightBlueAccent),
-                                //   // color: Colors.blueAccent,
-                                //   borderRadius: BorderRadius.all(
-                                //       Radius.circular(
-                                //           5.0) //         <--- border radius here
-                                //       ),
-                                // ),
-                                child: RedLetterWord(
-                                  textList: choices[index].values.toList()[0],
-                                  pos: choices[index].keys.toList()[0],
-                                )),
-                          );
+                              onTap: () {
+                                print('tapped pic');
+                                print(index);
+                              },
+                              child: choices.length == 3
+                                  ? Container(
+                                      key: _wordCardKey[index],
+                                      width: 300,
+                                      height: 200,
+                                      // decoration: BoxDecoration(
+                                      //   border: Border.all(
+                                      //       width: 3.0,
+                                      //       color: Colors.lightBlueAccent),
+                                      //   // color: Colors.blueAccent,
+                                      //   borderRadius: BorderRadius.all(
+                                      //       Radius.circular(
+                                      //           5.0) //         <--- border radius here
+                                      //       ),
+                                      // ),
+                                      child: RedLetterWord(
+                                        textList:
+                                            choices[index].values.toList()[0],
+                                        pos: choices[index].keys.toList()[0],
+                                      ))
+                                  : Container());
                         }),
                       ),
                     ],
@@ -480,4 +740,15 @@ class _ExerciceThreeState extends State<ExerciceThree> {
       ),
     );
   }
+}
+
+Map<String, Map<int, List<String>>> shuffleMap(
+    Map<String, Map<int, List<String>>> map) {
+  Map<String, Map<int, List<String>>> result = {};
+  var keys = map.keys.toList()..shuffle();
+  var values = map.values.toList()..shuffle();
+  for (var i = 0; i < keys.length; i++) {
+    result[keys[i]] = values[i];
+  }
+  return result;
 }

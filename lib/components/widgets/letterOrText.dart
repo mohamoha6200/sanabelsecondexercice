@@ -8,8 +8,8 @@ class LetterOrText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print(textList);
-    // print(pos);
+    Size screenSize = MediaQuery.of(context).size;
+
     var x = -1;
     return Container(
       child: new RichText(
@@ -22,7 +22,7 @@ class LetterOrText extends StatelessWidget {
                 ? txt = TextSpan(
                     text: char,
                     style: new TextStyle(
-                        fontSize: 60.0,
+                        fontSize: screenSize.width/13,
                         color: Colors.red,
                         fontWeight: FontWeight.bold))
                 : txt = TextSpan(
