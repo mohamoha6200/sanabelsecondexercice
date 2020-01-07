@@ -381,7 +381,7 @@ class _DragToExerciceState extends State<DragToExercice> {
           emoji,
           fit: BoxFit.fill,
           width: screenSize.width / 4,
-          height: screenSize.height / 3,
+          height: screenSize.height / 3.2,
         );
       },
       onWillAccept: (data) {

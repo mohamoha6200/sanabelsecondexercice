@@ -7,12 +7,12 @@ import 'package:sanabelsecondexercice/components/widgets/ResultSuccessQuestion.d
 import 'package:sanabelsecondexercice/theme/style.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ExerciceFour extends StatefulWidget {
+class ExerciceFourV2 extends StatefulWidget {
   @override
-  _ExerciceFourState createState() => _ExerciceFourState();
+  _ExerciceFourV2State createState() => _ExerciceFourV2State();
 }
 
-class _ExerciceFourState extends State<ExerciceFour> {
+class _ExerciceFourV2State extends State<ExerciceFourV2> {
   String subQuestion = '';
   bool nextExercice;
 
@@ -61,7 +61,6 @@ class _ExerciceFourState extends State<ExerciceFour> {
   void initState() {
     super.initState();
     gettingLetter();
-    initialiseSubQuestionLatin();
     letterListRed = fillLetterListRed(subQuestion);
     letterListGreen = fillLetterListGreen(subQuestion);
     letterListBlue = fillLetterListBlue(subQuestion);
@@ -76,6 +75,8 @@ class _ExerciceFourState extends State<ExerciceFour> {
         subQuestion = prefs.getString('currentLetter');
         colorSoundMap = fillColorSoundMap(subQuestion);
       });
+      initialiseSubQuestionLatin();
+      print('subQuestionLatin = ' + subQuestionLatin);
     });
     print("subQuestion === ");
     print(subQuestion);
@@ -567,17 +568,21 @@ class _ExerciceFourState extends State<ExerciceFour> {
                         return Draggable<String>(
                           data: emoji,
                           child: letterWidget(
-                              (scoreMap[emoji] == true) ? '' : emoji,
-                              subQuestion,
-                              context,
-                              false),
-                          feedback:
-                              letterWidget(emoji, subQuestion, context, false),
-                          childWhenDragging: letterWidget(
-                              (scoreMap[emoji] == true) ? '' : emoji,
-                              subQuestion,
-                              context,
-                              true),
+                            (scoreMap[emoji] == true) ? '' : emoji,
+                            subQuestion,
+                            context,
+                          ),
+                          feedback: letterWidget(emoji, subQuestion, context),
+                          childWhenDragging: Container(
+                            width:  screenSize.width / 7,
+                            height: screenSize.height / 15 + screenSize.height / 5.5,
+
+                          ),
+                          // letterWidget(
+                          //   (scoreMap[emoji] == true) ? '' : emoji,
+                          //   subQuestion,
+                          //   context,
+                          // ),
                           onDragEnd: (value) {
                             print('the is value ' + scoreMap[emoji].toString());
 
@@ -594,8 +599,7 @@ class _ExerciceFourState extends State<ExerciceFour> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: letterList.map((emoji) {
                         return Container(
-                            child: letterWidget(
-                                emoji, subQuestion, context, false));
+                            child: letterWidget(emoji, subQuestion, context));
                       }).toList(),
                     )
             ],
@@ -665,14 +669,14 @@ class _ExerciceFourState extends State<ExerciceFour> {
             alignment: Alignment.topCenter,
             children: <Widget>[
               Container(
-                width: screenSize.width / 6,
-                height: screenSize.height / 2.5,
+                width: screenSize.width / 5.5,
+                height: screenSize.height / 2.15,
                 alignment: Alignment.center,
                 child: Image.asset('assets/balloonpurpleaccent.png'),
               ),
               Positioned(
-                top: -screenSize.width / 75,
-                child: letterWidget(emoji, subQuestion, context, false),
+                  top: emoji != 'kasra' ? screenSize.height / 100 : 0,
+                child: letterWidget(emoji, subQuestion, context),
               ),
             ],
           );
@@ -681,8 +685,8 @@ class _ExerciceFourState extends State<ExerciceFour> {
             alignment: Alignment.center,
             children: <Widget>[
               Container(
-                width: screenSize.width / 6,
-                height: screenSize.height / 2.5,
+                width: screenSize.width / 5.5,
+                height: screenSize.height / 2.15,
                 alignment: Alignment.center,
                 child: Image.asset('assets/balloonpurpleaccent.png'),
               ),
@@ -765,117 +769,73 @@ class _ExerciceFourState extends State<ExerciceFour> {
     );
   }
 
-  Widget letterWidget(
-      String emojiStr, String subQuestion, context, bool transparentLetter) {
+  Widget letterWidget(String emojiStr, String subQuestion, context) {
     Size screenSize = MediaQuery.of(context).size;
 
-    List<String> textList = [subQuestion];
-    String chakl;
-    switch (emojiStr) {
-      case 'kasra':
-        {
-          if (subQuestion == 'أ') textList[0] = 'إ';
-          textList.add(' ِ');
-          chakl = 'fatha-kasra';
-        }
-        break;
-      case 'fatha':
-        {
-          textList.add(' َ');
-          chakl = 'fatha-kasra';
-        }
-        break;
-
-      case 'thama':
-        {
-          textList.add(' ُ');
-          chakl = 'thama';
-        }
-        break;
-      default:
-        {
-          chakl = 'fatha-kasra';
-          textList.add(' ِ');
-        }
-    }
     print(subQuestion + emojiStr);
+    List<String> textList = [subQuestionLatin];
 
-    return Material(
-        color: Colors.transparent,
-        child: emojiStr != ''
-            ? Stack(
-                // crossAxisAlignment: CrossAxisAlignment.center,
-                // mainAxisSize: MainAxisSize.min,
-                // mainAxisAlignment: MainAxisAlignment.start,
-                overflow: Overflow.visible,
-                alignment: (emojiStr == 'kasra')
-                    ? Alignment.bottomRight
-                    : Alignment.topCenter,
-                children: [
-                  Padding(
-                    padding: (textList[0] == 'أ')
-                        ? EdgeInsets.only(top: screenSize.height / 15.42) //35
-                        : EdgeInsets.only(top: 0),
-                    child: Text(textList[0],
-                        // overflow: TextOverflow.visible,
-                        style: new TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: (textList[0] == 'إ' || textList[0] == 'أ')
-                                ? (screenSize.width + screenSize.height) / 15
-                                : (screenSize.width + screenSize.height) / 13,
-                            color: transparentLetter == true
-                                ? Colors.transparent
-                                : Colors.red)),
-                  ),
-                  Padding(
-                    padding: ((emojiStr == 'thama' || emojiStr == 'fatha') &&
-                            (textList[0] != 'ض' &&
-                                textList[0] != 'ظ' &&
-                                textList[0] != 'ذ' &&
-                                textList[0] != 'خ' &&
-                                textList[0] != 'ز' &&
-                                textList[0] != 'غ' &&
-                                textList[0] != 'أ' &&
-                                textList[0] != 'ف' &&
-                                textList[0] != 'ت' &&
-                                textList[0] != 'ث' &&
-                                textList[0] != 'ط' &&
-                                textList[0] != 'ل' &&
-                                // textList[0] != 'ز' &&
-                                textList[0] != 'ز'))
-                        ? EdgeInsets.only(top: screenSize.height / 12) //18
-                        : EdgeInsets.only(top: screenSize.height / 23), //5
-                    child: Padding(
-                      padding: ((emojiStr == 'kasra') &&
-                              (textList[0] != 'غ') &&
-                              (textList[0] != 'خ') &&
-                              (textList[0] != 'ح') &&
-                              (textList[0] != 'ج') &&
-                              (textList[0] != 'إ') &&
-                              textList[0] != 'ق' &&
-                              textList[0] != 'ل' &&
-                              textList[0] != 'ن' &&
-                              textList[0] != 'و' &&
-                              textList[0] != 'ر' &&
-                              textList[0] != 'ز' &&
-                              textList[0] != 'ي' &&
-                              (textList[0] != 'ع'))
-                          ? EdgeInsets.only(bottom: screenSize.height / 10) //15
-                          : EdgeInsets.only(bottom: screenSize.height / 23),
-                      child: Container(
-                          width: screenSize.width / 48, //20
-                          height: screenSize.height / 27, //20
-                          child: transparentLetter == true
-                              ? Container()
-                              : Image.asset(
-                                  'assets/$chakl.png',
-                                  fit: BoxFit.contain,
-                                )),
+    if (subQuestionLatin == 'alif' && emojiStr == 'kasra') {
+      textList[0] = 'iii';
+    }
+    String char = textList[0];
+    if (emojiStr != '' && char != null) {
+      return Material(
+          color: Colors.transparent,
+          child: emojiStr == 'kasra'
+              ? Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(top: screenSize.height / 15),
+                    child: Column(
+                      // crossAxisAlignment: CrossAxisAlignment.end,
+                      // mainAxisAlignment: MainAxisAlignment.start,
+                      // mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          width: screenSize.width / 7,
+                          height: screenSize.height / 5.5,
+                          child: Image.asset(
+                            'assets/letters/$char.png',
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                        Center(
+                          child: Image.asset(
+                            'assets/$emojiStr.png',
+                            fit: BoxFit.contain,
+                            width: screenSize.width / 30, //20
+                            height: screenSize.height / 15, //20
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              )
-            : Container());
+                )
+              : Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  //  mainAxisSize: MainAxisSize.min,
+
+                  children: [
+                    Container(
+                        width: screenSize.width / 30, //20
+                        height: screenSize.height / 15, //20
+                        child: Image.asset(
+                          'assets/$emojiStr.png',
+                          fit: BoxFit.contain,
+                        )),
+                    Container(
+                      width: screenSize.width / 7,
+                      height: screenSize.height / 5.5,
+                      child: Image.asset(
+                        'assets/letters/$subQuestionLatin.png',
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ],
+                ));
+    } else
+      return Material();
   }
 
   @override

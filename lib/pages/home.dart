@@ -11,6 +11,7 @@ import 'package:sanabelsecondexercice/pages/Exercice1.dart';
 import 'package:sanabelsecondexercice/pages/Exercice2.dart';
 import 'package:sanabelsecondexercice/pages/Exercice3.dart';
 import 'package:sanabelsecondexercice/pages/Exercice4.dart';
+import 'package:sanabelsecondexercice/pages/Exercice4v2.dart';
 import 'package:sanabelsecondexercice/pages/Exercice5.dart';
 import 'package:sanabelsecondexercice/pages/Exercice6.dart';
 import 'package:sanabelsecondexercice/pages/Exercice8.dart';
@@ -124,10 +125,9 @@ class _HomePageState extends State<HomePage> {
               if ((a % 5 != 0)) {
                 conditional = AnimationConfiguration.staggeredGrid(
                   position: i,
-                  duration: const Duration(milliseconds: 1000),
+                  duration: const Duration(milliseconds: 2000),
                   columnCount: 4,
-                  child: ScaleAnimation(
-                    child: FadeInAnimation(
+                  child: FlipAnimation(
                       child: InkWell(
                         onTap: () async {
                           SharedPreferences prefs =
@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                             PageTransition(
                               duration: Duration(milliseconds: 2000),
                               type: PageTransitionType.rippleMiddle,
-                              child: ExerciceFour(),
+                              child: ExerciceFourV2(),
                             ),
                           );
 
@@ -165,7 +165,6 @@ class _HomePageState extends State<HomePage> {
                             balloonColor: letters[a - 1].balloonColor),
                       ),
                     ),
-                  ),
                 );
               } else {
                 setState(() {
