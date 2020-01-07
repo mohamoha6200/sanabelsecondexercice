@@ -75,8 +75,8 @@ class ExQuestionBar extends StatelessWidget {
                         },
                       ));
                     }),
-                nextExercice == true
-                    ? Row(
+                // nextExercice == true?
+                     Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         mainAxisSize: MainAxisSize.max,
@@ -115,7 +115,7 @@ class ExQuestionBar extends StatelessWidget {
                           ),
                         ],
                       )
-                    : Container(),
+                    // : Container(),
               ],
             ),
           ),

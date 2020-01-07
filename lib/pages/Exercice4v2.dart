@@ -576,7 +576,7 @@ class _ExerciceFourV2State extends State<ExerciceFourV2> {
                           childWhenDragging: Container(
                             width:  screenSize.width / 7,
                             height: screenSize.height / 15 + screenSize.height / 5.5,
-
+                          
                           ),
                           // letterWidget(
                           //   (scoreMap[emoji] == true) ? '' : emoji,
