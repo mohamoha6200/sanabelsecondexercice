@@ -1,9 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:sanabelsecondexercice/pages/DragToBoxExercice.dart';
+import 'package:sanabelsecondexercice/pages/NavigateLetter.dart';
 import 'package:sanabelsecondexercice/pages/home.dart';
 import 'package:sanabelsecondexercice/theme/perrine.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class AppDrawer extends StatelessWidget {
+class AppDrawer extends StatefulWidget {
+  @override
+  _AppDrawerState createState() => _AppDrawerState();
+}
+
+class _AppDrawerState extends State<AppDrawer> {
+  String subQuestion = '';
+  SharedPreferences prefs;
+  int currentExercice;
+
+  @override
+  void initState() {
+    super.initState();
+
+    gettingLetter();
+  }
+
+  gettingLetter() async {
+    SharedPreferences.getInstance().then((onValue) {
+      prefs = onValue;
+      setState(() {
+        subQuestion = prefs.getString('currentLetter');
+        currentExercice = prefs.getInt('currentExercice'); 
+
+        // print("subQuestion in drawer === ");
+        // print(subQuestion); 
+         print("currentExercice  in drawer=== ");
+         print(currentExercice);
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -26,7 +59,7 @@ class AppDrawer extends StatelessWidget {
                 //     ),
                 InkWell(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(
+                    Navigator.pushReplacement(context, MaterialPageRoute(
                       builder: (BuildContext context) {
                         return HomePage();
                       },
@@ -64,54 +97,56 @@ class AppDrawer extends StatelessWidget {
                 //     //        Navigator.pushReplacementNamed(context, Routes.events)
                 //     ),
 
-                InkWell(
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (BuildContext context) {
-                      return DragToExercice();
-                    }));
-                  },
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      Container(
-                       margin: new EdgeInsets.symmetric(
-                            horizontal: screenSize.width / 80),
-                        child: Icon(
-                          Icons.arrow_forward,
-                          size: screenSize.width / 32,
-                          color: Colors.purple,
+                ((subQuestion == 'أ' && currentExercice == 3) || (subQuestion != 'أ' && currentExercice == 4))
+                    ? Container()
+                    : InkWell(
+                        onTap: () {
+                          Navigator.pushReplacement(context, MaterialPageRoute(
+                              builder: (BuildContext context) {
+                            return NavigateLetter();
+                          }));
+                        },
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            Container(
+                              margin: new EdgeInsets.symmetric(
+                                  horizontal: screenSize.width / 80),
+                              child: Icon(
+                                Icons.arrow_forward,
+                                size: screenSize.width / 32,
+                                color: Colors.purple,
+                              ),
+                            ),
+                            Container(
+                              child: Text(
+                                'الْتَمْرِيِنُ الْتَالِي',
+                                style: mStyleNext,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      Container(
-                        child: Text(
-                          'الْتَمْرِيِنُ الْتَالِي',
-                          style: mStyleNext,
-                        ),
-                      ),
-                      
-                    ],
-                  ),
-                ),
-                Divider(),
+                      )
 
-                _createDrawerItem(
-                    icon: Icons.event,
-                    text: 'التَمرين الثالث',
-                    onTap: () => {} //note
-                    //       Navigator.pushReplacementNamed(context, Routes.notes)
-                    ),
-                Divider(),
+                // Divider(),
 
-                _createDrawerItem(
-                    icon: Icons.collections_bookmark,
-                    text: 'التَمرين الرابع',
-                    onTap: () => {}
-                    //       Navigator.pushReplacementNamed(context, Routes.notes)
-                    ),
-                Divider(),
+                // _createDrawerItem(
+                //     icon: Icons.event,
+                //     text: 'التَمرين الثالث',
+                //     onTap: () => {} //note
+                //     //       Navigator.pushReplacementNamed(context, Routes.notes)
+                //     ),
+                // Divider(),
+
+                // _createDrawerItem(
+                //     icon: Icons.collections_bookmark,
+                //     text: 'التَمرين الرابع',
+                //     onTap: () => {}
+                //     //       Navigator.pushReplacementNamed(context, Routes.notes)
+                //     ),
+                // Divider(),
                 // _createDrawerItem(
                 //     icon: Icons.collections_bookmark, text: 'Steps'),
                 // _createDrawerItem(icon: Icons.face, text: 'Authors'),

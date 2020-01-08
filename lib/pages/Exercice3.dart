@@ -6,6 +6,9 @@ import 'package:sanabelsecondexercice/components/models/redLetterWord.dart';
 import 'package:sanabelsecondexercice/components/widgets/ExerciceDrawer.dart';
 import 'package:sanabelsecondexercice/components/widgets/ResultSuccessQuestion.dart';
 import 'package:sanabelsecondexercice/components/widgets/Signature.dart';
+import 'package:sanabelsecondexercice/components/widgets/backgroundImage.dart';
+import 'package:sanabelsecondexercice/components/widgets/exAppBar.dart';
+import 'package:sanabelsecondexercice/pages/Exercice4v2.dart';
 
 import 'package:sanabelsecondexercice/theme/style.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -16,13 +19,15 @@ class ExerciceThree extends StatefulWidget {
 }
 
 class _ExerciceThreeState extends State<ExerciceThree> {
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   List<Offset> _points = <Offset>[];
   List<Offset> _truePoints = <Offset>[];
   String subQuestion = '';
   String subQuestionLatin;
   SharedPreferences prefs;
 
-  static final GlobalKey _picCardKey0 = GlobalKey();
+  static final GlobalKey _picCardKey0 = GlobalKey(); 
 
   static final GlobalKey _picCardKey1 = GlobalKey();
   static final GlobalKey _picCardKey2 = GlobalKey();
@@ -640,40 +645,37 @@ class _ExerciceThreeState extends State<ExerciceThree> {
             child: Center(
               child: Column(
                 children: <Widget>[
-                  ExQuestionBar(
-                    question: ' أربط الكلمة بالصورة المناسبة',
-                    kidPic: 'kids4.png',
-                  ),
+                  // ExQuestionBar(
+                  //   question: ' أربط الكلمة بالصورة المناسبة',
+                  //   kidPic: 'kids4.png',
+                  // ),
                   Column(
                     children: <Widget>[
+                      // keys.length == 3
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: List.generate(3, (index) {
                           var keys = initialpicChoiceMap.keys.toList();
-                          return GestureDetector(
-                              onTap: () {
-                                print('tapped pic');
-                                print(index);
-                              },
-                              child: keys.length == 3
-                                  ? Container(
-                                      key: _picCardKey[index],
-                                      width: 300,
-                                      height: 200,
-                                      // decoration: BoxDecoration(
-                                      //   border: Border.all(
-                                      //       width: 3.0, color: Colors.lightBlueAccent),
-                                      //   borderRadius: BorderRadius.all(Radius.circular(
-                                      //           5.0) //         <--- border radius here
-                                      //       ),
-                                      // ),
-                                      child: new Image.asset(
-                                        keys[index],
-                                        fit: BoxFit.fill,
-                                      ),
-                                    )
-                                  : Container());
+
+                          return keys.length == 3
+                              ? Container(
+                                  key: _picCardKey[index],
+                                  width: 300,
+                                  height: 200,
+                                  // decoration: BoxDecoration(
+                                  //   border: Border.all(
+                                  //       width: 3.0, color: Colors.lightBlueAccent),
+                                  //   borderRadius: BorderRadius.all(Radius.circular(
+                                  //           5.0) //         <--- border radius here
+                                  //       ),
+                                  // ),
+                                  child: new Image.asset(
+                                    keys[index],
+                                    fit: BoxFit.fill,
+                                  ),
+                                )
+                              : Container();
                         }),
                       ),
                       Row(
@@ -681,32 +683,26 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: List.generate(3, (index) {
                           var choices = initialpicChoiceMap.values.toList();
-                          return GestureDetector(
-                              onTap: () {
-                                print('tapped pic');
-                                print(index);
-                              },
-                              child: choices.length == 3
-                                  ? Container(
-                                      key: _wordCardKey[index],
-                                      width: 300,
-                                      height: 200,
-                                      // decoration: BoxDecoration(
-                                      //   border: Border.all(
-                                      //       width: 3.0,
-                                      //       color: Colors.lightBlueAccent),
-                                      //   // color: Colors.blueAccent,
-                                      //   borderRadius: BorderRadius.all(
-                                      //       Radius.circular(
-                                      //           5.0) //         <--- border radius here
-                                      //       ),
-                                      // ),
-                                      child: RedLetterWord(
-                                        textList:
-                                            choices[index].values.toList()[0],
-                                        pos: choices[index].keys.toList()[0],
-                                      ))
-                                  : Container());
+                          return choices.length == 3
+                              ? Container(
+                                  key: _wordCardKey[index],
+                                  width: 300,
+                                  height: 200,
+                                  // decoration: BoxDecoration(
+                                  //   border: Border.all(
+                                  //       width: 3.0,
+                                  //       color: Colors.lightBlueAccent),
+                                  //   // color: Colors.blueAccent,
+                                  //   borderRadius: BorderRadius.all(
+                                  //       Radius.circular(
+                                  //           5.0) //         <--- border radius here
+                                  //       ),
+                                  // ),
+                                  child: RedLetterWord(
+                                    textList: choices[index].values.toList()[0],
+                                    pos: choices[index].keys.toList()[0],
+                                  ))
+                              : Container();
                         }),
                       ),
                     ],
@@ -722,8 +718,18 @@ class _ExerciceThreeState extends State<ExerciceThree> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
 
-    return Scaffold(
-      backgroundColor: backgroundMainColor,
+    return backgroundImage(Scaffold(
+      key: _scaffoldKey,
+      backgroundColor: Colors.transparent,
+      appBar: exAppBar(
+        screenSize,
+        _scaffoldKey,
+        ExQuestionBar(
+          question: ' أربط الكلمة بالصورة المناسبة',
+          kidPic: 'kids4.png',
+          logos: false,
+        ),
+      ),
       drawer: AppDrawer(),
       body: childWidget(),
       bottomNavigationBar: Container(
@@ -738,7 +744,7 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                   }),
                 }),
       ),
-    );
+    ));
   }
 }
 

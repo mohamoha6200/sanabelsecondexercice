@@ -106,10 +106,10 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     recapIndex = 0;
+    initializePrefs();
   }
 
   Widget childWidget() {
-    Size screenSize = MediaQuery.of(context).size;
     Widget conditional;
     return Directionality(
       textDirection: TextDirection.rtl,
@@ -129,43 +129,47 @@ class _HomePageState extends State<HomePage> {
                   duration: const Duration(milliseconds: 2000),
                   columnCount: 4,
                   child: FlipAnimation(
-                      child: InkWell(
-                        onTap: () async {
-                          SharedPreferences prefs =
-                              await SharedPreferences.getInstance();
+                    child: InkWell(
+                      onTap: () async {
+                        SharedPreferences prefs =
+                            await SharedPreferences.getInstance();
 
-                          await prefs.setString(
-                              'currentLetter', letters[a - 1].letter);
-                          print('got from shared in home');
-                          print(prefs.getString('currentLetter'));
-                          Navigator.of(context).push(
-                            PageTransition(
-                              duration: Duration(milliseconds: 2000),
-                              type: PageTransitionType.rippleMiddle,
-                              child: ExerciceThree(),
-                            ),
-                          );
+                        await prefs.setString(
+                            'currentLetter', letters[a - 1].letter);
+                        print('got from shared in home');
+                        // print(prefs.getString('currentLetter'));
+                        await prefs.setInt('currentExercice', 1);
+                        Navigator.of(context).push(
+                          PageTransition(
+                            duration: Duration(milliseconds: 2000),
+                            type: PageTransitionType.rippleMiddle,
+                            child: ExerciceFourV2(),
+                            // (letters[a - 1].letter != 'أ')
+                            //     ? ExerciceFive() // 7 cards and 4 boxes only Ba
+                            //     : ExerciceEight(), // circles
+                          ),
+                        );
 
-                          // Navigator.push(context,
-                          //     MaterialPageRoute(builder: (BuildContext context) {
-                          //   //   return ExerciceFive(subQuestion:letters[a-1].letter);  // 7 cards and 4 boxes only Ba
-                          //   return ExerciceFour(
-                          //       subQuestion: letters[a - 1]
-                          //           .letter); // parametered listen and drag
-                          //   //   return ExerciceThree(); //match right answer
-                          //   //  return ExerciceSeven(); // click pic when u see letter
-                          //   //  return ExerciceEight(subQuestion: letters[a - 1].letter); // drag cirlce to box
-                          //   // return DragToExercice(subQuestion: letters[a-1].letter);
-                          //   //return NavigateLetter(letter: letters[a-1].letter).redirectToExercice();
-                          //   // return ExerciceSix(subQuestion: letters[a - 1].letter);
-                          // }));
-                        },
-                        child: Balloon(
-                            letter: letters[a - 1].letter,
-                            letterColor: letters[a - 1].letterColor,
-                            balloonColor: letters[a - 1].balloonColor),
-                      ),
+                        // Navigator.push(context,
+                        //     MaterialPageRoute(builder: (BuildContext context) {
+                        //   //   return ExerciceFive(subQuestion:letters[a-1].letter);  // 7 cards and 4 boxes only Ba
+                        //   return ExerciceFour(
+                        //       subQuestion: letters[a - 1]
+                        //           .letter); // parametered listen and drag
+                        //   //   return ExerciceThree(); //match right answer
+                        //   //  return ExerciceSeven(); // click pic when u see letter
+                        //   //  return ExerciceEight(subQuestion: letters[a - 1].letter); // drag cirlce to box
+                        //   // return DragToExercice(subQuestion: letters[a-1].letter);
+                        //   //return NavigateLetter(letter: letters[a-1].letter).redirectToExercice();
+                        //   // return ExerciceSix(subQuestion: letters[a - 1].letter);
+                        // }));
+                      },
+                      child: Balloon(
+                          letter: letters[a - 1].letter,
+                          letterColor: letters[a - 1].letterColor,
+                          balloonColor: letters[a - 1].balloonColor),
                     ),
+                  ),
                 );
               } else {
                 setState(() {
@@ -268,5 +272,15 @@ class _HomePageState extends State<HomePage> {
         child: childWidget(),
       ),
     );
+  } 
+
+  initializePrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    // await prefs.setString('currentLetter', 'ب');
+    // print('got from shared in home');
+    await prefs.setInt('currentExercice', 1);
+    print(prefs.getString('currentLetter'));
+    print(prefs.getInt('currentExercice'));
   }
 }

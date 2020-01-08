@@ -3,20 +3,24 @@ import 'package:flame/flame.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sanabelsecondexercice/components/ExQuestionBar.dart';
+import 'package:sanabelsecondexercice/components/widgets/ExerciceDrawer.dart';
 import 'package:sanabelsecondexercice/components/widgets/ResultSuccessQuestion.dart';
+import 'package:sanabelsecondexercice/components/widgets/exAppBar.dart';
 import 'package:sanabelsecondexercice/theme/style.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ExerciceFive extends StatefulWidget {
-  final subQuestion;
-
-  ExerciceFive({this.subQuestion});
-
   @override
   _ExerciceFiveState createState() => _ExerciceFiveState();
 }
 
 class _ExerciceFiveState extends State<ExerciceFive> {
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   Map<String, bool> scoreMap = {};
+
+  String subQuestion = '';
+  SharedPreferences prefs;
 
   Map<String, List<String>> cardsMap = {
     'assets/doorCard-final.png': ['start', 'end'],
@@ -36,15 +40,24 @@ class _ExerciceFiveState extends State<ExerciceFive> {
   };
   int rightAnswersCount;
 
-  var subQuestion;
-
   @override
   void initState() {
     super.initState();
-    setState(() {
-      rightAnswersCount = fnRightAnswersCount();
-      subQuestion = widget.subQuestion;
-      boxsMap = fillBoxMap(subQuestion);
+    gettingLetter();
+
+    rightAnswersCount = fnRightAnswersCount();
+  }
+
+  gettingLetter() async {
+    SharedPreferences.getInstance().then((onValue) {
+      prefs = onValue;
+      setState(() {
+        subQuestion = prefs.getString('currentLetter');
+        boxsMap = fillBoxMap(subQuestion);
+      });
+
+      print("subQuestion === ");
+      print(subQuestion);
     });
   }
 
@@ -197,13 +210,12 @@ class _ExerciceFiveState extends State<ExerciceFive> {
           prefix = 'ba';
         }
     }
-    return  {
-     'assets/$prefix''End.png': 'end',
-     'assets/$prefix''MiddleToEnd.png': 'middleToEnd',
-     'assets/$prefix''Middle.png': 'middle',
-     'assets/$prefix''Start.png': 'start',
-  };
-
+    return {
+      'assets/$prefix' 'End.png': 'end',
+      'assets/$prefix' 'MiddleToEnd.png': 'middleToEnd',
+      'assets/$prefix' 'Middle.png': 'middle',
+      'assets/$prefix' 'Start.png': 'start',
+    };
   }
 
   int fnRightAnswersCount() {
@@ -345,21 +357,50 @@ class _ExerciceFiveState extends State<ExerciceFive> {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        ExQuestionBar(
-          question: 'أضع كل كلمة و صورتها في الصندوق المناسب',
-          kidPic: 'kids6.png',
-          logos: false,
-        ),
+        // ExQuestionBar(
+        //   question: 'أضع كل كلمة و صورتها في الصندوق المناسب',
+        //   kidPic: 'kids6.png',
+        //   logos: false,
+        // ),
         Expanded(child: exView()),
       ],
     );
   }
 
+  Widget backgroundImage(child) {
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage("assets/classroom3.png"),
+          fit: BoxFit.fill,
+          colorFilter: new ColorFilter.mode(
+              Colors.yellow.withOpacity(0.65), BlendMode.luminosity),
+        ),
+      ),
+      child: child,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgroundMainColor,
-      body: childItem(),
+    Size screenSize = MediaQuery.of(context).size;
+
+    return backgroundImage(
+      Scaffold(
+        key: _scaffoldKey,
+        backgroundColor: Colors.transparent,
+        appBar: exAppBar(
+          screenSize,
+          _scaffoldKey,
+          ExQuestionBar(
+            question: 'أضع كل كلمة و صورتها في الصندوق المناسب',
+            kidPic: 'kids6.png',
+            logos: false,
+          ),
+        ),
+        drawer: AppDrawer(),
+        body: childItem(),
+      ),
     );
   }
 }

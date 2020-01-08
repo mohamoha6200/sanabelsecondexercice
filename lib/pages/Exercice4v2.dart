@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:sanabelsecondexercice/components/ExQuestionBar.dart';
 import 'package:sanabelsecondexercice/components/widgets/ExerciceDrawer.dart';
 import 'package:sanabelsecondexercice/components/widgets/ResultSuccessQuestion.dart';
+import 'package:sanabelsecondexercice/components/widgets/backgroundImage.dart';
 import 'package:sanabelsecondexercice/components/widgets/exAppBar.dart';
 import 'package:sanabelsecondexercice/theme/style.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -844,16 +845,8 @@ class _ExerciceFourV2State extends State<ExerciceFourV2> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
 
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("assets/classroom3.png"),
-          fit: BoxFit.fill,
-          colorFilter: new ColorFilter.mode(
-              Colors.yellow.withOpacity(0.65), BlendMode.luminosity),
-        ),
-      ),
-      child: Scaffold(
+    return backgroundImage(
+      Scaffold(
         key: _scaffoldKey,
         backgroundColor: Colors.transparent,
         appBar: exAppBar(

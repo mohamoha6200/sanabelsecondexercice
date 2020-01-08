@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:sanabelsecondexercice/components/ExQuestionBar.dart';
 import 'package:sanabelsecondexercice/components/widgets/ExerciceDrawer.dart';
 import 'package:sanabelsecondexercice/components/widgets/ResultSuccessQuestion.dart';
+import 'package:sanabelsecondexercice/components/widgets/backgroundImage.dart';
+import 'package:sanabelsecondexercice/components/widgets/exAppBar.dart';
 import 'package:sanabelsecondexercice/theme/style.dart';
 
 class ExerciceSeven extends StatefulWidget {
@@ -12,6 +14,8 @@ class ExerciceSeven extends StatefulWidget {
 }
 
 class _ExerciceSevenState extends State<ExerciceSeven> {
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   Map<String, bool> scoreMap = {};
   final String subQuestion = 'ـا,ا';
 
@@ -52,12 +56,12 @@ class _ExerciceSevenState extends State<ExerciceSeven> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        ExQuestionBar(
-          subQuestion: subQuestion,
-          question: 'أضغط على الصورة عندما أرى   ',
-          kidPic: 'kids8.png',
-          logos: false,
-        ),
+        // ExQuestionBar(
+        //   subQuestion: subQuestion,
+        //   question: 'أضغط على الصورة عندما أرى   ',
+        //   kidPic: 'kids8.png',
+        //   logos: false,
+        // ),
         Directionality(
           textDirection: TextDirection.rtl,
           child: new GridView.count(
@@ -122,11 +126,23 @@ class _ExerciceSevenState extends State<ExerciceSeven> {
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
 
-    return Scaffold(
-      backgroundColor: backgroundMainColor,
-      
-      drawer: AppDrawer(),
-      body: childWidget(),
+    return backgroundImage(
+      Scaffold(
+        key: _scaffoldKey,
+        backgroundColor: Colors.transparent,
+        appBar: exAppBar(
+          screenSize,
+          _scaffoldKey,
+          ExQuestionBar(
+            subQuestion: subQuestion,
+            question: 'أضغط على الصورة عندما أرى   ',
+            kidPic: 'kids8.png',
+            logos: false,
+          ),
+        ),
+        drawer: AppDrawer(),
+        body: childWidget(),
+      ),
     );
   }
 }

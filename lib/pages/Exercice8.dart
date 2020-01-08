@@ -3,20 +3,22 @@ import 'package:flame/flame.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sanabelsecondexercice/components/ExQuestionBar.dart';
+import 'package:sanabelsecondexercice/components/widgets/ExerciceDrawer.dart';
 import 'package:sanabelsecondexercice/components/widgets/ResultSuccessQuestion.dart';
+import 'package:sanabelsecondexercice/components/widgets/backgroundImage.dart';
+import 'package:sanabelsecondexercice/components/widgets/exAppBar.dart';
 import 'package:sanabelsecondexercice/theme/style.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ExerciceEight extends StatefulWidget {
-  final subQuestion;
-
-  ExerciceEight({this.subQuestion});
-
   @override
   _ExerciceEightState createState() => _ExerciceEightState();
 }
 
 class _ExerciceEightState extends State<ExerciceEight> {
-  // static final GlobalKey _cardKey = GlobalKey();
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  String subQuestion = '';
+  SharedPreferences prefs;
 
   Map<String, bool> scoreMap = {};
 
@@ -38,27 +40,27 @@ class _ExerciceEightState extends State<ExerciceEight> {
   int rightAnswersCount;
 
   Size circleSize;
-  var subQuestion;
 
   @override
   void initState() {
     super.initState();
-    // WidgetsBinding.instance.addPostFrameCallback((_) => getSizeAndPosition());
+    gettingLetter();
 
-    setState(() {
-      rightAnswersCount = fnRightAnswersCount();
-      subQuestion = widget.subQuestion;
-      boxsMap = fillBoxMap(subQuestion);
-    });
+    rightAnswersCount = fnRightAnswersCount();
   }
 
-  // getSizeAndPosition() {
-  //   RenderBox _cardBox = _cardKey.currentContext.findRenderObject();
-  //   setState(() {
-  //     circleSize = _cardBox.size;
-  //   });
-  //   print('circleSize' + circleSize.toString());
-  // }
+  gettingLetter() async {
+    SharedPreferences.getInstance().then((onValue) {
+      prefs = onValue;
+      setState(() {
+        subQuestion = prefs.getString('currentLetter');
+        boxsMap = fillBoxMap(subQuestion);
+      });
+
+      print("subQuestion === ");
+      print(subQuestion);
+    });
+  }
 
   Map<String, String> fillBoxMap(subQuestion) {
     String prefix;
@@ -240,7 +242,7 @@ class _ExerciceEightState extends State<ExerciceEight> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly, 
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisSize: MainAxisSize.max,
                   children: boxsMap.keys
@@ -350,27 +352,43 @@ class _ExerciceEightState extends State<ExerciceEight> {
   }
 
   Widget childItem() {
-    Size screenSize = MediaQuery.of(context).size;
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        ExQuestionBar(
-          question: 'أضع كل كلمة في الصندوق المناسب',
-          kidPic: 'kids6.png',
-          logos: false,
-        ),
+        // ExQuestionBar(
+        //   question: 'أضع كل كلمة في الصندوق المناسب',
+        //   kidPic: 'kids6.png',
+        //   logos: false,
+        // ),
         Expanded(child: exView()),
       ],
     );
   }
 
+
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgroundMainColor,
-      body: childItem(),
+    Size screenSize = MediaQuery.of(context).size;
+
+    return backgroundImage(
+      Scaffold(
+        key: _scaffoldKey,
+        backgroundColor: Colors.transparent,
+        appBar: exAppBar(
+          screenSize,
+          _scaffoldKey,
+          ExQuestionBar( 
+            question: 'أضع كل كلمة في الصندوق المناسب',
+            kidPic: 'kids6.png',
+            logos: false,
+          ),
+        ),
+        drawer: AppDrawer(),
+        body: childItem(),
+      ),
     );
   }
 }
