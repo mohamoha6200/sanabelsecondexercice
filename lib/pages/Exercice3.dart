@@ -27,7 +27,7 @@ class _ExerciceThreeState extends State<ExerciceThree> {
   String subQuestionLatin;
   SharedPreferences prefs;
 
-  static final GlobalKey _picCardKey0 = GlobalKey(); 
+  static final GlobalKey _picCardKey0 = GlobalKey();
 
   static final GlobalKey _picCardKey1 = GlobalKey();
   static final GlobalKey _picCardKey2 = GlobalKey();
@@ -226,6 +226,18 @@ class _ExerciceThreeState extends State<ExerciceThree> {
         {
           setState(() {
             subQuestionLatin = 'te';
+            picChoiceMap = {
+              'assets/blueberry.png': {
+                0: ['تُ', 'و', 'تٌ',]
+              },
+              'assets/tv.png': {
+                0: ['تِ', 'لْ', 'فَ','ا','زٌ']
+              },
+              'assets/dates.png': {
+                0: ['تَ', 'مْ', 'رٌ']
+              }
+            };
+            initialpicChoiceMap = shuffleMap(picChoiceMap);
           });
         }
         break;
@@ -233,6 +245,18 @@ class _ExerciceThreeState extends State<ExerciceThree> {
         {
           setState(() {
             subQuestionLatin = 'the';
+               picChoiceMap = {
+              'assets/cow.png': {
+                0: ['ثَ', 'وْ', 'رٌ',]
+              },
+              'assets/snake.png': {
+                0: ['ثُ', 'عْ', 'بَ','ا','نٌ']
+              },
+              'assets/fruits.png': {
+                0: ['ثِ', 'مَ', 'ا','رٌ']
+              }
+            };
+            initialpicChoiceMap = shuffleMap(picChoiceMap);
           });
         }
         break;
@@ -672,7 +696,7 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                                   // ),
                                   child: new Image.asset(
                                     keys[index],
-                                    fit: BoxFit.fill,
+                                    fit: BoxFit.contain,
                                   ),
                                 )
                               : Container();

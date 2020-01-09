@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_page_transition/flutter_page_transition.dart';
+import 'package:provider/provider.dart';
 import 'package:sanabelsecondexercice/components/models/LetterBalloon.dart';
+import 'package:sanabelsecondexercice/components/providers/DrawerState.dart';
 import 'package:sanabelsecondexercice/components/widgets/Balloon.dart';
 import 'package:sanabelsecondexercice/components/widgets/ExerciceDrawer.dart';
 import 'package:sanabelsecondexercice/components/widgets/PerrineAppBar.dart';
@@ -138,6 +140,8 @@ class _HomePageState extends State<HomePage> {
                             'currentLetter', letters[a - 1].letter);
                         print('got from shared in home');
                         // print(prefs.getString('currentLetter'));
+                        Provider.of<DrawerStateInfo>(context, listen: false)
+                            .setCurrentExercice(1);
                         await prefs.setInt('currentExercice', 1);
                         Navigator.of(context).push(
                           PageTransition(
@@ -259,7 +263,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      drawer: AppDrawer(),
+      // drawer: AppDrawer(),
       body: DecoratedBox(
         decoration: BoxDecoration(
           image: DecorationImage(
@@ -272,7 +276,7 @@ class _HomePageState extends State<HomePage> {
         child: childWidget(),
       ),
     );
-  } 
+  }
 
   initializePrefs() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();

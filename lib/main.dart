@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:sanabelsecondexercice/pages/Exercice3.dart';
 import 'package:sanabelsecondexercice/pages/Exercice4v2.dart';
 import 'package:sanabelsecondexercice/pages/Exercice5.dart';
@@ -12,6 +13,8 @@ import 'package:sanabelsecondexercice/pages/Exercice9-4b.dart';
 import 'package:sanabelsecondexercice/pages/ExerciceSeven.dart';
 import 'package:sanabelsecondexercice/pages/Splash.dart';
 import 'package:sanabelsecondexercice/pages/home.dart';
+
+import 'components/providers/DrawerState.dart';
 
 final RouteObserver<PageRoute> routeObserver = new RouteObserver<PageRoute>();
 
@@ -67,22 +70,34 @@ class MyAppState extends State<MyApp> {
       DeviceOrientation.landscapeRight,
     ]);
 
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        navigatorObservers: <NavigatorObserver>[routeObserver],
-        theme: ThemeData(primaryColor: Colors.black),
-        // home: SplashScreen(),
-        initialRoute: '/',
-        routes: {
-          '/': (BuildContext context) => SplashScreen(),
-          'home': (BuildContext context) => HomePage(),
-          'alif-ex1': (BuildContext context) => ExerciceFourV2(), // listen and drag
-          'alif-ex2': (BuildContext context) => ExerciceEight(), // circles
-          'alif-ex3': (BuildContext context) => ExerciceSeven(), // tap on card
-          'ba-ex1': (BuildContext context) => ExerciceFourV2(),  // listen and drag
-          'ba-ex2': (BuildContext context) => ExerciceThree(), // match right answer 
-          'ba-ex3': (BuildContext context) => ExerciceFive(), // 7 cards and 4 boxes only Ba(), 
-          'ba-ex4': (BuildContext context) => Exercice9(), // tap on letters
-        });
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => DrawerStateInfo(),
+        ),
+      ],
+      child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          navigatorObservers: <NavigatorObserver>[routeObserver],
+          theme: ThemeData(primaryColor: Colors.black),
+          // home: SplashScreen(),
+          initialRoute: '/',
+          routes: {
+            '/': (BuildContext context) => SplashScreen(),
+            'home': (BuildContext context) => HomePage(),
+            'alif-ex1': (BuildContext context) =>
+                ExerciceFourV2(), // listen and drag
+            'alif-ex2': (BuildContext context) => ExerciceEight(), // circles
+            'alif-ex3': (BuildContext context) =>
+                ExerciceSeven(), // tap on card
+            'ba-ex1': (BuildContext context) =>
+                ExerciceFourV2(), // listen and drag
+            'ba-ex2': (BuildContext context) =>
+                ExerciceThree(), // match right answer
+            'ba-ex3': (BuildContext context) =>
+                ExerciceFive(), // 7 cards and 4 boxes only Ba(),
+            'ba-ex4': (BuildContext context) => Exercice9(), // tap on letters
+          }),
+    );
   }
 }

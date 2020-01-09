@@ -1,4 +1,4 @@
- import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 class RedLetterWord extends StatelessWidget {
   final List<String> textList;
@@ -8,8 +8,8 @@ class RedLetterWord extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print(textList);
-    // print(pos);
+    Size screenSize = MediaQuery.of(context).size;
+
     var x = -1;
     return Center(
       child: new RichText(
@@ -22,14 +22,14 @@ class RedLetterWord extends StatelessWidget {
                 ? txt = TextSpan(
                     text: char,
                     style: new TextStyle(
-                        fontSize: 60.0,
+                        fontSize: screenSize.width / 12,
                         color: Color.fromRGBO(194, 0, 0, 1),
                         fontWeight: FontWeight.bold))
                 : txt = TextSpan(
                     text: char,
                     style: new TextStyle(
-                        fontSize: 60.0,
-                         color: Colors.black,
+                        fontSize: screenSize.width / 12,
+                        color: Colors.black,
                         fontWeight: FontWeight.bold));
             return txt;
           }).toList(),

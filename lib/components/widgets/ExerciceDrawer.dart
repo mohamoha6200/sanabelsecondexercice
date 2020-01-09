@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sanabelsecondexercice/components/providers/DrawerState.dart';
 import 'package:sanabelsecondexercice/pages/DragToBoxExercice.dart';
 import 'package:sanabelsecondexercice/pages/NavigateLetter.dart';
 import 'package:sanabelsecondexercice/pages/home.dart';
@@ -12,29 +14,37 @@ class AppDrawer extends StatefulWidget {
 
 class _AppDrawerState extends State<AppDrawer> {
   String subQuestion = '';
-  SharedPreferences prefs;
   int currentExercice;
+
+  List<bool> showExList = [];
 
   @override
   void initState() {
     super.initState();
-
+    showExList = [
+      true,
+      true,
+      true,
+      true,
+    ];
     gettingLetter();
   }
 
   gettingLetter() async {
-    SharedPreferences.getInstance().then((onValue) {
-      prefs = onValue;
-      setState(() {
-        subQuestion = prefs.getString('currentLetter');
-        currentExercice = prefs.getInt('currentExercice'); 
-
-        // print("subQuestion in drawer === ");
-        // print(subQuestion); 
-         print("currentExercice  in drawer=== ");
-         print(currentExercice);
-      });
+    final prefs = await SharedPreferences.getInstance();
+    final myexercice =
+        Provider.of<DrawerStateInfo>(context, listen: false).getCurrentDrawer;
+    // prefs.getInt('currentExercice') ?? 0;
+    setState(() {
+      subQuestion = prefs.getString('currentLetter');
+      currentExercice = myexercice;
     });
+
+    print("subQuestion in drawer === ");
+    print(subQuestion);
+    print("myexercice  in drawer=== ");
+    print(myexercice);
+    initializeWhatToShow();
   }
 
   @override
@@ -88,7 +98,9 @@ class _AppDrawerState extends State<AppDrawer> {
                     ],
                   ),
                 ),
-                Divider(),
+               showExList[0] == true
+                    ?
+                Divider():Container(),
 
                 // _createDrawerItem(
                 //     icon: Icons.collections_bookmark,
@@ -97,10 +109,16 @@ class _AppDrawerState extends State<AppDrawer> {
                 //     //        Navigator.pushReplacementNamed(context, Routes.events)
                 //     ),
 
-                ((subQuestion == 'أ' && currentExercice == 3) || (subQuestion != 'أ' && currentExercice == 4))
-                    ? Container()
-                    : InkWell(
-                        onTap: () {
+                // ((subQuestion == 'أ' && currentExercice == 3) || (subQuestion != 'أ' && currentExercice == 4))
+                // ? Container()                     :
+                showExList[0] == true
+                    ? InkWell(
+                        onTap: () async {
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          await prefs.setInt('currentExercice', 1);
+                          Provider.of<DrawerStateInfo>(context, listen: false)
+                              .setCurrentExercice(1);
                           Navigator.pushReplacement(context, MaterialPageRoute(
                               builder: (BuildContext context) {
                             return NavigateLetter();
@@ -115,22 +133,146 @@ class _AppDrawerState extends State<AppDrawer> {
                               margin: new EdgeInsets.symmetric(
                                   horizontal: screenSize.width / 80),
                               child: Icon(
-                                Icons.arrow_forward,
+                                Icons.web,
                                 size: screenSize.width / 32,
                                 color: Colors.purple,
                               ),
                             ),
                             Container(
                               child: Text(
-                                'الْتَمْرِيِنُ الْتَالِي',
+                                'الْتَمْرِيِنُ الْأول',
                                 style: mStyleNext,
                               ),
                             ),
                           ],
                         ),
                       )
+                    : Container(),
 
-                // Divider(),
+                showExList[1] == true
+                    ?
+                Divider():Container(),
+                showExList[1] == true
+                    ? InkWell(
+                        onTap: () async {
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          await prefs.setInt('currentExercice', 2);
+                          Provider.of<DrawerStateInfo>(context, listen: false)
+                              .setCurrentExercice(2);
+                          Navigator.pushReplacement(context, MaterialPageRoute(
+                              builder: (BuildContext context) {
+                            return NavigateLetter();
+                          }));
+                        },
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            Container(
+                              margin: new EdgeInsets.symmetric(
+                                  horizontal: screenSize.width / 80),
+                              child: Icon(
+                                Icons.web,
+                                size: screenSize.width / 32,
+                                color: Colors.purple,
+                              ),
+                            ),
+                            Container(
+                              child: Text(
+                                'الْتَمْرِيِنُ الْثاني',
+                                style: mStyleNext,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : Container(),
+
+               showExList[2] == true
+                    ?
+                Divider():Container(),
+                showExList[2] == true
+                    ? InkWell(
+                        onTap: () async {
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          await prefs.setInt('currentExercice', 3);
+                          Provider.of<DrawerStateInfo>(context, listen: false)
+                              .setCurrentExercice(3);
+                          Navigator.pushReplacement(context, MaterialPageRoute(
+                              builder: (BuildContext context) {
+                            return NavigateLetter();
+                          }));
+                        },
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            Container(
+                              margin: new EdgeInsets.symmetric(
+                                  horizontal: screenSize.width / 80),
+                              child: Icon(
+                                Icons.web,
+                                size: screenSize.width / 32,
+                                color: Colors.purple,
+                              ),
+                            ),
+                            Container(
+                              child: Text(
+                                'الْتَمْرِيِنُ الثالث',
+                                style: mStyleNext,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : Container(),
+
+               showExList[3] == true
+                    ?
+                Divider():Container(),
+                showExList[3] == true
+                    ? InkWell(
+                        onTap: () async {
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          await prefs.setInt('currentExercice', 4);
+                          Provider.of<DrawerStateInfo>(context, listen: false)
+                              .setCurrentExercice(4);
+                          Navigator.pushReplacement(context, MaterialPageRoute(
+                              builder: (BuildContext context) {
+                            return NavigateLetter();
+                          }));
+                        },
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            Container(
+                              margin: new EdgeInsets.symmetric(
+                                  horizontal: screenSize.width / 80),
+                              child: Icon(
+                                Icons.web,
+                                size: screenSize.width / 32,
+                                color: Colors.purple,
+                              ),
+                            ),
+                            Container(
+                              child: Text(
+                                'الْتَمْرِيِنُ الرابع',
+                                style: mStyleNext,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : Container(),
+
+                Divider(),
 
                 // _createDrawerItem(
                 //     icon: Icons.event,
@@ -206,5 +348,23 @@ class _AppDrawerState extends State<AppDrawer> {
         onTap: onTap,
       ),
     );
+  }
+
+  initializeWhatToShow() {
+    setState(() {
+      if (subQuestion == 'أ') {
+        showExList[3] = false;
+      } else {
+        showExList[3] = true;
+      }
+    });
+    for (var i = 0; i < showExList.length; i++) {
+      if (i == currentExercice - 1) {
+        setState(() {
+          showExList[i] = false;
+          print('showExList[i]=' + showExList[i].toString());
+        });
+      }
+    }
   }
 }

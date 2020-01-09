@@ -53,15 +53,20 @@ class _NavigateLetterState extends State<NavigateLetter> {
       setState(() {
         subQuestion = prefs.getString('currentLetter');
         currentExercice = prefs.getInt('currentExercice');
-        currentExercice++;
+        // currentExercice++;
       });
-      initialiseSubQuestionLatin();
+      print("currentExercice  to drawer=== ");
+      print(currentExercice);
+      initializeSubQuestionLatin();
 
       // print("subQuestion === ");
       // print(subQuestion);
       // print("currentExercice === ");
       // print(currentExercice);
     });
+    // SharedPreferences prefs =
+    //                           await SharedPreferences.getInstance();
+    // await prefs.setInt('currentExercice', currentExercice);
   }
 
   redirectToExercice() {
@@ -102,10 +107,10 @@ class _NavigateLetterState extends State<NavigateLetter> {
     }
   }
 
-  initialiseSubQuestionLatin() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+  initializeSubQuestionLatin() {
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    await prefs.setInt('currentExercice', currentExercice);
+    // await prefs.setInt('currentExercice', currentExercice);
     switch (subQuestion) {
       case 'أ':
         {
