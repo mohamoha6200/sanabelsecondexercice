@@ -29,12 +29,15 @@ class _ExerciceSevenState extends State<ExerciceSeven> {
   };
   int rightAnswersCount;
 
+  Map<String, bool> initialAnswers = {};
+
   @override
   void initState() {
     super.initState();
 
     setState(() {
       rightAnswersCount = fnRightAnswersCount();
+      initialAnswers = shuffleMap(answers);
     });
   }
 
@@ -69,7 +72,7 @@ class _ExerciceSevenState extends State<ExerciceSeven> {
             childAspectRatio: 1.5,
             physics: ClampingScrollPhysics(),
             crossAxisCount: 3,
-            children: answers.keys.map((key) {
+            children: initialAnswers.keys.map((key) {
               var value = answers[key];
 
               return new InkWell(
@@ -145,4 +148,15 @@ class _ExerciceSevenState extends State<ExerciceSeven> {
       ),
     );
   }
+}
+
+  Map<String, bool> shuffleMap(
+      Map<String, bool> map) {
+    Map<String, bool> result = {};
+  var keys = map.keys.toList()..shuffle();
+  var values = map.values.toList()..shuffle();
+  for (var i = 0; i < keys.length; i++) {
+    result[keys[i]] = values[i];
+  }
+  return result;
 }

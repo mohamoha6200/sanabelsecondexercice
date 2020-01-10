@@ -14,6 +14,8 @@ import 'package:sanabelsecondexercice/pages/Exercice4.dart';
 import 'package:sanabelsecondexercice/pages/home.dart';
 import 'package:sanabelsecondexercice/theme/style.dart';
 
+import 'homeV2.dart';
+
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -47,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<Object> push() async {
-    Object object = await _controller.push(context, HomePage());
+    Object object = await _controller.push(context, HomePageV2());
     return object;
   }
 

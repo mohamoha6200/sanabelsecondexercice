@@ -41,6 +41,8 @@ class _ExerciceEightState extends State<ExerciceEight> {
 
   Size circleSize;
 
+  Map<String, List<String>> initialCirclesMap={};
+
   @override
   void initState() {
     super.initState();
@@ -55,6 +57,7 @@ class _ExerciceEightState extends State<ExerciceEight> {
       setState(() {
         subQuestion = prefs.getString('currentLetter');
         boxsMap = fillBoxMap(subQuestion);
+        initialCirclesMap = shuffleMap(circlesMap);
       });
 
       print("subQuestion === ");
@@ -253,7 +256,7 @@ class _ExerciceEightState extends State<ExerciceEight> {
                 childAspectRatio: 2.5,
                 physics: ClampingScrollPhysics(),
                 crossAxisCount: 4,
-                children: circlesMap.keys.map((emoji) {
+                children: initialCirclesMap.keys.map((emoji) {
                   return Draggable<String>(
                     data: emoji,
                     child:
@@ -367,8 +370,6 @@ class _ExerciceEightState extends State<ExerciceEight> {
     );
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
@@ -380,7 +381,7 @@ class _ExerciceEightState extends State<ExerciceEight> {
         appBar: exAppBar(
           screenSize,
           _scaffoldKey,
-          ExQuestionBar( 
+          ExQuestionBar(
             question: 'أضع كل كلمة في الصندوق المناسب',
             kidPic: 'kids6.png',
             logos: false,
@@ -411,4 +412,14 @@ class Emoji extends StatelessWidget {
               )
             : Container());
   }
+}
+
+Map<String, List<String>> shuffleMap(Map<String, List<String>> map) {
+  Map<String, List<String>> result = {};
+  var keys = map.keys.toList()..shuffle();
+  var values = map.values.toList()..shuffle();
+  for (var i = 0; i < keys.length; i++) {
+    result[keys[i]] = values[i];
+  }
+  return result;
 }

@@ -21,62 +21,9 @@ class _Exercice9State extends State<Exercice9> {
 
   String subQuestion = '';
 
-  Map<int, Map<int, List<String>>> answers = {
-    // 0: {
-    //   0: ['بِـ', 'ا', 'ع']
-    // },
-    // 1: {
-    //   0: ['ذُ', 'ج', 'ش']
-    // },
-    // 2: {
-    //   0: ['نــِ', 'ا', 'ب']
-    // },
-    // 3: {
-    //   2: ['ن', 'ا', 'بٌ']
-    // },
-    // 4: {
-    //   2: ['ر', 'ي', 'ـبٍ']
-    // },
-    // 5: {
-    //   0: ['جَـ', 'ت', 'ب']
-    // },
-    // 6: {
-    //   1: ['ب', 'ـبُـ', 'ب']
-    // },
-    // 7: {
-    //   1: ['ب', 'ـنِـ', 'ت']
-    // },
-    // 8: {
-    //   2: ['ا', 'ا', 'زُ']
-    // },
-    // 9: {
-    //   0: ['خَـ', 'ت', 'ب']
-    // },
-    // 10: {
-    //   0: ['بَـ', 'د', 'ر']
-    // },
-    // 11: {
-    //   1: ['ص', 'ـبِـ', 'ر']
-    // },
-    // 12: {
-    //   2: ['ر', 'ي', 'ـنٌ']
-    // },
-    // 13: {
-    //   0: ['ذِ', 'ج', 'ش']
-    // },
-    // 14: {
-    //   0: ['بُـ', 'ا', 'ع']
-    // },
-    // 15: {
-    //   1: ['ص', 'ـبَـ', 'ر']
-    // },
-    // 16: {
-    //   0: ['فَـ', 'ب', 'ن']
-    // },
-    // 17: {
-    //   2: ['ن', 'ا', 'تٌ']
-    // },
-  };
+  Map<int, Map<int, List<String>>> answers = {};
+  Map<int, Map<int, List<String>>> initialAnswers = {};
+
   SharedPreferences prefs;
   List<int> rightCardsIndexes = [];
 
@@ -160,6 +107,7 @@ class _Exercice9State extends State<Exercice9> {
               },
             };
             rightCardsIndexes = [0, 3, 4, 6, 10, 11, 14, 15];
+            initialAnswers = shuffleMap(answers);
           });
         }
         break;
@@ -223,6 +171,8 @@ class _Exercice9State extends State<Exercice9> {
               },
             };
             rightCardsIndexes = [0, 3, 5, 7, 12, 14, 16];
+            initialAnswers = shuffleMap(answers);
+
           });
         }
         break;
@@ -286,6 +236,8 @@ class _Exercice9State extends State<Exercice9> {
               },
             };
             rightCardsIndexes = [1, 2, 5, 7, 8, 12, 14];
+            initialAnswers = shuffleMap(answers);
+
           });
         }
         break;
@@ -437,7 +389,7 @@ class _Exercice9State extends State<Exercice9> {
             childAspectRatio: 1.07,
             physics: ClampingScrollPhysics(),
             crossAxisCount: 6,
-            children: answers.keys.map((index) {
+            children: initialAnswers.keys.map((index) {
               var key = answers[index].keys.toList()[0];
               var value = answers[index].values.toList()[0];
               return scoreMap[index.toString()] != true
@@ -539,4 +491,15 @@ class _Exercice9State extends State<Exercice9> {
       ),
     );
   }
+}
+
+Map<int, Map<int, List<String>>> shuffleMap(
+    Map<int, Map<int, List<String>>> map) {
+  Map<int, Map<int, List<String>>> result = {};
+  var keys = map.keys.toList()..shuffle();
+  var values = map.values.toList()..shuffle();
+  for (var i = 0; i < keys.length; i++) {
+    result[keys[i]] = values[i];
+  }
+  return result;
 }

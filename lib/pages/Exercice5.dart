@@ -40,6 +40,8 @@ class _ExerciceFiveState extends State<ExerciceFive> {
   };
   int rightAnswersCount;
 
+  Map<String, List<String>> initialCardsMap={};
+
   @override
   void initState() {
     super.initState();
@@ -74,7 +76,7 @@ class _ExerciceFiveState extends State<ExerciceFive> {
               'assets/tigerCard.png': [],
               'assets/rabbitCard.png': ['middleToEnd'],
             };
-            // initialpicChoiceMap = shuffleMap(picChoiceMap);
+            initialCardsMap = shuffleMap(cardsMap);
           });
         }
         break;
@@ -90,7 +92,7 @@ class _ExerciceFiveState extends State<ExerciceFive> {
               'assets/bullCard.png': [],
               'assets/duckCard.png': ['end'],
             };
-            // initialpicChoiceMap = shuffleMap(picChoiceMap);
+            initialCardsMap = shuffleMap(cardsMap);
           });
         }
         break;
@@ -106,7 +108,7 @@ class _ExerciceFiveState extends State<ExerciceFive> {
               'assets/garlicCard.png': ['start'],
               'assets/wolfCard.png': [],
             };
-            // initialpicChoiceMap = shuffleMap(picChoiceMap);
+            initialCardsMap = shuffleMap(cardsMap);
           });
         }
         break;
@@ -425,7 +427,7 @@ class _ExerciceFiveState extends State<ExerciceFive> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: cardsMap.keys.map((emoji) {
+                children: initialCardsMap.keys.map((emoji) {
                   return Draggable<String>(
                     data: emoji,
                     child:
@@ -480,7 +482,7 @@ class _ExerciceFiveState extends State<ExerciceFive> {
       },
       onWillAccept: (data) {
         print(' will accept data ' + data);
-        print(' will accept cardsMap[data] ' + cardsMap[data].toString());
+        print(' will accept cardsMap[data] ' + initialCardsMap[data].toString());
         print(' will accept boxsMap[emoji] ' + boxsMap[emoji].toString());
 
         return cardsMap[data].contains(boxsMap[emoji]);
@@ -603,4 +605,14 @@ class Emoji extends StatelessWidget {
               )
             : Container());
   }
+}
+
+Map<String, List<String>> shuffleMap(Map<String, List<String>> map) {
+  Map<String, List<String>> result = {};
+  var keys = map.keys.toList()..shuffle();
+  var values = map.values.toList()..shuffle();
+  for (var i = 0; i < keys.length; i++) {
+    result[keys[i]] = values[i];
+  }
+  return result;
 }

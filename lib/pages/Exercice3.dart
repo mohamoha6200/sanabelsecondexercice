@@ -491,8 +491,9 @@ class _ExerciceThreeState extends State<ExerciceThree> {
   }
 
   Widget childWidget() {
-    return Center(
-        child: GestureDetector(
+    Size screenSize = MediaQuery.of(context).size;
+
+    return GestureDetector(
       onPanUpdate: (DragUpdateDetails details) {
         setState(() {
           RenderBox object = context.findRenderObject();
@@ -588,8 +589,8 @@ class _ExerciceThreeState extends State<ExerciceThree> {
             Flame.audio.play('error.mp3');
             setState(() {
               _points = [];
-              _truePoints = [];
-              scoreMap = {};
+              // _truePoints = [];
+              // scoreMap = {};
             });
           }
         } else if (startedWithWord == true && endedWithPic == true) {
@@ -637,8 +638,8 @@ class _ExerciceThreeState extends State<ExerciceThree> {
             Flame.audio.play('error.mp3');
             setState(() {
               _points = [];
-              _truePoints = [];
-              scoreMap = {};
+              // _truePoints = [];
+              // scoreMap = {};
             });
           }
         } else {
@@ -646,8 +647,8 @@ class _ExerciceThreeState extends State<ExerciceThree> {
           Flame.audio.play('error.mp3');
           setState(() {
             _points = [];
-            _truePoints = [];
-            scoreMap = {};
+            // _truePoints = [];
+            // scoreMap = {};
           });
         }
         print('scoreMap=' + scoreMap.toString());
@@ -663,75 +664,53 @@ class _ExerciceThreeState extends State<ExerciceThree> {
           endedWithWord = false;
         });
       },
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            // ExQuestionBar(
-            //   question: ' أربط الكلمة بالصورة المناسبة',
-            //   kidPic: 'kids4.png',
-            // ),
-            Column(
-              children: <Widget>[
-                // keys.length == 3
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: List.generate(3, (index) {
-                    var keys = initialpicChoiceMap.keys.toList();
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: List.generate(3, (index) {
+              var keys = initialpicChoiceMap.keys.toList();
 
-                    return keys.length == 3
-                        ? Container(
-                            key: _picCardKey[index],
-                            width: 300,
-                            height: 200,
-                            // decoration: BoxDecoration(
-                            //   border: Border.all(
-                            //       width: 3.0, color: Colors.lightBlueAccent),
-                            //   borderRadius: BorderRadius.all(Radius.circular(
-                            //           5.0) //         <--- border radius here
-                            //       ),
-                            // ),
-                            child: new Image.asset(
-                              keys[index],
-                              fit: BoxFit.contain,
-                            ),
-                          )
-                        : Container();
-                  }),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: List.generate(3, (index) {
-                    var choices = initialpicChoiceMap.values.toList();
-                    return choices.length == 3
-                        ? Container(
-                            key: _wordCardKey[index],
-                            width: 300,
-                            height: 200,
-                            // decoration: BoxDecoration(
-                            //   border: Border.all(
-                            //       width: 3.0,
-                            //       color: Colors.lightBlueAccent),
-                            //   // color: Colors.blueAccent,
-                            //   borderRadius: BorderRadius.all(
-                            //       Radius.circular(
-                            //           5.0) //         <--- border radius here
-                            //       ),
-                            // ),
-                            child: RedLetterWord(
-                              textList: choices[index].values.toList()[0],
-                              pos: choices[index].keys.toList()[0],
-                            ))
-                        : Container();
-                  }),
-                ),
-              ],
-            ),
-          ],
-        ),
+              return keys.length == 3
+                  ? Container(
+                      key: _picCardKey[index],
+                      width: screenSize.width / 3,
+                      height: screenSize.height / 2.7,
+                      child: new Image.asset(
+                        keys[index],
+                        fit: BoxFit.contain,
+                      ),
+                    )
+                  : Container();
+            }),
+          ),
+          SizedBox(
+            height: screenSize.height / 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: List.generate(3, (index) {
+              var choices = initialpicChoiceMap.values.toList();
+              return choices.length == 3
+                  ? Container(
+                      alignment: Alignment.bottomCenter,
+                      width: screenSize.width / 3,
+                      height: screenSize.height / 2.7,
+                      key: _wordCardKey[index],
+                      child: RedLetterWord(
+                        textList: choices[index].values.toList()[0],
+                        pos: choices[index].keys.toList()[0],
+                      ))
+                  : Container();
+            }),
+          ),
+        ],
       ),
-    ));
+    );
   }
 
   @override
@@ -740,6 +719,7 @@ class _ExerciceThreeState extends State<ExerciceThree> {
 
     return backgroundImage(
       CustomPaint(
+        isComplex: true,
         painter: new Signature(points: _points, trues: _truePoints),
         child: Scaffold(
           key: _scaffoldKey,
@@ -755,18 +735,18 @@ class _ExerciceThreeState extends State<ExerciceThree> {
           ),
           drawer: AppDrawer(),
           body: childWidget(),
-          bottomNavigationBar: Container(
-            height: screenSize.height * 0.05,
-            child: new FloatingActionButton(
-                child: new Icon(Icons.clear),
-                onPressed: () => {
-                      setState(() {
-                        _truePoints = [];
-                        _points = [];
-                        scoreMap = {};
-                      }),
-                    }),
-          ),
+          // bottomNavigationBar: Container(
+          //   height: screenSize.height * 0.05,
+          //   child: new FloatingActionButton(
+          //       child: new Icon(Icons.clear),
+          //       onPressed: () => {
+          //             setState(() {
+          //               _truePoints = [];
+          //               _points = [];
+          //               scoreMap = {};
+          //             }),
+          //           }),
+          // ),
         ),
       ),
     );
