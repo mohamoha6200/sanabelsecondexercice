@@ -25,6 +25,8 @@ import 'package:sanabelsecondexercice/theme/style.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
+import 'Exercice4v3.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -124,7 +126,7 @@ class _HomePageState extends State<HomePage> {
 
             children: List.generate(letters.length, (i) {
               var a = i + 1;
-
+              
               if ((a % 5 != 0)) {
                 conditional = AnimationConfiguration.staggeredGrid(
                   position: i,
@@ -147,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                           PageTransition(
                             duration: Duration(milliseconds: 2000),
                             type: PageTransitionType.rippleMiddle,
-                            child: ExerciceFourV2(),
+                            child: ExerciceFourV3(),
                             // (letters[a - 1].letter != 'أ')
                             //     ? ExerciceFive() // 7 cards and 4 boxes only Ba
                             //     : ExerciceEight(), // circles

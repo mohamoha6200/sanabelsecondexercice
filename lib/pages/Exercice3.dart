@@ -228,10 +228,14 @@ class _ExerciceThreeState extends State<ExerciceThree> {
             subQuestionLatin = 'te';
             picChoiceMap = {
               'assets/blueberry.png': {
-                0: ['تُ', 'و', 'تٌ',]
+                0: [
+                  'تُ',
+                  'و',
+                  'تٌ',
+                ]
               },
               'assets/tv.png': {
-                0: ['تِ', 'لْ', 'فَ','ا','زٌ']
+                0: ['تِ', 'لْ', 'فَ', 'ا', 'زٌ']
               },
               'assets/dates.png': {
                 0: ['تَ', 'مْ', 'رٌ']
@@ -245,15 +249,19 @@ class _ExerciceThreeState extends State<ExerciceThree> {
         {
           setState(() {
             subQuestionLatin = 'the';
-               picChoiceMap = {
-              'assets/cow.png': {
-                0: ['ثَ', 'وْ', 'رٌ',]
+            picChoiceMap = {
+              'assets/bull.png': {
+                0: [
+                  'ثَ',
+                  'وْ',
+                  'رٌ',
+                ]
               },
               'assets/snake.png': {
-                0: ['ثُ', 'عْ', 'بَ','ا','نٌ']
+                0: ['ثُ', 'عْ', 'بَ', 'ا', 'نٌ']
               },
               'assets/fruits.png': {
-                0: ['ثِ', 'مَ', 'ا','رٌ']
+                0: ['ثِ', 'مَ', 'ا', 'رٌ']
               }
             };
             initialpicChoiceMap = shuffleMap(picChoiceMap);
@@ -484,291 +492,284 @@ class _ExerciceThreeState extends State<ExerciceThree> {
 
   Widget childWidget() {
     return Center(
-      child: GestureDetector(
-          onPanUpdate: (DragUpdateDetails details) {
-            setState(() {
-              RenderBox object = context.findRenderObject();
-              Offset _localPosition =
-                  object.globalToLocal(details.globalPosition);
+        child: GestureDetector(
+      onPanUpdate: (DragUpdateDetails details) {
+        setState(() {
+          RenderBox object = context.findRenderObject();
+          Offset _localPosition = object.globalToLocal(details.globalPosition);
 
-              _points = new List.from(_points)..add(_localPosition);
-              // print('_localPosition: ' + _localPosition.toString());
-              // print('_points: ' + _points.toString());
-            });
-          },
-          onPanEnd: (DragEndDetails details) {
-            _points.add(null);
-            // print(_points);
+          _points = new List.from(_points)..add(_localPosition);
+          // print('_localPosition: ' + _localPosition.toString());
+          // print('_points: ' + _points.toString());
+        });
+      },
+      onPanEnd: (DragEndDetails details) {
+        _points.add(null);
+        // print(_points);
 
-            firstPointOffset = _points[0];
-            if (_points.length >= 2)
-              lastPointOffset = _points[_points.length - 2];
+        firstPointOffset = _points[0];
+        if (_points.length >= 2) lastPointOffset = _points[_points.length - 2];
 
-            if (firstPointOffset != null && lastPointOffset != null) {
-              if (inWhichPicIsThisPoint(firstPointOffset, picOffsetmap) != '') {
-                startedWithPic = true;
-                startingPic =
-                    inWhichPicIsThisPoint(firstPointOffset, picOffsetmap);
-              }
+        if (firstPointOffset != null && lastPointOffset != null) {
+          if (inWhichPicIsThisPoint(firstPointOffset, picOffsetmap) != '') {
+            startedWithPic = true;
+            startingPic = inWhichPicIsThisPoint(firstPointOffset, picOffsetmap);
+          }
 
-              if (inWhichWordIsThisPoint(firstPointOffset, wordOffsetmap) !=
-                  null) {
-                startedWithWord = true;
-                startingWord =
-                    inWhichWordIsThisPoint(firstPointOffset, wordOffsetmap);
-              }
-              if (inWhichPicIsThisPoint(lastPointOffset, picOffsetmap) != '') {
-                endedWithPic = true;
-                endingPic =
-                    inWhichPicIsThisPoint(lastPointOffset, picOffsetmap);
-              }
-              if (inWhichWordIsThisPoint(lastPointOffset, wordOffsetmap) !=
-                  null) {
-                endedWithWord = true;
-                endingWord =
-                    inWhichWordIsThisPoint(lastPointOffset, wordOffsetmap);
-              }
-            }
+          if (inWhichWordIsThisPoint(firstPointOffset, wordOffsetmap) != null) {
+            startedWithWord = true;
+            startingWord =
+                inWhichWordIsThisPoint(firstPointOffset, wordOffsetmap);
+          }
+          if (inWhichPicIsThisPoint(lastPointOffset, picOffsetmap) != '') {
+            endedWithPic = true;
+            endingPic = inWhichPicIsThisPoint(lastPointOffset, picOffsetmap);
+          }
+          if (inWhichWordIsThisPoint(lastPointOffset, wordOffsetmap) != null) {
+            endedWithWord = true;
+            endingWord = inWhichWordIsThisPoint(lastPointOffset, wordOffsetmap);
+          }
+        }
 
-            print('startedWithPic ' + startedWithPic.toString());
-            print('startedWithWord ' + startedWithWord.toString());
-            print('endedWithPic ' + endedWithPic.toString());
-            print('endedWithWord ' + endedWithWord.toString());
+        print('startedWithPic ' + startedWithPic.toString());
+        print('startedWithWord ' + startedWithWord.toString());
+        print('endedWithPic ' + endedWithPic.toString());
+        print('endedWithWord ' + endedWithWord.toString());
 
-            print('startingPic =' + startingPic.toString());
-            print('startingWord =' + startingWord.toString());
-            print('endingPic =' + endingPic.toString());
-            print('endingWord =' + endingWord.toString());
+        print('startingPic =' + startingPic.toString());
+        print('startingWord =' + startingWord.toString());
+        print('endingPic =' + endingPic.toString());
+        print('endingWord =' + endingWord.toString());
 
-            if (startedWithPic == true && endedWithWord == true) {
-              print('startedWithPic&&endedWithWord');
-              print('picChoiceMap[startingPic] =');
-              print(picChoiceMap[startingPic]);
-              if ((picChoiceMap[startingPic].toString() ==
-                  endingWord.toString())) {
-                if (scoreMap[startingPic] == null) {
-                  print('inside scoreMap[startingPic] == null');
-                  setState(() {
-                    _truePoints += _points;
-                    _points = [];
-                    scoreMap[startingPic] = true;
-                  });
+        if (startedWithPic == true && endedWithWord == true) {
+          print('startedWithPic&&endedWithWord');
+          print('picChoiceMap[startingPic] =');
+          print(picChoiceMap[startingPic]);
+          if ((picChoiceMap[startingPic].toString() == endingWord.toString())) {
+            if (scoreMap[startingPic] == null) {
+              print('inside scoreMap[startingPic] == null');
+              setState(() {
+                _truePoints += _points;
+                _points = [];
+                scoreMap[startingPic] = true;
+              });
 
-                  if (scoreMap.length == picChoiceMap.length) {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          Future.delayed(Duration(seconds: 5), () {
-                            Navigator.of(context).pop(true);
-                          });
-                          return Theme(
-                            data: Theme.of(context).copyWith(
-                                dialogBackgroundColor: Colors.transparent),
-                            child: ResultSucessQuestion(),
-                          );
-                        });
-                    setState(() {
-                      _points = [];
-                      _truePoints = [];
-                      scoreMap = {};
+              if (scoreMap.length == picChoiceMap.length) {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      Future.delayed(Duration(seconds: 5), () {
+                        Navigator.of(context).pop(true);
+                      });
+                      return Theme(
+                        data: Theme.of(context).copyWith(
+                            dialogBackgroundColor: Colors.transparent),
+                        child: ResultSucessQuestion(),
+                      );
                     });
-                  } else {
-                    print('gj');
-                    Flame.audio.play('good.mp3');
-                    setState(() {
-                      _points = [];
-                    });
-                  }
-                } else
-                  setState(() {
-                    _points = [];
-                  });
-              } else {
-                print('nah');
-                Flame.audio.play('error.mp3');
                 setState(() {
                   _points = [];
                   _truePoints = [];
                   scoreMap = {};
                 });
-              }
-            } else if (startedWithWord == true && endedWithPic == true) {
-              print('startedWithWord&&endedWithPic');
-              if ((picChoiceMap[endingPic].toString() ==
-                  startingWord.toString())) {
-                if (scoreMap[endingPic] == null) {
-                  print('inside scoreMap[startingPic] == null');
-                  setState(() {
-                    _truePoints += _points;
-                    _points = [];
-                    scoreMap[endingPic] = true;
-                  });
-
-                  if (scoreMap.length == picChoiceMap.length) {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          Future.delayed(Duration(seconds: 5), () {
-                            Navigator.of(context).pop(true);
-                          });
-                          return Theme(
-                            data: Theme.of(context).copyWith(
-                                dialogBackgroundColor: Colors.transparent),
-                            child: ResultSucessQuestion(),
-                          );
-                        });
-                    setState(() {
-                      _points = [];
-                      _truePoints = [];
-                      scoreMap = {};
-                    });
-                  } else {
-                    print('gj');
-                    Flame.audio.play('good.mp3');
-                    setState(() {
-                      _points = [];
-                    });
-                  }
-                } else
-                  setState(() {
-                    _points = [];
-                  });
               } else {
-                print('nah');
-                Flame.audio.play('error.mp3');
+                print('gj');
+                Flame.audio.play('good.mp3');
                 setState(() {
                   _points = [];
-                  _truePoints = [];
-                  scoreMap = {};
                 });
               }
-            } else {
-              print('neither');
-              Flame.audio.play('error.mp3');
+            } else
               setState(() {
                 _points = [];
-                _truePoints = [];
-                scoreMap = {};
               });
-            }
-            print('scoreMap=' + scoreMap.toString());
-
+          } else {
+            print('nah');
+            Flame.audio.play('error.mp3');
             setState(() {
-              startingPic = null;
-              startingWord = null;
-              endingPic = null;
-              endingWord = null;
-              startedWithPic = false;
-              startedWithWord = false;
-              endedWithPic = false;
-              endedWithWord = false;
+              _points = [];
+              _truePoints = [];
+              scoreMap = {};
             });
-          },
-          child: new CustomPaint(
-            painter: new Signature(points: _points, trues: _truePoints),
-            child: Center(
-              child: Column(
-                children: <Widget>[
-                  // ExQuestionBar(
-                  //   question: ' أربط الكلمة بالصورة المناسبة',
-                  //   kidPic: 'kids4.png',
-                  // ),
-                  Column(
-                    children: <Widget>[
-                      // keys.length == 3
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: List.generate(3, (index) {
-                          var keys = initialpicChoiceMap.keys.toList();
+          }
+        } else if (startedWithWord == true && endedWithPic == true) {
+          print('startedWithWord&&endedWithPic');
+          if ((picChoiceMap[endingPic].toString() == startingWord.toString())) {
+            if (scoreMap[endingPic] == null) {
+              print('inside scoreMap[startingPic] == null');
+              setState(() {
+                _truePoints += _points;
+                _points = [];
+                scoreMap[endingPic] = true;
+              });
 
-                          return keys.length == 3
-                              ? Container(
-                                  key: _picCardKey[index],
-                                  width: 300,
-                                  height: 200,
-                                  // decoration: BoxDecoration(
-                                  //   border: Border.all(
-                                  //       width: 3.0, color: Colors.lightBlueAccent),
-                                  //   borderRadius: BorderRadius.all(Radius.circular(
-                                  //           5.0) //         <--- border radius here
-                                  //       ),
-                                  // ),
-                                  child: new Image.asset(
-                                    keys[index],
-                                    fit: BoxFit.contain,
-                                  ),
-                                )
-                              : Container();
-                        }),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: List.generate(3, (index) {
-                          var choices = initialpicChoiceMap.values.toList();
-                          return choices.length == 3
-                              ? Container(
-                                  key: _wordCardKey[index],
-                                  width: 300,
-                                  height: 200,
-                                  // decoration: BoxDecoration(
-                                  //   border: Border.all(
-                                  //       width: 3.0,
-                                  //       color: Colors.lightBlueAccent),
-                                  //   // color: Colors.blueAccent,
-                                  //   borderRadius: BorderRadius.all(
-                                  //       Radius.circular(
-                                  //           5.0) //         <--- border radius here
-                                  //       ),
-                                  // ),
-                                  child: RedLetterWord(
-                                    textList: choices[index].values.toList()[0],
-                                    pos: choices[index].keys.toList()[0],
-                                  ))
-                              : Container();
-                        }),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+              if (scoreMap.length == picChoiceMap.length) {
+                showDialog(
+                    context: context,
+                    builder: (context) {
+                      Future.delayed(Duration(seconds: 5), () {
+                        Navigator.of(context).pop(true);
+                      });
+                      return Theme(
+                        data: Theme.of(context).copyWith(
+                            dialogBackgroundColor: Colors.transparent),
+                        child: ResultSucessQuestion(),
+                      );
+                    });
+                setState(() {
+                  _points = [];
+                  _truePoints = [];
+                  scoreMap = {};
+                });
+              } else {
+                print('gj');
+                Flame.audio.play('good.mp3');
+                setState(() {
+                  _points = [];
+                });
+              }
+            } else
+              setState(() {
+                _points = [];
+              });
+          } else {
+            print('nah');
+            Flame.audio.play('error.mp3');
+            setState(() {
+              _points = [];
+              _truePoints = [];
+              scoreMap = {};
+            });
+          }
+        } else {
+          print('neither');
+          Flame.audio.play('error.mp3');
+          setState(() {
+            _points = [];
+            _truePoints = [];
+            scoreMap = {};
+          });
+        }
+        print('scoreMap=' + scoreMap.toString());
+
+        setState(() {
+          startingPic = null;
+          startingWord = null;
+          endingPic = null;
+          endingWord = null;
+          startedWithPic = false;
+          startedWithWord = false;
+          endedWithPic = false;
+          endedWithWord = false;
+        });
+      },
+      child: Center(
+        child: Column(
+          children: <Widget>[
+            // ExQuestionBar(
+            //   question: ' أربط الكلمة بالصورة المناسبة',
+            //   kidPic: 'kids4.png',
+            // ),
+            Column(
+              children: <Widget>[
+                // keys.length == 3
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: List.generate(3, (index) {
+                    var keys = initialpicChoiceMap.keys.toList();
+
+                    return keys.length == 3
+                        ? Container(
+                            key: _picCardKey[index],
+                            width: 300,
+                            height: 200,
+                            // decoration: BoxDecoration(
+                            //   border: Border.all(
+                            //       width: 3.0, color: Colors.lightBlueAccent),
+                            //   borderRadius: BorderRadius.all(Radius.circular(
+                            //           5.0) //         <--- border radius here
+                            //       ),
+                            // ),
+                            child: new Image.asset(
+                              keys[index],
+                              fit: BoxFit.contain,
+                            ),
+                          )
+                        : Container();
+                  }),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: List.generate(3, (index) {
+                    var choices = initialpicChoiceMap.values.toList();
+                    return choices.length == 3
+                        ? Container(
+                            key: _wordCardKey[index],
+                            width: 300,
+                            height: 200,
+                            // decoration: BoxDecoration(
+                            //   border: Border.all(
+                            //       width: 3.0,
+                            //       color: Colors.lightBlueAccent),
+                            //   // color: Colors.blueAccent,
+                            //   borderRadius: BorderRadius.all(
+                            //       Radius.circular(
+                            //           5.0) //         <--- border radius here
+                            //       ),
+                            // ),
+                            child: RedLetterWord(
+                              textList: choices[index].values.toList()[0],
+                              pos: choices[index].keys.toList()[0],
+                            ))
+                        : Container();
+                  }),
+                ),
+              ],
             ),
-          )),
-    );
+          ],
+        ),
+      ),
+    ));
   }
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
 
-    return backgroundImage(Scaffold(
-      key: _scaffoldKey,
-      backgroundColor: Colors.transparent,
-      appBar: exAppBar(
-        screenSize,
-        _scaffoldKey,
-        ExQuestionBar(
-          question: ' أربط الكلمة بالصورة المناسبة',
-          kidPic: 'kids4.png',
-          logos: false,
+    return backgroundImage(
+      CustomPaint(
+        painter: new Signature(points: _points, trues: _truePoints),
+        child: Scaffold(
+          key: _scaffoldKey,
+          backgroundColor: Colors.transparent,
+          appBar: exAppBar(
+            screenSize,
+            _scaffoldKey,
+            ExQuestionBar(
+              question: ' أربط الكلمة بالصورة المناسبة',
+              kidPic: 'kids4.png',
+              logos: false,
+            ),
+          ),
+          drawer: AppDrawer(),
+          body: childWidget(),
+          bottomNavigationBar: Container(
+            height: screenSize.height * 0.05,
+            child: new FloatingActionButton(
+                child: new Icon(Icons.clear),
+                onPressed: () => {
+                      setState(() {
+                        _truePoints = [];
+                        _points = [];
+                        scoreMap = {};
+                      }),
+                    }),
+          ),
         ),
       ),
-      drawer: AppDrawer(),
-      body: childWidget(),
-      bottomNavigationBar: Container(
-        height: screenSize.height * 0.05,
-        child: new FloatingActionButton(
-            child: new Icon(Icons.clear),
-            onPressed: () => {
-                  setState(() {
-                    _truePoints = [];
-                    _points = [];
-                    scoreMap = {};
-                  }),
-                }),
-      ),
-    ));
+    );
   }
 }
 

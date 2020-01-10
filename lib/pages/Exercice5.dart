@@ -23,13 +23,13 @@ class _ExerciceFiveState extends State<ExerciceFive> {
   SharedPreferences prefs;
 
   Map<String, List<String>> cardsMap = {
-    'assets/doorCard-final.png': ['start', 'end'],
-    'assets/datesCard-final.png': [],
-    'assets/breadCard-final.png': ['middle'],
-    'assets/duckCard-final.png': ['start'],
-    'assets/treeCard-final.png': [],
-    'assets/tigerCard-final.png': [],
-    'assets/rabbitCard-final.png': ['middleToEnd'],
+    // 'assets/doorCard-final.png': ['start', 'end'],
+    // 'assets/datesCard-final.png': [],
+    // 'assets/breadCard-final.png': ['middle'],
+    // 'assets/duckCard-final.png': ['start'],
+    // 'assets/treeCard-final.png': [],
+    // 'assets/tigerCard-final.png': [],
+    // 'assets/rabbitCard-final.png': ['middleToEnd'],
   };
 
   Map<String, String> boxsMap = {
@@ -44,8 +44,6 @@ class _ExerciceFiveState extends State<ExerciceFive> {
   void initState() {
     super.initState();
     gettingLetter();
-
-    rightAnswersCount = fnRightAnswersCount();
   }
 
   gettingLetter() async {
@@ -55,9 +53,191 @@ class _ExerciceFiveState extends State<ExerciceFive> {
         subQuestion = prefs.getString('currentLetter');
         boxsMap = fillBoxMap(subQuestion);
       });
+      initilizeCardsMap();
 
       print("subQuestion === ");
       print(subQuestion);
+    });
+  }
+
+  initilizeCardsMap() {
+    switch (subQuestion) {
+      case 'ب':
+        {
+          setState(() {
+            cardsMap = {
+              'assets/doorCard.png': ['start', 'end'],
+              'assets/datesCard.png': [],
+              'assets/breadCard.png': ['middle'],
+              'assets/duckCard.png': ['start'],
+              'assets/treeCard.png': [],
+              'assets/tigerCard.png': [],
+              'assets/rabbitCard.png': ['middleToEnd'],
+            };
+            // initialpicChoiceMap = shuffleMap(picChoiceMap);
+          });
+        }
+        break;
+      case 'ت':
+        {
+          setState(() {
+            cardsMap = {
+              'assets/crownCard.png': ['start'],
+              'assets/bookCard.png': ['middle'],
+              'assets/datesCard.png': ['start'],
+              'assets/cowCard.png': ['end'],
+              'assets/whaleCard.png': ['middleToEnd'],
+              'assets/bullCard.png': [],
+              'assets/duckCard.png': ['end'],
+            };
+            // initialpicChoiceMap = shuffleMap(picChoiceMap);
+          });
+        }
+        break;
+      case 'ث':
+        {
+          setState(() {
+            cardsMap = {
+              'assets/triangleCard.png': ['middle', 'middleToEnd'],
+              'assets/refrigeratorCard.png': ['start'],
+              'assets/furnitureCard.png': ['start', 'end'],
+              'assets/threeCard.png': ['start'],
+              'assets/foxCard.png': ['start'],
+              'assets/garlicCard.png': ['start'],
+              'assets/wolfCard.png': [],
+            };
+            // initialpicChoiceMap = shuffleMap(picChoiceMap);
+          });
+        }
+        break;
+      case 'ج':
+        {
+          setState(() {});
+        }
+        break;
+      case 'ح':
+        {
+          setState(() {});
+        }
+        break;
+      case 'خ':
+        {
+          setState(() {});
+        }
+        break;
+      case 'د':
+        {
+          setState(() {});
+        }
+        break;
+      case 'ذ':
+        {
+          setState(() {});
+        }
+        break;
+      case 'ر':
+        {
+          setState(() {});
+        }
+        break;
+      case 'ز':
+        {
+          setState(() {});
+        }
+        break;
+      case 'س':
+        {
+          setState(() {});
+        }
+        break;
+      case 'ش':
+        {
+          setState(() {});
+        }
+        break;
+      case 'ص':
+        {
+          setState(() {});
+        }
+        break;
+      case 'ض':
+        {
+          setState(() {});
+        }
+        break;
+      case 'ط':
+        {
+          setState(() {});
+        }
+        break;
+      case 'ظ':
+        {
+          setState(() {});
+        }
+        break;
+      case 'ع':
+        {
+          setState(() {});
+        }
+        break;
+      case 'غ':
+        {
+          setState(() {});
+        }
+        break;
+      case 'ف':
+        {
+          setState(() {});
+        }
+        break;
+      case 'ق':
+        {
+          setState(() {});
+        }
+        break;
+      case 'ك':
+        {
+          setState(() {});
+        }
+        break;
+      case 'ل':
+        {
+          setState(() {});
+        }
+        break;
+      case 'م':
+        {
+          setState(() {});
+        }
+        break;
+      case 'ن':
+        {
+          setState(() {});
+        }
+        break;
+      case 'ه':
+        {
+          setState(() {});
+        }
+        break;
+      case 'و':
+        {
+          setState(() {});
+        }
+        break;
+      case 'ي':
+        {
+          setState(() {});
+        }
+        break;
+
+      default:
+        {
+          setState(() {});
+        }
+    }
+    setState(() {
+      rightAnswersCount = fnRightAnswersCount();
     });
   }
 

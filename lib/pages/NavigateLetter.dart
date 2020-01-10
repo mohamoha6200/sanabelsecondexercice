@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:sanabelsecondexercice/pages/Exercice3.dart';
 import 'package:sanabelsecondexercice/pages/Exercice4v2.dart';
+import 'package:sanabelsecondexercice/pages/Exercice4v3.dart';
 import 'package:sanabelsecondexercice/pages/Exercice9-4b.dart';
 import 'package:sanabelsecondexercice/pages/ExerciceSeven.dart';
 import 'package:sanabelsecondexercice/pages/home.dart';
@@ -83,7 +84,7 @@ class _NavigateLetterState extends State<NavigateLetter> {
         return HomePage();
         break;
       case 'alif-ex1':
-        return ExerciceFourV2(); // listen and drag
+        return ExerciceFourV3(); // listen and drag
       case 'alif-ex2':
         return ExerciceEight();
         break; // circles
@@ -91,7 +92,7 @@ class _NavigateLetterState extends State<NavigateLetter> {
         return ExerciceSeven();
         break; // tap on card
       case 'ba-ex1':
-        return ExerciceFourV2();
+        return ExerciceFourV3();
         break; // listen and drag
       case 'ba-ex2':
         return ExerciceThree();
