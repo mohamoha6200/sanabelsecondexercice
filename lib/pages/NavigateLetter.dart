@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:sanabelsecondexercice/pages/Exercice3.09-01.dart';
 import 'package:sanabelsecondexercice/pages/Exercice3.dart';
+import 'package:sanabelsecondexercice/pages/Exercice3.old.dart';
 import 'package:sanabelsecondexercice/pages/Exercice4v2.dart';
 import 'package:sanabelsecondexercice/pages/Exercice4v3.dart';
 import 'package:sanabelsecondexercice/pages/Exercice9-4b.dart';
@@ -97,7 +99,7 @@ class _NavigateLetterState extends State<NavigateLetter> {
         return ExerciceFourV3();
         break; // listen and drag
       case 'ba-ex2':
-        return ExerciceThree();
+        return ExerciceThree(); 
         break; // match right answer
       case 'ba-ex3':
         return ExerciceFive();

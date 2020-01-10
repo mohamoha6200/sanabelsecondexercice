@@ -174,35 +174,35 @@ class _ExerciceThreeState extends State<ExerciceThree> {
 
   initialiseSubQuestionLatin() {
     switch (subQuestion) {
-      case 'أ':
-        {
-          setState(() {
-            subQuestionLatin = 'alif';
-            picChoiceMap = {
-              'assets/bird.png': {
-                0: ['بُ', 'لْ', 'بُ', 'لٌ']
-              },
-              'assets/door.png': {
-                0: ['بَ', 'ا', 'بٌ']
-              },
-              'assets/berkar.png': {
-                0: ['بِ', 'رْ', 'كَ', 'ا', 'رٌ']
-              }
-            };
-            initialpicChoiceMap = {
-              'assets/berkar.png': {
-                0: ['بُ', 'لْ', 'بُ', 'لٌ']
-              },
-              'assets/bird.png': {
-                0: ['بَ', 'ا', 'بٌ']
-              },
-              'assets/door.png': {
-                0: ['بِ', 'رْ', 'كَ', 'ا', 'رٌ']
-              }
-            };
-          });
-        }
-        break;
+      // case 'أ':
+      //   {
+      //     setState(() {
+      //       subQuestionLatin = 'alif';
+      //       picChoiceMap = {
+      //         'assets/bird.png': {
+      //           0: ['بُ', 'لْ', 'بُ', 'لٌ']
+      //         },
+      //         'assets/door.png': {
+      //           0: ['بَ', 'ا', 'بٌ']
+      //         },
+      //         'assets/berkar.png': {
+      //           0: ['بِ', 'رْ', 'كَ', 'ا', 'رٌ']
+      //         }
+      //       };
+      //       initialpicChoiceMap = {
+      //         'assets/berkar.png': {
+      //           0: ['بُ', 'لْ', 'بُ', 'لٌ']
+      //         },
+      //         'assets/bird.png': {
+      //           0: ['بَ', 'ا', 'بٌ']
+      //         },
+      //         'assets/door.png': {
+      //           0: ['بِ', 'رْ', 'كَ', 'ا', 'رٌ']
+      //         }
+      //       };
+      //     });
+      //   }
+      //   break;
       case 'ب':
         {
           setState(() {
@@ -271,7 +271,24 @@ class _ExerciceThreeState extends State<ExerciceThree> {
       case 'ج':
         {
           setState(() {
-            subQuestionLatin = 'ja';
+            subQuestionLatin = 'the';
+            picChoiceMap = {
+              'assets/wall.png': {
+                0: [
+                  'جِ',
+                  'دَ',
+                  'ا',
+                  'رٌ',
+                ]
+              },
+              'assets/carrot.png': {
+                0: ['جَ', 'زَ', 'رٌ']
+              },
+              'assets/cheese.png': {
+                0: ['جُ', 'بْ', 'نٌ']
+              }
+            };
+            initialpicChoiceMap = shuffleMap(picChoiceMap);
           });
         }
         break;
@@ -687,9 +704,9 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                   : Container();
             }),
           ),
-          SizedBox(
-            height: screenSize.height / 10,
-          ),
+          // SizedBox(
+          //   height: screenSize.height / 10,
+          // ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,

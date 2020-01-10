@@ -40,7 +40,7 @@ class _ExerciceFiveState extends State<ExerciceFive> {
   };
   int rightAnswersCount;
 
-  Map<String, List<String>> initialCardsMap={};
+  Map<String, List<String>> initialCardsMap = {};
 
   @override
   void initState() {
@@ -114,7 +114,18 @@ class _ExerciceFiveState extends State<ExerciceFive> {
         break;
       case 'ج':
         {
-          setState(() {});
+          setState(() {
+            cardsMap = {
+              'assets/chickenCard.png': ['start'],
+              'assets/camelCard.png': ['start'],
+              'assets/treeCard.png': ['middle'],
+              'assets/iceCard.png': ['middleToEnd'],
+              'assets/crownCard.png': ['end'],
+              'assets/bellCard.png': ['start'],
+              'assets/mosqueCard.png': ['middle'],
+            };
+            initialCardsMap = shuffleMap(cardsMap);
+          });
         }
         break;
       case 'ح':
@@ -482,7 +493,8 @@ class _ExerciceFiveState extends State<ExerciceFive> {
       },
       onWillAccept: (data) {
         print(' will accept data ' + data);
-        print(' will accept cardsMap[data] ' + initialCardsMap[data].toString());
+        print(
+            ' will accept cardsMap[data] ' + initialCardsMap[data].toString());
         print(' will accept boxsMap[emoji] ' + boxsMap[emoji].toString());
 
         return cardsMap[data].contains(boxsMap[emoji]);
@@ -603,7 +615,10 @@ class Emoji extends StatelessWidget {
                 width: screenSize.width / 7,
                 height: screenSize.height / 2.2,
               )
-            : Container());
+            : Container(
+                width: screenSize.width / 7,
+                height: screenSize.height / 2.2,
+              ));
   }
 }
 

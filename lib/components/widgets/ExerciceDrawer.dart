@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sanabelsecondexercice/components/providers/DrawerState.dart';
-import 'package:sanabelsecondexercice/pages/DragToBoxExercice.dart';
+import 'package:flutter_page_transition/flutter_page_transition.dart';
+
 import 'package:sanabelsecondexercice/pages/NavigateLetter.dart';
-import 'package:sanabelsecondexercice/pages/home.dart';
+import 'package:sanabelsecondexercice/pages/homeV2.dart';
 import 'package:sanabelsecondexercice/theme/perrine.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -69,11 +70,18 @@ class _AppDrawerState extends State<AppDrawer> {
                 //     ),
                 InkWell(
                   onTap: () {
-                    Navigator.pushReplacement(context, MaterialPageRoute(
-                      builder: (BuildContext context) {
-                        return HomePage();
-                      },
-                    ));
+                    // Navigator.pushReplacement(context, MaterialPageRoute(
+                    //   builder: (BuildContext context) {
+                    //     return HomePage();
+                    //   },
+                    // ));
+                    Navigator.of(context).pushReplacement(
+                      PageTransition(
+                        duration: Duration(milliseconds: 1000),
+                        type: PageTransitionType.rippleMiddle,
+                        child: HomePageV2(),
+                      ),
+                    );
                   },
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -98,9 +106,7 @@ class _AppDrawerState extends State<AppDrawer> {
                     ],
                   ),
                 ),
-               showExList[0] == true
-                    ?
-                Divider():Container(),
+                showExList[0] == true ? Divider() : Container(),
 
                 // _createDrawerItem(
                 //     icon: Icons.collections_bookmark,
@@ -119,10 +125,14 @@ class _AppDrawerState extends State<AppDrawer> {
                           await prefs.setInt('currentExercice', 1);
                           Provider.of<DrawerStateInfo>(context, listen: false)
                               .setCurrentExercice(1);
-                          Navigator.pushReplacement(context, MaterialPageRoute(
-                              builder: (BuildContext context) {
-                            return NavigateLetter();
-                          }));
+                          // Navigator.pushReplacement(context, MaterialPageRoute(
+                          //     builder: (BuildContext context) {
+                          //   return NavigateLetter();
+                          // }));
+                          Navigator.of(context).pushReplacement(PageTransition(
+                              duration: Duration(milliseconds: 1000),
+                              type: PageTransitionType.transferRight,
+                              child: NavigateLetter()));
                         },
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -149,9 +159,7 @@ class _AppDrawerState extends State<AppDrawer> {
                       )
                     : Container(),
 
-                showExList[1] == true
-                    ?
-                Divider():Container(),
+                showExList[1] == true ? Divider() : Container(),
                 showExList[1] == true
                     ? InkWell(
                         onTap: () async {
@@ -190,9 +198,7 @@ class _AppDrawerState extends State<AppDrawer> {
                       )
                     : Container(),
 
-               showExList[2] == true
-                    ?
-                Divider():Container(),
+                showExList[2] == true ? Divider() : Container(),
                 showExList[2] == true
                     ? InkWell(
                         onTap: () async {
@@ -201,10 +207,14 @@ class _AppDrawerState extends State<AppDrawer> {
                           await prefs.setInt('currentExercice', 3);
                           Provider.of<DrawerStateInfo>(context, listen: false)
                               .setCurrentExercice(3);
-                          Navigator.pushReplacement(context, MaterialPageRoute(
-                              builder: (BuildContext context) {
-                            return NavigateLetter();
-                          }));
+                          // Navigator.pushReplacement(context, MaterialPageRoute(
+                          //     builder: (BuildContext context) {
+                          //   return NavigateLetter();
+                          // }));
+                          Navigator.of(context).pushReplacement(PageTransition(
+                              duration: Duration(milliseconds: 1000),
+                              type: PageTransitionType.transferUp,
+                              child: NavigateLetter()));
                         },
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -231,9 +241,7 @@ class _AppDrawerState extends State<AppDrawer> {
                       )
                     : Container(),
 
-               showExList[3] == true
-                    ?
-                Divider():Container(),
+                showExList[3] == true ? Divider() : Container(),
                 showExList[3] == true
                     ? InkWell(
                         onTap: () async {
@@ -242,10 +250,14 @@ class _AppDrawerState extends State<AppDrawer> {
                           await prefs.setInt('currentExercice', 4);
                           Provider.of<DrawerStateInfo>(context, listen: false)
                               .setCurrentExercice(4);
-                          Navigator.pushReplacement(context, MaterialPageRoute(
-                              builder: (BuildContext context) {
-                            return NavigateLetter();
-                          }));
+                          // Navigator.pushReplacement(context, MaterialPageRoute(
+                          //     builder: (BuildContext context) {
+                          //   return NavigateLetter();
+                          // }));
+                          Navigator.of(context).pushReplacement(PageTransition(
+                              duration: Duration(milliseconds: 1000),
+                              type: PageTransitionType.slideDown,
+                              child: NavigateLetter()));
                         },
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
