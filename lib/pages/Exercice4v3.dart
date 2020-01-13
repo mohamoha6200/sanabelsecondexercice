@@ -818,7 +818,7 @@ class _ExerciceFourV3State extends State<ExerciceFourV3> {
           screenSize,
           _scaffoldKey,
           ExQuestionBar(
-            question: 'أستمع و أرتب الحروف من اليمين الى اليسار    ',
+            question: 'أستمع و أرتب الحروف من اليمين الى اليسار         ',
             kidPic: 'kids5.png',
             logos: false,
             // nextExercice: nextExercice,
