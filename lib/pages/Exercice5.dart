@@ -448,9 +448,11 @@ class _ExerciceFiveState extends State<ExerciceFive> {
                       width: screenSize.width / 7,
                     ),
                     onDragEnd: (value) {
-                      // print('the is value ' + scoreMap[emoji].toString());
+                      print('scoreMap.length ' + scoreMap.length.toString());
+                      print(
+                          'rightAnswersCount ' + rightAnswersCount.toString());
 
-                      if ((scoreMap[emoji] == null)) {
+                      if ((scoreMap[emoji] == null) && scoreMap.length != 0) {
                         Flame.audio.play('error.mp3');
                       }
                     },
@@ -514,20 +516,20 @@ class _ExerciceFiveState extends State<ExerciceFive> {
             showDialog(
                 context: context,
                 builder: (context) {
-                  Future.delayed(Duration(seconds: 3), () {
-                    Navigator.of(context).pop(true);
-                  });
+                  // Future.delayed(Duration(seconds: 3), () {
+                  //   Navigator.of(context).pop(true);
+                  // });
                   return Theme(
                     data: Theme.of(context)
                         .copyWith(dialogBackgroundColor: Colors.transparent),
                     child: ResultSucessQuestion(),
                   );
                 });
-            Future.delayed(Duration(seconds: 5), () {
-              setState(() {
-                scoreMap = {};
-              });
+            // Future.delayed(Duration(seconds: 5), () {
+            setState(() {
+              scoreMap = {};
             });
+            // });
           } else {
             Flame.audio.play('treasure.mp3');
             Future.delayed(Duration(seconds: 1), () {

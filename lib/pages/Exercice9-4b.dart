@@ -459,17 +459,17 @@ class _Exercice9State extends State<Exercice9> {
                           });
 
                           if (scoreMap.length == rightCardsIndexes.length) {
-                            Future.delayed(Duration(seconds: 8), () {
-                              setState(() {
-                                scoreMap = {};
-                              });
-                            });
+                            // Future.delayed(Duration(seconds: 8), () {
+                               setState(() {
+                                 scoreMap = {};
+                               });
+                            // });
                             showDialog(
                                 context: context,
                                 builder: (context) {
-                                  Future.delayed(Duration(seconds: 5), () {
-                                    Navigator.of(context).pop(true);
-                                  });
+                                  // Future.delayed(Duration(seconds: 5), () {
+                                  //   Navigator.of(context).pop(true);
+                                  // });
                                   return Theme(
                                     data: Theme.of(context).copyWith(
                                         dialogBackgroundColor:
@@ -538,7 +538,7 @@ class _Exercice9State extends State<Exercice9> {
           _scaffoldKey,
           ExQuestionBar(
             subQuestion: subQuestion,
-            question: 'أضغط عندما أرى حرف   ',
+            question: 'أضغط عندما أرى حرف     ',
             kidPic: 'kids8.png',
             logos: false,
           ),

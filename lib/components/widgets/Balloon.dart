@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shadow/shadow.dart';
 
 class Balloon extends StatelessWidget {
   final String letter;
@@ -43,77 +44,87 @@ class Balloon extends StatelessWidget {
           color = Colors.white;
         }
     }
-    return Container(
-      width: screenSize.width / 10,
-      height: screenSize.width / 10,
-      decoration: new BoxDecoration(
-        image: new DecorationImage(
-          image: new AssetImage('assets/balloon$balloonColor.png'),
-          fit: BoxFit.contain,
-        ),
-      ),
-      child: letter == 'أ'
-          ? Center(
-              child: Column(
-                // mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    letter,
-                    style: TextStyle(
-                        fontSize: screenSize.width / 10,
-                        color: color,
-                        fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(
-                    height: screenSize.width / 40,
-                  )
-                ],
-              ),
-            )
-          : (letter == 'ح' ||
-          letter == 'ج' ||
-                  letter == 'خ' ||
-                  letter == 'س' ||
-                  letter == 'ش' ||
-                  letter == 'ص' ||
-                  letter == 'ض' ||
-                  letter == 'غ' ||
-                  letter == 'ع' ||
-                  // letter == 'ف' ||
-                  letter == 'ق' ||
-                  letter == 'م' ||
-                  letter == 'ن' ||
-                  letter == 'و' ||
-                  letter == 'ي')
-              ? Stack(
-                  alignment: AlignmentDirectional.topCenter,
-                  children: <Widget>[
-                    Positioned(
-                      top: -screenSize.width / 123,
-                      child: Text(
-                        letter,
-                        style: TextStyle(
-                            fontSize: screenSize.width / 10,
-                            color: color,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                  ],
-                )
-              : Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      letter,
-                      style: TextStyle(
-                          fontSize: screenSize.width / 10,
-                          color: color,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ],
+    return Shadow(
+       offset: Offset(20, 05),
+      child: Stack(
+        fit: StackFit.expand,
+        children: <Widget>[
+          Container(
+            width: screenSize.width / 10,
+            height: screenSize.width / 10,
+            decoration: new BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                  'assets/balloon$balloonColor.png',
                 ),
+                fit: BoxFit.contain,
+              ),
+            ),
+            child: letter == 'أ'
+                ? Center(
+                    child: Column(
+                      // mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          letter,
+                          style: TextStyle(
+                              fontSize: screenSize.width / 10,
+                              color: color,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(
+                          height: screenSize.width / 40,
+                        )
+                      ],
+                    ),
+                  )
+                : (letter == 'ح' ||
+                        letter == 'ج' ||
+                        letter == 'خ' ||
+                        letter == 'س' ||
+                        letter == 'ش' ||
+                        letter == 'ص' ||
+                        letter == 'ض' ||
+                        letter == 'غ' ||
+                        letter == 'ع' ||
+                        // letter == 'ف' ||
+                        letter == 'ق' ||
+                        letter == 'م' ||
+                        letter == 'ن' ||
+                        letter == 'و' ||
+                        letter == 'ي')
+                    ? Stack(
+                        alignment: AlignmentDirectional.topCenter,
+                        children: <Widget>[
+                          Positioned(
+                            top: -screenSize.width / 123,
+                            child: Text(
+                              letter,
+                              style: TextStyle(
+                                  fontSize: screenSize.width / 10,
+                                  color: color,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      )
+                    : Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            letter,
+                            style: TextStyle(
+                                fontSize: screenSize.width / 10,
+                                color: color,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+          ),
+        ],
+      ),
     );
   }
 }

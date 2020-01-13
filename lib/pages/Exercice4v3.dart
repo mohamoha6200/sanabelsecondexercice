@@ -722,25 +722,27 @@ class _ExerciceFourV3State extends State<ExerciceFourV3> {
 
             print('letterList = ');
             print(letterList);
+            
             showDialog(
+              barrierDismissible: true,
                 context: context,
-                builder: (context) {
-                  Future.delayed(Duration(seconds: 3), () {
-                    Navigator.of(context).pop(true);
-                  });
-                  return Theme(
+                builder: (BuildContext context) {
+                  // Future.delayed(Duration(seconds: 3), () {
+                  //   Navigator.of(context).pop();
+                  // });
+                  return Theme( 
                     data: Theme.of(context)
                         .copyWith(dialogBackgroundColor: Colors.transparent),
-                    child: ResultSucessQuestion(),
+                    child: new ResultSucessQuestion(),
                   );
                 });
-            Future.delayed(Duration(seconds: 5), () {
-              setState(() {
-                letterList = letterListRed;
-                scoreMap = {};
-                nextExercice = true;
+              Future.delayed(Duration(seconds: 3), () {
+               setState(() {
+                 letterList = letterListRed;
+                 scoreMap = {};
+                 nextExercice = true;
+               });
               });
-            });
 
             selectedButtonIndex = -1;
             var colors = buttonList.keys.toList();

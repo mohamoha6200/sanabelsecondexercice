@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
+import 'package:sanabelsecondexercice/components/providers/DrawerState.dart';
 import 'package:sanabelsecondexercice/pages/Exercice3.09-01.dart';
 import 'package:sanabelsecondexercice/pages/Exercice3.dart';
 import 'package:sanabelsecondexercice/pages/Exercice3.old.dart';
@@ -55,9 +57,11 @@ class _NavigateLetterState extends State<NavigateLetter> {
   gettingLetter() async {
     SharedPreferences.getInstance().then((onValue) async {
       prefs = onValue;
+      final myexercice =
+          Provider.of<DrawerStateInfo>(context, listen: false).getCurrentDrawer;
       setState(() {
         subQuestion = prefs.getString('currentLetter');
-        currentExercice = prefs.getInt('currentExercice');
+        currentExercice = myexercice;
         // currentExercice++;
       });
       print("currentExercice  to drawer=== ");
@@ -99,7 +103,7 @@ class _NavigateLetterState extends State<NavigateLetter> {
         return ExerciceFourV3();
         break; // listen and drag
       case 'ba-ex2':
-        return ExerciceThree(); 
+        return ExerciceThree();
         break; // match right answer
       case 'ba-ex3':
         return ExerciceFive();

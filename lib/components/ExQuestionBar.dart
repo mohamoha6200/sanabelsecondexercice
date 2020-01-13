@@ -66,7 +66,7 @@ class ExQuestionBar extends StatelessWidget {
                           subQuestion,
                           style: TextStyle(
                               color: Colors.red,
-                              fontSize: screenSize.width / 20,
+                              fontSize: screenSize.height / 14,
                               fontWeight: FontWeight.w500),
                         ),
                       )
@@ -77,7 +77,7 @@ class ExQuestionBar extends StatelessWidget {
                           question,
                           style: TextStyle(
                               color: Color.fromRGBO(80, 47, 136, 1),
-                              fontSize: screenSize.width / 27,
+                              fontSize: screenSize.height / 14,
                               fontWeight: FontWeight.w500),
                         ),
                       )

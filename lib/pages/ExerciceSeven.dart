@@ -91,17 +91,17 @@ class _ExerciceSevenState extends State<ExerciceSeven> {
                       });
 
                       if (scoreMap.length == rightAnswersCount) {
-                        Future.delayed(Duration(seconds: 8), () {
+                        // Future.delayed(Duration(seconds: 8), () {
                           setState(() {
                             scoreMap = {};
-                          });
+                          // });
                         });
                         showDialog(
                             context: context,
                             builder: (context) {
-                              Future.delayed(Duration(seconds: 5), () {
-                                Navigator.of(context).pop(true);
-                              });
+                              // Future.delayed(Duration(seconds: 5), () {
+                              //   Navigator.of(context).pop(true);
+                              // });
                               return Theme(
                                 data: Theme.of(context).copyWith(
                                     dialogBackgroundColor: Colors.transparent),
