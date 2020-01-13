@@ -583,7 +583,7 @@ class _ExerciceFourV3State extends State<ExerciceFourV3> {
                             child: Center(
                               child: Container(
                                 width: screenSize.width / 4,
-                                height: screenSize.height / 3.2,
+                                height: screenSize.height / 3.5,
                               ),
                             ),
                           ),
@@ -786,7 +786,7 @@ class _ExerciceFourV3State extends State<ExerciceFourV3> {
         child: Center(
           child: Container(
             width: screenSize.width / 4,
-            height: screenSize.height / 3.2,
+            height: screenSize.height / 3.5,
             child: Image.asset(
               'assets/lettres_image/$pic.png',
               fit: BoxFit.contain,
@@ -800,7 +800,7 @@ class _ExerciceFourV3State extends State<ExerciceFourV3> {
         child: Center(
           child: Container(
             width: screenSize.width / 4,
-            height: screenSize.height / 3.2,
+            height: screenSize.height / 3.5,
           ),
         ),
       );
