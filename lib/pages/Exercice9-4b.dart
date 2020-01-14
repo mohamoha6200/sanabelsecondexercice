@@ -460,9 +460,10 @@ class _Exercice9State extends State<Exercice9> {
 
                           if (scoreMap.length == rightCardsIndexes.length) {
                             // Future.delayed(Duration(seconds: 8), () {
-                               setState(() {
-                                 scoreMap = {};
-                               });
+                            setState(() {
+                              scoreMap = {};
+                              initialAnswers = shuffleMap(answers);
+                            });
                             // });
                             showDialog(
                                 context: context,

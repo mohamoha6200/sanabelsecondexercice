@@ -92,8 +92,10 @@ class _ExerciceSevenState extends State<ExerciceSeven> {
 
                       if (scoreMap.length == rightAnswersCount) {
                         // Future.delayed(Duration(seconds: 8), () {
-                          setState(() {
-                            scoreMap = {};
+                        setState(() {
+                          scoreMap = {};
+                          initialAnswers = shuffleMap(answers);
+
                           // });
                         });
                         showDialog(
@@ -150,9 +152,8 @@ class _ExerciceSevenState extends State<ExerciceSeven> {
   }
 }
 
-  Map<String, bool> shuffleMap(
-      Map<String, bool> map) {
-    Map<String, bool> result = {};
+Map<String, bool> shuffleMap(Map<String, bool> map) {
+  Map<String, bool> result = {};
   var keys = map.keys.toList()..shuffle();
   var values = map.values.toList()..shuffle();
   for (var i = 0; i < keys.length; i++) {

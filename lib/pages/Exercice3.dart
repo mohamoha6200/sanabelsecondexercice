@@ -589,6 +589,11 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                   _points = [];
                   _truePoints = [];
                   scoreMap = {};
+                  initialpicChoiceMap = shuffleMap(picChoiceMap);
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    getPicsCardsSizesAndPositions();
+                    getWordsCardsSizesAndPositions();
+                  });
                 });
               } else {
                 print('gj');
@@ -638,6 +643,11 @@ class _ExerciceThreeState extends State<ExerciceThree> {
                   _points = [];
                   _truePoints = [];
                   scoreMap = {};
+                  initialpicChoiceMap = shuffleMap(picChoiceMap);
+                  WidgetsBinding.instance.addPostFrameCallback((_) {
+                    getPicsCardsSizesAndPositions();
+                    getWordsCardsSizesAndPositions();
+                  });
                 });
               } else {
                 print('gj');

@@ -528,6 +528,7 @@ class _ExerciceFiveState extends State<ExerciceFive> {
             // Future.delayed(Duration(seconds: 5), () {
             setState(() {
               scoreMap = {};
+              initialCardsMap = shuffleMap(cardsMap);
             });
             // });
           } else {

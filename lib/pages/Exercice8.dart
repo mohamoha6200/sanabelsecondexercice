@@ -336,6 +336,8 @@ class _ExerciceEightState extends State<ExerciceEight> {
             // Future.delayed(Duration(seconds: 5), () {
             setState(() {
               scoreMap = {};
+              initialCirclesMap = shuffleMap(circlesMap);
+
               // });
             });
           } else {

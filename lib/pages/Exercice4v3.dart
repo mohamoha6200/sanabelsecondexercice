@@ -724,7 +724,6 @@ class _ExerciceFourV3State extends State<ExerciceFourV3> {
             print(letterList);
             
             showDialog(
-              barrierDismissible: true,
                 context: context,
                 builder: (BuildContext context) {
                   // Future.delayed(Duration(seconds: 3), () {
@@ -736,13 +735,13 @@ class _ExerciceFourV3State extends State<ExerciceFourV3> {
                     child: new ResultSucessQuestion(),
                   );
                 });
-              Future.delayed(Duration(seconds: 3), () {
+              // Future.delayed(Duration(seconds: 3), () {
                setState(() {
                  letterList = letterListRed;
                  scoreMap = {};
                  nextExercice = true;
                });
-              });
+              // });
 
             selectedButtonIndex = -1;
             var colors = buttonList.keys.toList();

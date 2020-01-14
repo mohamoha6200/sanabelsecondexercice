@@ -100,7 +100,7 @@ class _NavigateLetterState extends State<NavigateLetter> {
         return ExerciceSeven();
         break; // tap on card
       case 'ba-ex1':
-        return ExerciceFourV3();
+        return ExerciceFourV3(); 
         break; // listen and drag
       case 'ba-ex2':
         return ExerciceThree();
