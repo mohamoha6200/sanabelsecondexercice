@@ -23,9 +23,9 @@ class _ResultSucessQuestionState extends State<ResultSucessQuestion> {
   void initState() {
     super.initState();
 
-     Flame.audio.play('goodComplete.mp3');
+    Flame.audio.play('goodComplete.mp3');
 
-     Flame.audio.play('oueee.mp3');
+    Flame.audio.play('oueee.mp3');
     gettingLetter();
   }
 
@@ -84,6 +84,8 @@ class _ResultSucessQuestionState extends State<ResultSucessQuestion> {
                 children: <Widget>[
                   InkWell(
                     onTap: () {
+                      Navigator.of(context).pop(true);
+
                       Navigator.of(context).pushReplacement(
                         PageTransition(
                           duration: Duration(milliseconds: 1000),
@@ -209,3 +211,4 @@ class _ResultSucessQuestionState extends State<ResultSucessQuestion> {
     );
   }
 }
+ 

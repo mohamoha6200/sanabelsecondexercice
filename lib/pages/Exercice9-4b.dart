@@ -13,7 +13,7 @@ class Exercice9 extends StatefulWidget {
   @override
   _Exercice9State createState() => _Exercice9State();
 }
-
+ 
 class _Exercice9State extends State<Exercice9> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -443,7 +443,7 @@ class _Exercice9State extends State<Exercice9> {
           textDirection: TextDirection.rtl,
           child: new GridView.count(
             shrinkWrap: true,
-            childAspectRatio: 1.07,
+            childAspectRatio: screenSize.width/screenSize.height /1.75,
             physics: ClampingScrollPhysics(),
             crossAxisCount: 6,
             children: initialAnswers.keys.map((index) {
@@ -539,7 +539,7 @@ class _Exercice9State extends State<Exercice9> {
           _scaffoldKey,
           ExQuestionBar(
             subQuestion: subQuestion,
-            question: 'أضغط عندما أرى حرف     ',
+            question: 'أَضْغَطُ عِنْدَمَا أَرَى حَرْفَ     ', 
             kidPic: 'kids8.png',
             logos: false,
           ),

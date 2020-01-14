@@ -590,7 +590,7 @@ class _ExerciceFiveState extends State<ExerciceFive> {
           screenSize,
           _scaffoldKey,
           ExQuestionBar(
-            question: 'أضع كل كلمة و صورتها في الصندوق المناسب',
+            question: 'أَضَعُ كُلَّ كَلِمَةٍ وَ صُورَتَهَا فِي الصُّنْدُوقِ المُنَاسِبِ',
             kidPic: 'kids6.png',
             logos: false,
           ),

@@ -384,7 +384,7 @@ class _ExerciceEightState extends State<ExerciceEight> {
           screenSize,
           _scaffoldKey,
           ExQuestionBar(
-            question: 'أضع كل كلمة في الصندوق المناسب',
+            question: 'أَضَعُ كُلَّ كَلِمَةٍ فِي الصُّنْدُوقِ المُنَاسِبِ',
             kidPic: 'kids6.png',
             logos: false,
           ),

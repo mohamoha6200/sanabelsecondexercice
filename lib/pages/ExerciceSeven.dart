@@ -140,7 +140,7 @@ class _ExerciceSevenState extends State<ExerciceSeven> {
           _scaffoldKey,
           ExQuestionBar(
             subQuestion: subQuestion,
-            question: 'أضغط على الصورة عندما أرى   ',
+            question: 'أَضْغَطُ عَلَى الصُورَةِ عِنْدَمَا أَرَى   ',
             kidPic: 'kids8.png',
             logos: false,
           ),

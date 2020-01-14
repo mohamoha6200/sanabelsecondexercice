@@ -89,7 +89,7 @@ class _NavigateLetterState extends State<NavigateLetter> {
     print('route=' + route);
     switch (route) {
       case 'home':
-        return HomePageV2();
+        return HomePageV2(); 
         break;
       case 'alif-ex1':
         return ExerciceFourV3(); // listen and drag

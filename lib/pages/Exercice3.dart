@@ -27,6 +27,8 @@ class _ExerciceThreeState extends State<ExerciceThree> {
   String subQuestionLatin;
   SharedPreferences prefs;
 
+  // static final GlobalKey _loginFormKey =
+  //     new GlobalKey(debugLabel: '_loginFormKey');
   static final GlobalKey _picCardKey0 = GlobalKey();
 
   static final GlobalKey _picCardKey1 = GlobalKey();
@@ -755,7 +757,7 @@ class _ExerciceThreeState extends State<ExerciceThree> {
             screenSize,
             _scaffoldKey,
             ExQuestionBar(
-              question: ' أربط الكلمة بالصورة المناسبة',
+              question: '  أَرْبِطُ الكَلِمَةَ بِالصُّورَةِ المُنَاسِبَةِ',
               kidPic: 'kids4.png',
               logos: false,
             ),
