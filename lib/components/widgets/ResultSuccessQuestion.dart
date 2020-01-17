@@ -65,34 +65,73 @@ class _ResultSucessQuestionState extends State<ResultSucessQuestion> {
               ),
             ),
           ),
-          Expanded(
-            child: Container(
-              decoration:
-                  new BoxDecoration(color: Colors.transparent, boxShadow: [
-                new BoxShadow(
-                  color: Color.fromRGBO(255, 235, 59, 0.75),
-                  blurRadius: 80.0,
+          Container(
+            decoration:
+                new BoxDecoration(color: Colors.transparent, boxShadow: [
+              new BoxShadow(
+                color: Color.fromRGBO(255, 235, 59, 0.75),
+                blurRadius: 80.0,
+              ),
+            ]),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: ((subQuestion == 'أ' && myExercice == 3) ||
+                      (subQuestion != 'أ' && myExercice == 4))
+                  ? MainAxisAlignment.center
+                  : MainAxisAlignment.spaceBetween,
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).pop(true);
+
+                    Navigator.of(context).pushReplacement(
+                      PageTransition(
+                        duration: Duration(milliseconds: 1000),
+                        type: PageTransitionType.rippleMiddle,
+                        child: HomePageV2(),
+                      ),
+                    );
+                  },
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      Container(
+                        margin: new EdgeInsets.symmetric(
+                            horizontal: screenSize.width / 80),
+                        child: Icon(
+                          Icons.home,
+                          size: screenSize.width / 32,
+                          color: Colors.purple,
+                        ),
+                      ),
+                      Container(
+                        child: Text(
+                          'إِلَى الْحُرُوفْ',
+                          style: TextStyle(
+                              color: Colors.purple,
+                              fontSize: 25.0,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ]),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: ((subQuestion == 'أ' && myExercice == 3) ||
-                        (subQuestion != 'أ' && myExercice == 4))
-                    ? MainAxisAlignment.center
-                    : MainAxisAlignment.spaceBetween,
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  InkWell(
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: screenSize.width / 80),
+                  child: InkWell(
                     onTap: () {
+                      Provider.of<DrawerStateInfo>(context, listen: false)
+                          .setCurrentExercice(myExercice);
                       Navigator.of(context).pop(true);
 
-                      Navigator.of(context).pushReplacement(
-                        PageTransition(
-                          duration: Duration(milliseconds: 1000),
-                          type: PageTransitionType.rippleMiddle,
-                          child: HomePageV2(),
-                        ),
-                      );
+                      // Navigator.pushReplacement(context,
+                      //     MaterialPageRoute(builder: (BuildContext context) {
+                      //   return NavigateLetter();
+                      // }));
                     },
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -103,14 +142,14 @@ class _ResultSucessQuestionState extends State<ResultSucessQuestion> {
                           margin: new EdgeInsets.symmetric(
                               horizontal: screenSize.width / 80),
                           child: Icon(
-                            Icons.home,
+                            Icons.autorenew,
                             size: screenSize.width / 32,
                             color: Colors.purple,
                           ),
                         ),
                         Container(
                           child: Text(
-                            'إِلَى الْحُرُوفْ',
+                            'أعيد التمرين',
                             style: TextStyle(
                                 color: Colors.purple,
                                 fontSize: 25.0,
@@ -120,90 +159,49 @@ class _ResultSucessQuestionState extends State<ResultSucessQuestion> {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: screenSize.width / 80),
-                    child: InkWell(
-                      onTap: () {
-                        Provider.of<DrawerStateInfo>(context, listen: false)
-                            .setCurrentExercice(myExercice);
-                        Navigator.of(context).pop(true);
+                ),
+                Visibility(
+                  visible: !((subQuestion == 'أ' && myExercice == 3) ||
+                      (subQuestion != 'أ' && myExercice == 4)),
+                  child: InkWell(
+                    onTap: () {
+                      Provider.of<DrawerStateInfo>(context, listen: false)
+                          .setCurrentExercice(myExercice + 1);
+                      Navigator.of(context).pop(true);
 
-                        // Navigator.pushReplacement(context,
-                        //     MaterialPageRoute(builder: (BuildContext context) {
-                        //   return NavigateLetter();
-                        // }));
-                      },
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          Container(
-                            margin: new EdgeInsets.symmetric(
-                                horizontal: screenSize.width / 80),
-                            child: Icon(
-                              Icons.autorenew,
-                              size: screenSize.width / 32,
-                              color: Colors.purple,
-                            ),
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (BuildContext context) {
+                        return NavigateLetter();
+                      }));
+                    },
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
+                      children: <Widget>[
+                        Container(
+                          child: Text(
+                            'الْتَمْرِيِنُ التالي',
+                            style: TextStyle(
+                                color: Colors.purple,
+                                fontSize: 25.0,
+                                fontWeight: FontWeight.w500),
                           ),
-                          Container(
-                            child: Text(
-                              'أعيد التمرين',
-                              style: TextStyle(
-                                  color: Colors.purple,
-                                  fontSize: 25.0,
-                                  fontWeight: FontWeight.w500),
-                            ),
+                        ),
+                        Container(
+                          margin: new EdgeInsets.symmetric(
+                              horizontal: screenSize.width / 80),
+                          child: Icon(
+                            Icons.forward,
+                            size: screenSize.width / 32,
+                            color: Colors.purple,
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
-                  Visibility(
-                    visible: !((subQuestion == 'أ' && myExercice == 3) ||
-                        (subQuestion != 'أ' && myExercice == 4)),
-                    child: InkWell(
-                      onTap: () {
-                        Provider.of<DrawerStateInfo>(context, listen: false)
-                            .setCurrentExercice(myExercice + 1);
-                        Navigator.of(context).pop(true);
-
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (BuildContext context) {
-                          return NavigateLetter();
-                        }));
-                      },
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.max,
-                        children: <Widget>[
-                          Container(
-                            child: Text(
-                              'الْتَمْرِيِنُ التالي',
-                              style: TextStyle(
-                                  color: Colors.purple,
-                                  fontSize: 25.0,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                          ),
-                          Container(
-                            margin: new EdgeInsets.symmetric(
-                                horizontal: screenSize.width / 80),
-                            child: Icon(
-                              Icons.forward,
-                              size: screenSize.width / 32,
-                              color: Colors.purple,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                ],
-              ),
+                )
+              ],
             ),
           )
         ],

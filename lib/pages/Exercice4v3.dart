@@ -62,6 +62,8 @@ class _ExerciceFourV3State extends State<ExerciceFourV3> {
 
   String subQuestionLatin = '';
   SharedPreferences prefs;
+
+  bool interactionSound = true;
   @override
   void initState() {
     super.initState();
@@ -79,6 +81,7 @@ class _ExerciceFourV3State extends State<ExerciceFourV3> {
       setState(() {
         subQuestion = prefs.getString('currentLetter');
         colorSoundMap = fillColorSoundMap(subQuestion);
+        interactionSound = prefs.getBool('interactionSound') ?? true;
       });
       initialiseSubQuestionLatin();
       print('subQuestionLatin = ' + subQuestionLatin);
@@ -679,14 +682,14 @@ class _ExerciceFourV3State extends State<ExerciceFourV3> {
             children: <Widget>[
               Container(
                 width: screenSize.width / 5.5,
-                height: screenSize.height / 1.9,
+                height: screenSize.height / 1.93,
                 alignment: Alignment.center,
                 child: Image.asset('assets/balloonpurpleaccent.png'),
               ),
               Positioned(
-                top: emoji != 'kasra' ? 
-                 screenSize.height / 30
-                 : screenSize.height / 40,
+                top: emoji != 'kasra'
+                    ? screenSize.height / 30
+                    : screenSize.height / 40,
                 child: letterWidget(emoji, subQuestion, context),
               ),
             ],
@@ -697,7 +700,7 @@ class _ExerciceFourV3State extends State<ExerciceFourV3> {
             children: <Widget>[
               Container(
                 width: screenSize.width / 5.5,
-                height: screenSize.height / 1.9,
+                height: screenSize.height / 1.93,
                 alignment: Alignment.center,
                 child: Image.asset('assets/balloonpurpleaccent.png'),
               ),
@@ -722,26 +725,26 @@ class _ExerciceFourV3State extends State<ExerciceFourV3> {
 
             print('letterList = ');
             print(letterList);
-            
+
             showDialog(
                 context: context,
                 builder: (BuildContext context) {
                   // Future.delayed(Duration(seconds: 3), () {
                   //   Navigator.of(context).pop();
                   // });
-                  return Theme( 
+                  return Theme(
                     data: Theme.of(context)
                         .copyWith(dialogBackgroundColor: Colors.transparent),
                     child: new ResultSucessQuestion(),
                   );
                 });
-              // Future.delayed(Duration(seconds: 3), () {
-               setState(() {
-                 letterList = letterListRed;
-                 scoreMap = {};
-                 nextExercice = true;
-               });
-              // });
+            // Future.delayed(Duration(seconds: 3), () {
+            setState(() {
+              letterList = letterListRed;
+              scoreMap = {};
+              nextExercice = true;
+            });
+            // });
 
             selectedButtonIndex = -1;
             var colors = buttonList.keys.toList();
@@ -751,7 +754,7 @@ class _ExerciceFourV3State extends State<ExerciceFourV3> {
               });
             }
           } else {
-            Flame.audio.play('good.mp3');
+            if (interactionSound == true) Flame.audio.play('good.mp3'); 
           }
         });
         print('---ScoreLenght---');
@@ -819,7 +822,8 @@ class _ExerciceFourV3State extends State<ExerciceFourV3> {
           screenSize,
           _scaffoldKey,
           ExQuestionBar(
-            question: 'أَسْتَمِعُ وَ أُرَتِّبُ الحُرُوفَ مِنَ اليَمِينِ إِلَى اليَسَارَِ         ',
+            question:
+                'أَسْتَمِعُ وَ أُرَتِّبُ الحُرُوفَ مِنَ اليَمِينِ إِلَى اليَسَارَِ         ',
             kidPic: 'kids5.png',
             logos: false,
             // nextExercice: nextExercice,

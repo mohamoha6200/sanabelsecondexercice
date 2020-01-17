@@ -13,7 +13,7 @@ class Exercice9 extends StatefulWidget {
   @override
   _Exercice9State createState() => _Exercice9State();
 }
- 
+
 class _Exercice9State extends State<Exercice9> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -305,12 +305,130 @@ class _Exercice9State extends State<Exercice9> {
         break;
       case 'ح':
         {
-          setState(() {});
+          setState(() {
+            answers = {
+              0: {
+                2: ['ر', 'ر', 'حٌ']
+              },
+              1: {
+                0: ['عُــ', 'ت', 'ب']
+              },
+              2: {
+                1: ['بِـ', 'ـخِـ', 'ع']
+              },
+              3: {
+                0: ['حَــ', 'ت', 'ب']
+              },
+              4: {
+                2: ['ر', 'ي', 'ـجٍ']
+              },
+              5: {
+                0: ['دُ', 'ت', 'ب']
+              },
+              6: {
+                2: ['ر', 'ي', 'ـحٌ']
+              },
+              7: {
+                1: ['بِـ', 'ـحُـ', 'ع']
+              },
+              8: {
+                0: ['نُــ', 'ت', 'ب']
+              },
+              9: {
+                0: ['عِــ', 'ت', 'ب']
+              },
+              10: {
+                1: ['بِـ', 'ـحَـ', 'ع']
+              },
+              11: {
+                0: ['دِ', 'ت', 'ب']
+              },
+              12: {
+                2: ['ن', 'ا', 'يٌ']
+              },
+              13: {
+                0: ['مُــ', 'ت', 'ب']
+              },
+              14: {
+                1: ['بِـ', 'ـجِـ', 'ع']
+              },
+              15: {
+                0: ['خَــ', 'ت', 'ب']
+              },
+              16: {
+                1: ['بِـ', 'ـغُـ', 'ع']
+              },
+              17: {
+                0: ['حُــ', 'ت', 'ب']
+              },
+            };
+            rightCardsIndexes = [1, 3, 4, 9, 10, 13];
+            initialAnswers = shuffleMap(answers);
+          });
         }
         break;
       case 'خ':
         {
-          setState(() {});
+          setState(() {
+            answers = {
+              0: {
+                0: ['خُــ', 'ت', 'ب']
+              },
+              1: {
+                0: ['عُــ', 'ـجِـ', 'ع']
+              },
+              2: {
+                1: ['بِـ', 'ـخِـ', 'ع']
+              },
+              3: {
+                0: ['حَــ', 'ت', 'ب']
+              },
+              4: {
+                2: ['ر', 'ي', 'ـجٍ']
+              },
+              5: {
+                0: ['ذِ', 'ت', 'ب']
+              },
+              6: {
+                2: ['ر', 'ي', 'ـخٌ']
+              },
+              7: {
+                1: ['بِـ', 'ـحُـ', 'ع']
+              },
+              8: {
+                0: ['نُــ', 'ت', 'ب']
+              },
+              9: {
+                0: ['غُــ', 'ت', 'ب']
+              },
+              10: {
+                0: ['نِــ', 'ت', 'ب']
+              },
+              11: {
+                0: ['دَ', 'ت', 'ب']
+              },
+              12: {
+                1: ['بِـ', 'ـخَـ', 'ع']
+              },
+              13: {
+                2: ['ن', 'ا', 'خٌ']
+              },
+              14: {
+                1: ['بِـ', 'ـنِـ', 'ع']
+              },
+              15: {
+                1: ['بِـ', 'ـجِـ', 'ع']
+              },
+              16: {
+                0: ['خَــ', 'ت', 'ب']
+              },
+              17: {
+                1: ['بِـ', 'ـغُـ', 'ع']
+              },
+            };
+            rightCardsIndexes = [1, 3, 4, 9, 10, 13];
+            initialAnswers = answers;
+          });
         }
         break;
       case 'د':
@@ -443,7 +561,7 @@ class _Exercice9State extends State<Exercice9> {
           textDirection: TextDirection.rtl,
           child: new GridView.count(
             shrinkWrap: true,
-            childAspectRatio: screenSize.width/screenSize.height /1.75,
+            childAspectRatio: screenSize.width / screenSize.height / 1.75,
             physics: ClampingScrollPhysics(),
             crossAxisCount: 6,
             children: initialAnswers.keys.map((index) {
@@ -539,7 +657,7 @@ class _Exercice9State extends State<Exercice9> {
           _scaffoldKey,
           ExQuestionBar(
             subQuestion: subQuestion,
-            question: 'أَضْغَطُ عِنْدَمَا أَرَى حَرْفَ     ', 
+            question: 'أَضْغَطُ عِنْدَمَا أَرَى حَرْفَ     ',
             kidPic: 'kids8.png',
             logos: false,
           ),

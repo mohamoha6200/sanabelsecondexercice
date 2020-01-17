@@ -298,6 +298,22 @@ class _ExerciceThreeState extends State<ExerciceThree> {
         {
           setState(() {
             subQuestionLatin = '7a';
+            picChoiceMap = {
+              'assets/whale.png': {
+                0: [
+                  'حُ',
+                  'و',
+                  'تٌ',
+                ]
+              },
+              'assets/desktop.png': {
+                0: ['حَ', 'ا', 'سُ', 'و', 'بٌ']
+              },
+              'assets/donkey.png': {
+                0: ['حِ', 'مَ', 'ا', 'رٌ']
+              }
+            };
+            initialpicChoiceMap = shuffleMap(picChoiceMap);
           });
         }
         break;
@@ -305,6 +321,22 @@ class _ExerciceThreeState extends State<ExerciceThree> {
         {
           setState(() {
             subQuestionLatin = '5a';
+            picChoiceMap = {
+              'assets/cucumber.png': {
+                0: ['خِ', 'يَ', 'ا', 'رٌ']
+              },
+              'assets/sheep.png': {
+                0: ['خَ', 'رُ', 'و', 'فٌ']
+              },
+              'assets/bread.png': {
+                0: [
+                  'خُ',
+                  'بْ',
+                  'زٌ',
+                ]
+              }
+            };
+            initialpicChoiceMap = shuffleMap(picChoiceMap);
           });
         }
         break;
@@ -312,6 +344,25 @@ class _ExerciceThreeState extends State<ExerciceThree> {
         {
           setState(() {
             subQuestionLatin = 'da';
+            picChoiceMap = {
+              'assets/bear.png': {
+                0: [
+                  'دُ',
+                  'بٌّ',
+                ]
+              },
+              'assets/bike.png': {
+                0: ['دَ', 'رَّ', 'ا', 'جَ', 'ةٌ']
+              },
+              'assets/cockerel.png': {
+                0: [
+                  'دِ',
+                  'ي',
+                  'كٌ',
+                ]
+              }
+            };
+            initialpicChoiceMap = shuffleMap(picChoiceMap);
           });
         }
         break;
@@ -326,6 +377,22 @@ class _ExerciceThreeState extends State<ExerciceThree> {
         {
           setState(() {
             subQuestionLatin = 'ra';
+            picChoiceMap = {
+              'assets/spear.png': {
+                0: ['رُ', 'مْ', 'حٌ']
+              },
+              'assets/foot.png': {
+                0: ['رِ', 'جْ', 'لٌ']
+              },
+              'assets/head.png': {
+                0: [
+                  'رَ',
+                  'أْ',
+                  'سٌ',
+                ]
+              }
+            };
+            initialpicChoiceMap = shuffleMap(picChoiceMap);
           });
         }
         break;

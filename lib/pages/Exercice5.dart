@@ -130,17 +130,50 @@ class _ExerciceFiveState extends State<ExerciceFive> {
         break;
       case 'ح':
         {
-          setState(() {});
+          setState(() {
+            cardsMap = {
+              'assets/shoesCard.png': ['start'],
+              'assets/crocodileCard.png': ['end'],
+              'assets/beeCard.png': ['middle'],
+              'assets/farmerCard.png': ['end'],
+              'assets/thermoCard.png': ['middle'],
+              'assets/seaCard.png': ['middle'],
+              'assets/cloudCard.png': ['middle'],
+            };
+            initialCardsMap = shuffleMap(cardsMap);
+          });
         }
         break;
       case 'خ':
         {
-          setState(() {});
+          setState(() {
+            cardsMap = {
+              'assets/palmTreeCard.png': ['middle'],
+              'assets/fiveCard.png': ['start'],
+              'assets/chefCard.png': ['end'],
+              'assets/apricotCard.png': ['start', 'end'],
+              'assets/melonCard.png': ['middleToEnd'],
+              'assets/tentCard.png': ['start'],
+              'assets/cucumberCard.png': ['start'],
+            };
+            initialCardsMap = shuffleMap(cardsMap);
+          });
         }
         break;
       case 'د':
         {
-          setState(() {});
+         setState(() {
+            cardsMap = {
+              'assets/chickenCard.png': ['start'],
+              'assets/wallCard.png': ['end'],
+              'assets/monkeyCard.png': ['start'],
+              'assets/lionCard.png': ['start'],
+              'assets/wormCard.png': ['start'],
+              'assets/puppetCard.png': ['start'],
+              'assets/schoolCard.png': ['end'],
+            };
+            initialCardsMap = shuffleMap(cardsMap);
+          });
         }
         break;
       case 'ذ':
@@ -256,6 +289,7 @@ class _ExerciceFiveState extends State<ExerciceFive> {
 
   Map<String, String> fillBoxMap(subQuestion) {
     String prefix;
+    int boxes = 4;
     switch (subQuestion) {
       case 'أ':
         {
@@ -295,6 +329,7 @@ class _ExerciceFiveState extends State<ExerciceFive> {
       case 'د':
         {
           prefix = 'da';
+          boxes = 2;
         }
         break;
       case 'ذ':
@@ -403,12 +438,18 @@ class _ExerciceFiveState extends State<ExerciceFive> {
           prefix = 'ba';
         }
     }
-    return {
-      'assets/$prefix' 'End.png': 'end',
-      'assets/$prefix' 'MiddleToEnd.png': 'middleToEnd',
-      'assets/$prefix' 'Middle.png': 'middle',
-      'assets/$prefix' 'Start.png': 'start',
-    };
+    if (boxes == 4)
+      return {
+        'assets/$prefix' 'End.png': 'end',
+        'assets/$prefix' 'MiddleToEnd.png': 'middleToEnd',
+        'assets/$prefix' 'Middle.png': 'middle',
+        'assets/$prefix' 'Start.png': 'start',
+      };
+    else if (boxes == 2)
+      return {
+        'assets/$prefix' 'End.png': 'end',
+        'assets/$prefix' 'Start.png': 'start',
+      };
   }
 
   int fnRightAnswersCount() {
@@ -590,7 +631,8 @@ class _ExerciceFiveState extends State<ExerciceFive> {
           screenSize,
           _scaffoldKey,
           ExQuestionBar(
-            question: 'أَضَعُ كُلَّ كَلِمَةٍ وَ صُورَتَهَا فِي الصُّنْدُوقِ المُنَاسِبِ',
+            question:
+                'أَضَعُ كُلَّ كَلِمَةٍ وَ صُورَتَهَا فِي الصُّنْدُوقِ المُنَاسِبِ',
             kidPic: 'kids6.png',
             logos: false,
           ),

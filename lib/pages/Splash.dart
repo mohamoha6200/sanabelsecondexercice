@@ -5,6 +5,7 @@ import 'package:flame/flame.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sanabelsecondexercice/components/widgets/ResultSuccessQuestion.dart';
 
 import 'package:sanabelsecondexercice/components/widgets/sanabelFrame.dart';
 import 'package:sanabelsecondexercice/pages/Exercice1.dart';
@@ -13,6 +14,7 @@ import 'package:sanabelsecondexercice/pages/Exercice3.dart';
 import 'package:sanabelsecondexercice/pages/Exercice4.dart';
 import 'package:sanabelsecondexercice/pages/home.dart';
 import 'package:sanabelsecondexercice/theme/style.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'homeV2.dart';
 
@@ -22,8 +24,6 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-
-
   CircularSplashController _controller = CircularSplashController(
     color: backgroundMainColor, //optional, default is White.
     duration: Duration(milliseconds: 400), //optional.
@@ -33,11 +33,24 @@ class _SplashScreenState extends State<SplashScreen> {
   Timer t2;
   String routeName;
 
+  bool backgroundSound;
+
   @override
   void initState() {
     super.initState();
     print('should stop everything');
     Flame.bgm.initialize();
+    gettingSettings();
+  }
+
+  gettingSettings() async {
+    final prefs = await SharedPreferences.getInstance();
+    // final myexercice =
+    //     Provider.of<DrawerStateInfo>(context, listen: false).getCurrentDrawer;
+    // prefs.getInt('currentExercice') ?? 0;
+    setState(() {
+      backgroundSound = prefs.getBool('backgroundSound') ?? true;
+    }); 
   }
 
   @override
@@ -156,7 +169,9 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: InkWell(
                     onTap: () {
                       print('should play funny');
-                      // Flame.bgm.play('funny.mp3');
+                      if (backgroundSound == true) {
+                        Flame.bgm.play('funny.mp3');
+                      }
                       push();
 
                       //  Navigator.push(context, PageTransition(type: PageTransitionType.size, alignment: Alignment.bottomCenter, child: HomePage()));

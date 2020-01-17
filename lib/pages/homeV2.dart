@@ -5,6 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:sanabelsecondexercice/components/models/LetterBalloon.dart';
 import 'package:sanabelsecondexercice/components/providers/DrawerState.dart';
 import 'package:sanabelsecondexercice/components/widgets/Balloon.dart';
+import 'package:sanabelsecondexercice/components/widgets/ExerciceDrawer.dart';
+import 'package:sanabelsecondexercice/components/widgets/HomeDrawer.dart';
 import 'package:sanabelsecondexercice/theme/perrine.dart';
 import 'package:sanabelsecondexercice/theme/style.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -235,7 +237,7 @@ class _HomePageV2State extends State<HomePageV2> {
           ),
         ),
       ),
-      // drawer: AppDrawer(),
+       drawer: HomeDrawer(),
       body: DecoratedBox(
         decoration: BoxDecoration(
           image: DecorationImage(

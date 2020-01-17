@@ -21,13 +21,13 @@ class RedLetterWord extends StatelessWidget {
               ? txt = TextSpan(
                   text: char,
                   style: new TextStyle(
-                      fontSize: screenSize.width / 8,
+                      fontSize: screenSize.width / 10,
                       color: Color.fromRGBO(194, 0, 0, 1),
                       fontWeight: FontWeight.bold))
               : txt = TextSpan(
                   text: char,
                   style: new TextStyle(
-                      fontSize: screenSize.width / 8,
+                      fontSize: screenSize.width / 10,
                       color: Colors.black,
                       fontWeight: FontWeight.bold));
           return txt;
