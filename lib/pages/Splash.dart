@@ -12,6 +12,8 @@ import 'package:sanabelsecondexercice/pages/Exercice1.dart';
 
 import 'package:sanabelsecondexercice/pages/Exercice3.dart';
 import 'package:sanabelsecondexercice/pages/Exercice4.dart';
+import 'package:sanabelsecondexercice/pages/Splash2.dart';
+import 'package:sanabelsecondexercice/pages/bookScreen.dart';
 import 'package:sanabelsecondexercice/pages/home.dart';
 import 'package:sanabelsecondexercice/theme/style.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -58,11 +60,10 @@ class _SplashScreenState extends State<SplashScreen> {
     super.dispose();
     _controller.dispose();
 
-    t2.cancel();
   }
 
   Future<Object> push() async {
-    Object object = await _controller.push(context, HomePageV2());
+    Object object = await _controller.push(context, Splash2());
     return object;
   }
 

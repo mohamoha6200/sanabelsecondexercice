@@ -12,6 +12,7 @@ import 'package:sanabelsecondexercice/pages/Exercice8.dart';
 import 'package:sanabelsecondexercice/pages/Exercice9-4b.dart';
 import 'package:sanabelsecondexercice/pages/ExerciceSeven.dart';
 import 'package:sanabelsecondexercice/pages/Splash.dart';
+import 'package:sanabelsecondexercice/pages/Splash2.dart';
 import 'package:sanabelsecondexercice/pages/home.dart';
 
 import 'components/providers/DrawerState.dart';
@@ -83,7 +84,7 @@ class MyAppState extends State<MyApp> {
           // home: SplashScreen(),
           initialRoute: '/',
           routes: {
-            '/': (BuildContext context) => SplashScreen(),
+            '/': (BuildContext context) => Splash2(),
             'home': (BuildContext context) => HomePage(),
             'alif-ex1': (BuildContext context) =>
                 ExerciceFourV2(), // listen and drag

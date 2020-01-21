@@ -1,10 +1,15 @@
-import 'package:flame/flame.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:sanabelsecondexercice/components/widgets/soundSettings.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:share/share.dart';
+import 'package:connectivity/connectivity.dart';
+import 'dart:async';
+import 'dart:io';
+
+import 'package:connectivity/connectivity.dart';
+import 'package:flutter/services.dart';
 
 class HomeDrawer extends StatefulWidget {
   @override
@@ -13,13 +18,39 @@ class HomeDrawer extends StatefulWidget {
 
 class _HomeDrawerState extends State<HomeDrawer> {
   final _formKey = GlobalKey<FormState>();
-
-
-
-
+  final Connectivity _connectivity = Connectivity();
+  String _connectionStatus = 'Unknown';
   @override
   void initState() {
     super.initState();
+    initConnectivity();
+  }
+
+// Platform messages are asynchronous, so we initialize in an async method.
+  Future<void> initConnectivity() async {
+    ConnectivityResult result;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      result = await _connectivity.checkConnectivity();
+      print('result=' + result.toString());
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) {
+      return Future.value(null);
+    }
+
+    return _updateConnectionStatus(result);
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    if (result == ConnectivityResult.none) {
+      setState(() => _connectionStatus = result.toString());
+    }
   }
 
   @override
@@ -32,177 +63,242 @@ class _HomeDrawerState extends State<HomeDrawer> {
         children: <Widget>[
           Expanded(flex: 1, child: _createHeader(context)),
           Expanded(
-            flex: 2,
-            child: ListView(
-              padding: EdgeInsets.zero,
+            flex: 3,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisSize: MainAxisSize.max,
               children: <Widget>[
                 _createDrawerItem(
                     icon: CommunityMaterialIcons.settings,
                     text: 'إعدادات',
-                    onTap: () => {_settings()} //contacts
+                    onTap: () => {_settings()}
                     // Navigator.pushReplacementNamed(context, Routes.contacts)
                     ),
-                // Divider(),
+                Divider(),
                 _createDrawerItem(
                     icon: CommunityMaterialIcons.contact_mail,
                     text: 'راسلنا',
-                    onTap: () => {_contactUs()} //note
+                    onTap: () => {_contactUs()}
                     //       Navigator.pushReplacementNamed(context, Routes.notes)
                     ),
-                // Divider(),
+                Divider(),
                 _createDrawerItem(
                     icon: CommunityMaterialIcons.share_variant,
                     text: 'شارك التطبيق',
-                    onTap: () => {_share()} //note
+                    onTap: () => {_share()}
                     //       Navigator.pushReplacementNamed(context, Routes.notes)
                     ),
-                // Divider(),
+                Divider(),
                 _createDrawerItem(
                     icon: CommunityMaterialIcons.thumb_up_outline,
                     text: 'قيم التطبيق',
-                    onTap: () => {_rate()} //note
+                    onTap: () => {_rate()}
                     //       Navigator.pushReplacementNamed(context, Routes.notes)
                     ),
-                // Divider(),
+                Divider(),
                 _createDrawerItem(
                     // icon: Icons.navigation,
                     icon: Icons.touch_app,
                     text: 'عن التطبيق',
-                    onTap: () => {_aboutUs()} //note
+                    onTap: () => {_aboutUs()}
                     //       Navigator.pushReplacementNamed(context, Routes.notes)
                     ),
                 Divider(
                   thickness: 1.5,
                 ),
-
-                _createDrawerFooter(),
               ],
             ),
           ),
+          _createDrawerFooter(),
         ],
       ),
     );
   }
 
   Widget _createHeader(context) {
+    Size screenSize = MediaQuery.of(context).size;
+
     return Center(
-      child: DrawerHeader(
-          // margin: EdgeInsets.zero,
-          // padding: EdgeInsets.zero,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.contain,
-                  image: AssetImage('assets/Logo-sanabel-Vec.png'))),
-          child: Stack(children: <Widget>[
-            // Positioned(
-            //     bottom: 12.0,
-            //     right: 16.0,
-            //     child: Text("Sanabel",
-            //         style: TextStyle(
-            //             color: Colors.greenAccent,
-            //             fontSize: 20.0,
-            //             fontWeight: FontWeight.w500))),
-          ])),
+      child: Container(
+        width: screenSize.width / 4,
+        height: screenSize.height / 6,
+        child: Image.asset(
+          'assets/Logo-sanabel-Vec.png',
+          fit: BoxFit.contain,
+        ),
+      ),
     );
   }
 
   Widget _createDrawerItem(
       {IconData icon, String text, GestureTapCallback onTap}) {
-    return Container(
-      child: ListTile(
-        title: Row(
-          children: <Widget>[
-            Icon(icon),
-            Padding(
-              padding: EdgeInsets.only(left: 8.0),
-              child: Text(text),
-            )
-          ],
-        ),
-        onTap: onTap,
+    Size screenSize = MediaQuery.of(context).size;
+
+    return InkWell(
+      onTap: onTap,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(left: 10.0),
+            child: Icon(
+              icon,
+              size: screenSize.width / 30,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(left: 18.0),
+            child: Text(
+              text,
+              style: TextStyle(fontSize: screenSize.width / 42),
+            ),
+          )
+        ],
       ),
     );
   }
 
   Widget _createDrawerFooter() {
-    return Container(
-        child: ListTile(
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          // IconButton(
-          //     icon: new Icon(
-          //       CommunityMaterialIcons.facebook_box,
-          //       color: Color(0xFF4267B2),
-          //     ),
-          //     onPressed: () async {
-          //       const url = 'https://www.facebook.com/sanabel';
-          //       if (await canLaunch(url)) {
-          //         await launch(url);
-          //       } else {
-          //         throw 'Could not launch $url';
-          //       }
-          //     }),
-          // IconButton(
-          //     icon: new Icon(
-          //       CommunityMaterialIcons.instagram,
-          //       color: Color(0xFF8a3ab9),
-          //     ),
-          //     onPressed: () async {
-          //       const url = 'https://www.instagram.com/sanabel';
-          //       if (await canLaunch(url)) {
-          //         await launch(url);
-          //       } else {
-          //         throw 'Could not launch $url';
-          //       }
-          //     }),
-          // IconButton(
-          //     icon: new Icon(
-          //       CommunityMaterialIcons.youtube,
-          //       color: Color(0xFFFF0000),
-          //     ),
-          //     onPressed: () async {
-          //       const url = 'https://flutter.dev';
-          //       if (await canLaunch(url)) {
-          //         await launch(url);
-          //       } else {
-          //         throw 'Could not launch $url';
-          //       }
-          //     }),
-          InkWell(
-            onTap: () {},
-            child: Container(
-              width: 32,
-              height: 23,
-              child: Image.asset('assets/facebook.png'),
-            ),
-          ),
+    Size screenSize = MediaQuery.of(context).size;
 
-          InkWell(
-            onTap: () {},
-            child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 10),
-              width: 32,
-              child: Image.asset('assets/instagram.png'),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            // IconButton(
+            //     icon: new Icon(
+            //       CommunityMaterialIcons.facebook_box,
+            //       color: Color(0xFF4267B2),
+            //     ),
+            //     onPressed: () async {
+            //       const url = 'https://www.facebook.com/sanabel';
+            //       if (await canLaunch(url)) {
+            //         await launch(url);
+            //       } else {
+            //         throw 'Could not launch $url';
+            //       }
+            //     }),
+            // IconButton(
+            //     icon: new Icon(
+            //       CommunityMaterialIcons.instagram,
+            //       color: Color(0xFF8a3ab9),
+            //     ),
+            //     onPressed: () async {
+            //       const url = 'https://www.instagram.com/sanabel';
+            //       if (await canLaunch(url)) {
+            //         await launch(url);
+            //       } else {
+            //         throw 'Could not launch $url';
+            //       }
+            //     }),
+            // IconButton(
+            //     icon: new Icon(
+            //       CommunityMaterialIcons.youtube,
+            //       color: Color(0xFFFF0000),
+            //     ),
+            //     onPressed: () async {
+            //       const url = 'https://flutter.dev';
+            //       if (await canLaunch(url)) {
+            //         await launch(url);
+            //       } else {
+            //         throw 'Could not launch $url';
+            //       }
+            //     }),
+            InkWell(
+              onTap: () async {
+                const url = 'https://flutter.dev';
+                if (await canLaunch(url)) {
+                  await launch(url);
+                } else {
+                  throw 'Could not launch $url';
+                }
+              },
+              child: Container(
+                width: 32,
+                height: 23,
+                child: Image.asset('assets/facebook.png'),
+              ),
             ),
-          ),
-          InkWell(
-            onTap: () {},
-            child: Container(
-              width: 32,
-              child: Image.asset('assets/youtube.png'),
+
+            InkWell(
+              onTap: () async {
+                const url = 'https://www.instagram.com/sanabel';
+                if (await canLaunch(url)) {
+                  await launch(url);
+                } else {
+                  throw 'Could not launch $url';
+                }
+              },
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 10),
+                width: 32,
+                child: Image.asset('assets/instagram.png'),
+              ),
             ),
-          ),
-        ],
+            InkWell(
+              onTap: () async {
+                if (_connectionStatus != 'ConnectivityResult.none') {
+                  const url = 'https://flutter.dev';
+                  if (await canLaunch(url)) {
+                    await launch(url);
+                  } else {
+                    throw 'Could not launch $url';
+                  }
+                } else {
+                  print('show snackbar');
+                  showFloatingFlushbar(context);
+                }
+              },
+              child: Container(
+                width: 32,
+                child: Image.asset('assets/youtube.png'),
+              ),
+            ),
+          ],
+        ),
+        Center(
+          child: Text('x.x.x : إصدار التطبيق',
+              style: TextStyle(color: Colors.black, fontSize: 13)),
+        ),
+      ],
+    );
+  }
+
+  void showFloatingFlushbar(BuildContext context) {
+    Flushbar(
+      duration: Duration(seconds: 2),
+      padding: EdgeInsets.all(10),
+      borderRadius: 8,
+      backgroundGradient: LinearGradient(
+        colors: [Colors.green.shade800, Colors.greenAccent.shade700],
+        stops: [0.6, 1],
       ),
-      subtitle: Center(
-        child: Text('x.x.x : إصدار التطبيق',
-            style: TextStyle(color: Colors.black, fontSize: 13)),
-      ),
-    ));
+      boxShadows: [
+        BoxShadow(
+          color: Colors.black45,
+          offset: Offset(3, 3),
+          blurRadius: 3,
+        ),
+      ],
+      // All of the previous Flushbars could be dismissed by swiping down
+      // now we want to swipe to the sides
+      dismissDirection: FlushbarDismissDirection.HORIZONTAL,
+      // The default curve is Curves.easeOut
+      forwardAnimationCurve: Curves.fastLinearToSlowEaseIn,
+      title: 'Vérifier votre connection internet',
+      message: 'Il se peut que votre appareil n"est pas connecté au wifi/data',
+    )..show(context);
   }
 
   _contactUs() {
+    Size screenSize = MediaQuery.of(context).size;
+
     return showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -250,7 +346,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(vertical: 16),
+                    margin: EdgeInsets.only(bottom: 16),
                     decoration: new BoxDecoration(color: Colors.grey),
                     child: TextField(
                       maxLines: 8,
@@ -267,27 +363,36 @@ class _HomeDrawerState extends State<HomeDrawer> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      RaisedButton(
-                        color: Colors.redAccent,
-                        child: Text(
-                          "إغلاق",
-                          style: TextStyle(color: Colors.white),
+                      Container(
+                        height: screenSize.height / 14,
+                        // width: 100,
+                        child: RaisedButton(
+                          color: Colors.redAccent,
+                          child: Text(
+                            "إغلاق",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop(true);
+                          },
                         ),
-                        onPressed: () {
-                          Navigator.of(context).pop(true);
-                        },
                       ),
-                      RaisedButton(
-                        color: Colors.greenAccent,
-                        child: Text(
-                          "أرسل",
-                          style: TextStyle(color: Colors.white),
+                      Container(
+                        height: screenSize.height / 14,
+
+                        // width: 100,
+                        child: RaisedButton(
+                          color: Colors.greenAccent,
+                          child: Text(
+                            "أرسل",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          onPressed: () {
+                            if (_formKey.currentState.validate()) {
+                              _formKey.currentState.save();
+                            }
+                          },
                         ),
-                        onPressed: () {
-                          if (_formKey.currentState.validate()) {
-                            _formKey.currentState.save();
-                          }
-                        },
                       ),
                     ],
                   ),
@@ -369,6 +474,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
           // Future.delayed(Duration(seconds: 5), () {
           //   Navigator.of(context).pop(true);
           // });
+          print('tapped settings');
           return Theme(
             data: Theme.of(context)
                 .copyWith(dialogBackgroundColor: Colors.transparent),
