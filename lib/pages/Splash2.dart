@@ -31,7 +31,7 @@ class _Splash2State extends State<Splash2> {
   }
 
   Future<Object> push() async {
-    Object object = await _controller.push(context, BookScreen());
+    Object object = await _controller.push(context, HomePageV2());
     return object;
   }
 
@@ -63,7 +63,7 @@ class _Splash2State extends State<Splash2> {
               ),
             ),
             child: Padding(
-              padding:  EdgeInsets.only(top:screenSize.height/12),
+              padding: EdgeInsets.only(top: screenSize.height / 12),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -86,11 +86,10 @@ class _Splash2State extends State<Splash2> {
                     ),
                   ),
                   InkWell(
-                    onTap: (){
+                    onTap: () {
                       push();
-
                     },
-                                      child: Container(
+                    child: Container(
                       width: screenSize.width / 2,
                       height: screenSize.height / 3.5,
                       child: Image.asset(

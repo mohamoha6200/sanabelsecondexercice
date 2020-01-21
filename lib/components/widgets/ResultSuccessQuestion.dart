@@ -60,12 +60,14 @@ class _ResultSucessQuestionState extends State<ResultSucessQuestion> {
               child: Image.asset(
                 'assets/goodg.png',
                 width: screenSize.width / 4,
-                height: screenSize.height * 0.75,
+                height: screenSize.height * 0.65,
                 fit: BoxFit.fill,
               ),
             ),
           ),
           Container(
+                // height: screenSize.height * 0.25,
+ 
             decoration:
                 new BoxDecoration(color: Colors.transparent, boxShadow: [
               new BoxShadow(

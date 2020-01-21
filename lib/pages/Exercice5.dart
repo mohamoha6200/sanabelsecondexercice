@@ -162,12 +162,12 @@ class _ExerciceFiveState extends State<ExerciceFive> {
         break;
       case 'د':
         {
-         setState(() {
+          setState(() {
             cardsMap = {
               'assets/chickenCard.png': ['start'],
               'assets/wallCard.png': ['end'],
               'assets/monkeyCard.png': ['start'],
-              'assets/lionCard.png': ['start'],
+              'assets/lionCard.png': ['end'],
               'assets/wormCard.png': ['start'],
               'assets/puppetCard.png': ['start'],
               'assets/schoolCard.png': ['end'],
@@ -183,17 +183,50 @@ class _ExerciceFiveState extends State<ExerciceFive> {
         break;
       case 'ر':
         {
-          setState(() {});
+          setState(() {
+            cardsMap = {
+              'assets/sheepCard.png': ['end'],
+              'assets/rabbitCard.png': ['start'],
+              'assets/monkeyCard.png': ['end'],
+              'assets/tigerCard.png': ['end'],
+              'assets/treeCard.png': ['end'],
+              'assets/pomegranateCard.png': ['start'],
+              'assets/carCard.png': ['start'],
+            };
+            initialCardsMap = shuffleMap(cardsMap);
+          });
         }
         break;
       case 'ز':
         {
-          setState(() {});
+          setState(() {
+            cardsMap = {
+              'assets/giraffeCard.png': ['start'],
+              'assets/deerCard.png': ['end'],
+              'assets/oliveCard.png': ['start'],
+              'assets/canoeCard.png': ['start'],
+              'assets/buttonCard.png': ['start'],
+              'assets/breadCard.png': ['end'],
+              'assets/houseCard.png': ['end'],
+            };
+            initialCardsMap = shuffleMap(cardsMap);
+          });
         }
         break;
       case 'س':
         {
-          setState(() {});
+          setState(() {
+              cardsMap = {
+              'assets/boatCard.png': ['start'],
+              'assets/mosqueCard.png': ['middle'],
+              'assets/bellCard.png': ['end'],
+              'assets/bedCard.png': ['start'],
+              'assets/broomCard.png': ['middle'],
+              'assets/sunCard.png': ['start','middleToEnd'],
+              'assets/washerCard.png': ['middle'],
+            };
+            initialCardsMap = shuffleMap(cardsMap);
+          });
         }
         break;
       case 'ش':
@@ -203,7 +236,18 @@ class _ExerciceFiveState extends State<ExerciceFive> {
         break;
       case 'ص':
         {
-          setState(() {});
+          setState(() {
+              cardsMap = {
+              'assets/thiefCard.png': ['middleToEnd'],
+              'assets/rocketCard.png': ['start'],
+              'assets/birdCard.png': ['middle'],
+              'assets/mosqueTowerCard.png': ['start'],
+              'assets/whistleCard.png': ['start'],
+              'assets/juiceCard.png': ['middle'],
+              'assets/diverCard.png': ['end'],
+            };
+            initialCardsMap = shuffleMap(cardsMap);
+          });
         }
         break;
       case 'ض':
@@ -335,16 +379,19 @@ class _ExerciceFiveState extends State<ExerciceFive> {
       case 'ذ':
         {
           prefix = 'tha';
+          boxes = 2;
         }
         break;
       case 'ر':
         {
           prefix = 'ra';
+          boxes = 2;
         }
         break;
       case 'ز':
         {
           prefix = 'za';
+          boxes = 2;
         }
         break;
       case 'س':
@@ -426,6 +473,7 @@ class _ExerciceFiveState extends State<ExerciceFive> {
       case 'و':
         {
           prefix = 'wa';
+          boxes = 2;
         }
         break;
       case 'ي':

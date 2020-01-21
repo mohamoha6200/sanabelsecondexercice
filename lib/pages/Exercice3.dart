@@ -400,6 +400,18 @@ class _ExerciceThreeState extends State<ExerciceThree> {
         {
           setState(() {
             subQuestionLatin = 'za';
+            picChoiceMap = {
+              'assets/ruby.png': {
+                0: ['زُ', 'مُ', 'رُّ', 'دٌ']
+              },
+              'assets/button.png': {
+                0: ['زِ', 'رٌّ']
+              },
+              'assets/giraffe.png': {
+                0: ['زَ', 'رَ', 'ا', 'فَ', 'ةٌ']
+              }
+            };
+            initialpicChoiceMap = shuffleMap(picChoiceMap);
           });
         }
         break;
@@ -407,6 +419,18 @@ class _ExerciceThreeState extends State<ExerciceThree> {
         {
           setState(() {
             subQuestionLatin = 'sa';
+            picChoiceMap = {
+              'assets/trousers.png': {
+                0: ['سِ', 'رْ', 'وَ', 'ا', 'لٌ']
+              },
+              'assets/fish.png': {
+                0: ['سَ', 'مَ', 'كَ', 'ةٌ']
+              },
+              'assets/wheat.png': {
+                0: ['سُ', 'نْ', 'بُ', 'لَ', 'ةٌ']
+              }
+            };
+            initialpicChoiceMap = shuffleMap(picChoiceMap);
           });
         }
         break;
@@ -421,6 +445,18 @@ class _ExerciceThreeState extends State<ExerciceThree> {
         {
           setState(() {
             subQuestionLatin = 'sad';
+            picChoiceMap = {
+              'assets/photo.png': {
+                0: ['صُ', 'و', 'رَ', 'ةٌ']
+              },
+              'assets/rocket.png': {
+                0: ['صَ', 'ا', 'رُ', 'و', 'خٌ']
+              },
+              'assets/juice.png': {
+                0: ['عَ', 'صِ', 'ي', 'رٌ']
+              }
+            };
+            initialpicChoiceMap = shuffleMap(picChoiceMap);
           });
         }
         break;

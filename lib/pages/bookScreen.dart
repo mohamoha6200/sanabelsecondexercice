@@ -81,21 +81,21 @@ class _BookScreenState extends State<BookScreen> {
                               fit: BoxFit.contain,
                             ),
                           ),
-                           GestureDetector(
-                             onTap: () {
-                               print('should be clicked');
+                          GestureDetector(
+                            onTap: () {
+                              print('should be clicked');
                             },
-                             child: Column(
-                               children: <Widget>[
-                                 Image.asset(
-                                   'assets/actualBook.png',
-                                   fit: BoxFit.contain,
-                                   width: screenSize.width / 8.8,
-                                   height: screenSize.height / 4.6,
-                                 ),
-                               ],
-                             ),
-                           ),
+                            child: Column(
+                              children: <Widget>[
+                                Image.asset(
+                                  'assets/actualBook.png',
+                                  fit: BoxFit.contain,
+                                  width: screenSize.width / 8.8,
+                                  height: screenSize.height / 4.6,
+                                ),
+                              ],
+                            ),
+                          ),
                           Container(
                             width: screenSize.width / 8.8,
                             height: screenSize.height / 4.6,
