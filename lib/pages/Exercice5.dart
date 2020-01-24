@@ -151,7 +151,7 @@ class _ExerciceFiveState extends State<ExerciceFive> {
               'assets/palmTreeCard.png': ['middle'],
               'assets/fiveCard.png': ['start'],
               'assets/chefCard.png': ['end'],
-              'assets/apricotCard.png': ['start', 'end'],
+              'assets/peachCard.png': ['start', 'end'],
               'assets/melonCard.png': ['middleToEnd'],
               'assets/tentCard.png': ['start'],
               'assets/cucumberCard.png': ['start'],
@@ -216,13 +216,13 @@ class _ExerciceFiveState extends State<ExerciceFive> {
       case 'س':
         {
           setState(() {
-              cardsMap = {
+            cardsMap = {
               'assets/boatCard.png': ['start'],
               'assets/mosqueCard.png': ['middle'],
               'assets/bellCard.png': ['end'],
               'assets/bedCard.png': ['start'],
               'assets/broomCard.png': ['middle'],
-              'assets/sunCard.png': ['start','middleToEnd'],
+              'assets/sunCard.png': ['start', 'middleToEnd'],
               'assets/washerCard.png': ['middle'],
             };
             initialCardsMap = shuffleMap(cardsMap);
@@ -231,13 +231,24 @@ class _ExerciceFiveState extends State<ExerciceFive> {
         break;
       case 'ش':
         {
-          setState(() {});
+          setState(() {
+            cardsMap = {
+              'assets/sharkCard.png': ['end'],
+              'assets/herbCard.png': ['middle'],
+              'assets/treeCard.png': ['start'],
+              'assets/apricotCard.png': ['middle','middleToEnd'],
+              'assets/copCard.png': ['start'],
+              'assets/sunCard.png': ['start','middleToEnd'],
+              'assets/butterflyCard.png': ['start'],
+            };
+            initialCardsMap = shuffleMap(cardsMap);
+          });
         }
         break;
       case 'ص':
         {
           setState(() {
-              cardsMap = {
+            cardsMap = {
               'assets/thiefCard.png': ['middleToEnd'],
               'assets/rocketCard.png': ['start'],
               'assets/birdCard.png': ['middle'],
@@ -252,17 +263,50 @@ class _ExerciceFiveState extends State<ExerciceFive> {
         break;
       case 'ض':
         {
-          setState(() {});
+           setState(() {
+            cardsMap = {
+              'assets/earthCard.png': ['end'],
+              'assets/hyenaCard.png': ['start'],
+              'assets/vegetablesCard.png': ['middle'],
+              'assets/bandageCard.png': ['start'],
+              'assets/photoCard.png': [],
+              'assets/eggsCard.png': ['middleToEnd'],
+              'assets/toiletCard.png': ['end'],
+            };
+            initialCardsMap = shuffleMap(cardsMap);
+          });
         }
         break;
       case 'ط':
         {
-          setState(() {});
+          setState(() {
+            cardsMap = {
+              'assets/copCard.png': ['start'],
+              'assets/catCard.png': ['middleToEnd'],
+              'assets/penguinCard.png': ['middle'],
+              'assets/doctorCard.png': ['start'],
+              'assets/octopusCard.png': ['middle','end'],
+              'assets/parachuteCard.png': ['middle'],
+              'assets/drumCard.png': ['start'],
+            };
+            initialCardsMap = shuffleMap(cardsMap);
+          });
         }
         break;
       case 'ظ':
         {
-          setState(() {});
+       setState(() {
+            cardsMap = {
+              'assets/umbrellaCard.png': ['middle'],
+              'assets/backCard.png': ['start'],
+              'assets/envelopeCard.png': ['start'],
+              'assets/bagCard.png': ['middle'],
+              'assets/shadowCard.png': ['start'],
+              'assets/glassesCard.png': ['middle'],
+              'assets/stableCard.png': ['middle'],
+            };
+            initialCardsMap = shuffleMap(cardsMap);
+          });
         }
         break;
       case 'ع':

@@ -171,45 +171,6 @@ class _HomeDrawerState extends State<HomeDrawer> {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            // IconButton(
-            //     icon: new Icon(
-            //       CommunityMaterialIcons.facebook_box,
-            //       color: Color(0xFF4267B2),
-            //     ),
-            //     onPressed: () async {
-            //       const url = 'https://www.facebook.com/sanabel';
-            //       if (await canLaunch(url)) {
-            //         await launch(url);
-            //       } else {
-            //         throw 'Could not launch $url';
-            //       }
-            //     }),
-            // IconButton(
-            //     icon: new Icon(
-            //       CommunityMaterialIcons.instagram,
-            //       color: Color(0xFF8a3ab9),
-            //     ),
-            //     onPressed: () async {
-            //       const url = 'https://www.instagram.com/sanabel';
-            //       if (await canLaunch(url)) {
-            //         await launch(url);
-            //       } else {
-            //         throw 'Could not launch $url';
-            //       }
-            //     }),
-            // IconButton(
-            //     icon: new Icon(
-            //       CommunityMaterialIcons.youtube,
-            //       color: Color(0xFFFF0000),
-            //     ),
-            //     onPressed: () async {
-            //       const url = 'https://flutter.dev';
-            //       if (await canLaunch(url)) {
-            //         await launch(url);
-            //       } else {
-            //         throw 'Could not launch $url';
-            //       }
-            //     }),
             InkWell(
               onTap: () async {
                 const url = 'https://flutter.dev';
@@ -225,7 +186,6 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 child: Image.asset('assets/facebook.png'),
               ),
             ),
-
             InkWell(
               onTap: () async {
                 const url = 'https://www.instagram.com/sanabel';

@@ -2,6 +2,7 @@ import 'dart:core';
 import 'package:flame/flame.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sanabelsecondexercice/components/widgets/DogSlider.dart/demo.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SoundSettings extends StatefulWidget {
@@ -40,17 +41,18 @@ class _SoundSettingsState extends State<SoundSettings> {
         type: MaterialType.transparency,
         child: AlertDialog(
           backgroundColor: Colors.white,
-          title: Text(
-            'إعدادات عامة',
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.blue),
-          ),
+          // title: Text(
+          //   'إعدادات عامة',
+          //   textAlign: TextAlign.center,
+          //   style: TextStyle(color: Colors.blue),
+          // ),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(32.0))),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              Container(width: 600, height: 240, child: DogSliderDemo()),
               Divider(),
               Directionality(
                 textDirection: TextDirection.rtl,

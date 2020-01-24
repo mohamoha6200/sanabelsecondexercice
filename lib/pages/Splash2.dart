@@ -5,6 +5,7 @@ import 'package:flame/flame.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:sanabelsecondexercice/components/widgets/DogSlider.dart/demo.dart';
 
 import 'package:sanabelsecondexercice/components/widgets/sanabelFrame.dart';
 import 'package:sanabelsecondexercice/pages/bookScreen.dart';

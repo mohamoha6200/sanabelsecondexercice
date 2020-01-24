@@ -438,6 +438,18 @@ class _ExerciceThreeState extends State<ExerciceThree> {
         {
           setState(() {
             subQuestionLatin = 'cha';
+            picChoiceMap = {
+              'assets/cop.png': {
+                0: ['شُ', 'رْ', 'طِ', 'يٌّ']
+              },
+              'assets/tree.png': {
+                0: ['شَ', 'جَ', 'رَ', 'ةٌ']
+              },
+              'assets/lionCub.png': {
+                0: ['شِ', 'بْ', 'لٌ']
+              }
+            };
+            initialpicChoiceMap = shuffleMap(picChoiceMap);
           });
         }
         break;
@@ -464,6 +476,18 @@ class _ExerciceThreeState extends State<ExerciceThree> {
         {
           setState(() {
             subQuestionLatin = 'dhad';
+            picChoiceMap = {
+              'assets/egges.png': {
+                2: ['بَ', 'يْ', 'ضٌ']
+              },
+              'assets/frog.png': {
+                0: ['ضِ', 'فْ', 'دَ', 'عَ', 'ةٌ']
+              },
+              'assets/officer.png': {
+                0: ['ضَ', 'ا', 'بِ', 'طٌ']
+              }
+            };
+            initialpicChoiceMap = shuffleMap(picChoiceMap);
           });
         }
         break;
@@ -471,6 +495,18 @@ class _ExerciceThreeState extends State<ExerciceThree> {
         {
           setState(() {
             subQuestionLatin = 'ta';
+            picChoiceMap = {
+              'assets/child.png': {
+                0: ['طِ', 'فْ', 'لٌ', ]
+              },
+              'assets/tomatoes.png': {
+                0: ['طَ', 'مَ', 'ا', 'طِ', 'مُ']
+              },
+              'assets/hat.png': {
+                0: ['طُ', 'رْ', 'بُ', 'و','شٌ']
+              }
+            };
+            initialpicChoiceMap = shuffleMap(picChoiceMap);
           });
         }
         break;
@@ -478,6 +514,18 @@ class _ExerciceThreeState extends State<ExerciceThree> {
         {
           setState(() {
             subQuestionLatin = 'dha';
+            picChoiceMap = {
+              'assets/envelope.png': {
+                0: ['ظَ', 'رْ', 'فٌ']
+              },
+              'assets/stable.png': {
+                1: ['حَ', 'ظِ', 'ي', 'رَ', 'ةٌ']
+              },
+              'assets/nail.png': {
+                0: ['ظُ', 'فْ', 'رٌ']
+              }
+            };
+            initialpicChoiceMap = shuffleMap(picChoiceMap);
           });
         }
         break;
