@@ -20,7 +20,7 @@ class _DogSliderDemoState extends State<DogSliderDemo> {
   num maxVolume = 0;
 
   num realVolume = 0;
-  int _numTreats =-1;
+  int _numTreats = -1;
   int _maxTreats = 15;
   double _maxContentWidth = 500;
 
@@ -30,7 +30,12 @@ class _DogSliderDemoState extends State<DogSliderDemo> {
 
     initPlatformState();
     initSlider();
-  
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
   }
 
   void _handleSliderChanged(double value) {
@@ -48,7 +53,6 @@ class _DogSliderDemoState extends State<DogSliderDemo> {
       _numTreats = realVolume;
     });
     print('_numTreats=' + _numTreats.toString());
-    
   }
 
   Future<void> initPlatformState() async {
@@ -57,7 +61,7 @@ class _DogSliderDemoState extends State<DogSliderDemo> {
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
     // setState to update our non-existent appearance.
-    if (!mounted) return;
+    // if (!mounted) return;
 
     setState(() {
       initVolume = initVolume;

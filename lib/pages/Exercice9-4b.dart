@@ -426,7 +426,7 @@ class _Exercice9State extends State<Exercice9> {
                 1: ['بِـ', 'ـغُـ', 'ع']
               },
             };
-            rightCardsIndexes = [1, 3, 4, 9, 10, 13];
+            rightCardsIndexes = [0, 2, 6, 12, 13, 16];
             initialAnswers = shuffleMap(answers);
           });
         }
@@ -759,7 +759,7 @@ class _Exercice9State extends State<Exercice9> {
               13,
               15,
             ];
-            initialAnswers = (answers);
+            initialAnswers = shuffleMap(answers);
           });
         }
         break;
@@ -887,7 +887,7 @@ class _Exercice9State extends State<Exercice9> {
               15,
               16,
             ];
-            initialAnswers = (answers);
+            initialAnswers = shuffleMap(answers);
           });
         }
         break;
@@ -951,14 +951,14 @@ class _Exercice9State extends State<Exercice9> {
               },
             };
             rightCardsIndexes = [1, 3, 4, 8, 10, 13, 16];
-            initialAnswers = (answers);
+            initialAnswers = shuffleMap(answers);
           });
         }
         break;
       case 'ظ':
         {
           setState(() {
-           answers = {
+            answers = {
               0: {
                 0: ['ظَــ', 'ت', 'ب']
               },
@@ -1015,10 +1015,10 @@ class _Exercice9State extends State<Exercice9> {
               },
             };
             rightCardsIndexes = [0, 6, 7, 9, 12, 17];
-            initialAnswers = (answers);
+            initialAnswers = shuffleMap(answers);
           });
         }
-        break; 
+        break;
       case 'ع':
         {
           setState(() {});

@@ -49,31 +49,31 @@ class _DogSliderState extends State<DogSlider> with TickerProviderStateMixin {
     super.initState();
 
     initStartValue();
-    // //Move slider to start pos
+    //  //Move slider to start pos
     // _slidePosX =
     //     widget.hzPadding + startValue * (widget.width - widget.hzPadding);
-    // // _sliderValue = await VolumeWatcher.getCurrentVolume;
+    //  // _sliderValue = await VolumeWatcher.getCurrentVolume;
 
-    // //animationController to handle our ball
-    // _ballAnim = AnimationController(vsync: this)
-    //   ..addListener(() => setState(() {}));
-    // //Dog controller to handle animations
-    // _dogController = DogFlareControls();
-    // //Character physics for dog
-    // _dogPhysics = MovingCharacterPhysics2d(
-    //   //Start dog offscreen
-    //   startX: _offscreenX,
+    //  //animationController to handle our ball
+    //  _ballAnim = AnimationController(vsync: this)
+    //    ..addListener(() => setState(() {}));
+    //  //Dog controller to handle animations
+    //  _dogController = DogFlareControls();
+    //  //Character physics for dog
+    //  _dogPhysics = MovingCharacterPhysics2d(
+    //    //Start dog offscreen
+    //    startX: _offscreenX,
     //   //If value is 0, keep dog offscreen, otherwise, set target to the current slider pos
-    //   targetX: _sliderValue == 0 ? _offscreenX : _slidePosX,
-    //   //Play walk anim when moving
-    //   onMoveStarted: () => _dogController.play("walk"),
-    //   //play sit animation when we reach our destination
-    //   onDestinationReached: () => _dogController.play("sit-front"),
-    // );
-    // //Use Ticker to redraw view, and update dog physics
-    // _dogTicker = Ticker((elapsed) {
-    //   setState(() => _dogPhysics.update(elapsed));
-    // });
+    //    targetX: _sliderValue == 0 ? _offscreenX : _slidePosX,
+    //    //Play walk anim when moving
+    //    onMoveStarted: () => _dogController.play("walk"),
+    //    //play sit animation when we reach our destination
+    //    onDestinationReached: () => _dogController.play("sit-front"),
+    //  );
+    //  //Use Ticker to redraw view, and update dog physics
+    //  _dogTicker = Ticker((elapsed) {
+    //    setState(() => _dogPhysics.update(elapsed));
+    //  });
     // _startDogTicker();
     // print('in init startValue = ' + startValue.toString());
   }
